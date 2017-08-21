@@ -1,0 +1,86 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="branch.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Add Operator</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Add Branch Operators
+            </div>
+            <form name="editOperator" autocomplete="off" class="form-horizontal" ng-submit="updateOperator(branchId)">
+
+                <!--<div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Branch ID</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="branchId" tooltip="Alphabets And Numbers Are Accepted" name="branchId" class="form-control"  maxlength="16">
+                    </div>
+                </div>-->
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">First Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.firstName" tooltip="Alphabets Are Accepted" class="form-control" maxlength="64" name="firstName" ng-pattern="/^[a-zA-Z]*$/" >
+                    </div>
+                    <div class="col-lg-4" style="color:red;padding:0" ng-show="editOperator.firstName.$error.pattern">
+                        Only Alphabets are allowed</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Last Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.lastName" tooltip="Alphabets Are Accepted" class="form-control" maxlength="64" name="lastName" ng-pattern="/^[a-zA-Z]*$/" >
+                    </div>
+                    <div class="col-lg-4" style="color:red;padding:0" ng-show="editOperator.lastName.$error.pattern">
+                        Only Alphabets are allowed</div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Username</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="edit.userName" tooltip="Alphabets And Numbers Are Accepted" class="form-control" name="username" required autofocus maxlength="16" ng-pattern="/^[a-zA-Z0-9 ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editOperator.username.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Password</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.password" tooltip="Enter A Valid Password" name="password" class="form-control"  maxlength="16">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Phone Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.phoneNumber" tooltip="Ten Digit Numbers Are Accepted" class="form-control" name="phoneNumber" >
+                    </div>
+                    <div class="col-lg-4" style="color:red;padding:0" ng-show="editOperator.phoneNumber.$error.pattern">
+                        Only numbers are allowed</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Email Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="email" ng-model="edit.email" tooltip="Enter A Valid Email Id" class="form-control" maxlength="32" name="email">
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="editOperator.$invalid">Create</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

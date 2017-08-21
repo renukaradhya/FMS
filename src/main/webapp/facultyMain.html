@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>iCarat Technology Services</title>
+    <link rel="stylesheet" href="css/ext_lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/pc/pc_header.css">
+    <link rel="stylesheet" href="css/pc/pc_sideContainer.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/pc/pc_common.css">
+    <link rel="stylesheet" href="css/pc/pc_fixed-header.css">
+    <link rel="stylesheet" href="css/pc/pc_informationPanel.css">
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/all-skins.css">
+    <link rel="stylesheet" href="css/ext_lib/angular-block-ui.min.css">
+    <link rel="stylesheet" href="css/ps/scrollable.css">
+    <link rel="stylesheet" href="css/pc/angular-csp.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!--date picker js file-->
+    <script src="scripts/jquery-ui.min.js"></script>
+
+    <script src="scripts/angular/jquery.js"></script>
+    <script src="scripts/angular/jquery-ui.js"></script>
+    <script src="scripts/angular/bootstrap.min.js"></script>
+    <script src="scripts/angular/angular.min.js"></script>
+    <script src="scripts/datePick.js"></script>
+    <script src="scripts/angular/angular-route.min.js"></script>
+    <script src="scripts/angular/angular-resource.min.js"></script>
+    <script src="scripts/angular/angular-storage.min.js"></script>
+    <script src="scripts/angular/ui-bootstrap-0.12.0.min.js"></script>
+    <script src="scripts/moment.js"></script>
+    <script src="scripts/moment-with-locales.js"></script>
+    <script src="scripts/angular/checklist-model.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/angular/dirPagination.js"></script>
+    <script src="scripts/angular/underscore-min.js"></script>
+    <script src="scripts/angular/angular-ui-router.min.js"></script>
+    <script src="scripts/angular/angular-block-ui.min.js"></script>
+    <script src="scripts/jquery.slimscroll.min.js"></script>
+    <script src="scripts/slim-scrollbar.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/highcharts.js"></script>
+    <script src="scripts/highcharts-ng.js"></script>
+    <script src="scripts/drilldown.js"></script>
+    <script src="scripts/highcharts-3d.js"></script>
+    <script src="scripts/ui-bootstrap-tpls.js"></script>
+    <script src="scripts/pdf.js"></script>
+    <script src="scripts/pdf.worker.js"></script>
+
+    <script src="scripts/faculties/faculty_logins.js"></script>
+    <script src="scripts/faculties/faculties_main.js"></script>
+    <script src="scripts/faculties/dashboard.js"></script>
+    <script src="scripts/faculties/faculties_assignment.js"></script>
+    <script src="scripts/faculties/faculties_leave.js"></script>
+    <script src="scripts/faculties/fa_attendance.js"></script>
+    <script src="scripts/faculties/pc_capitalize.js"></script>
+
+    <!--<script src="scripts/faculties/faculty.min.js"></script>-->
+
+    <script type="text/javascript">
+        angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+    </script>
+</head>
+<body data-ng-app="facultyApp"  data-ng-controller="mainFacultyCtrl" class="skin-blue">
+<div class="container-fluid wrapper"  id="wrapper" data-ng-controller="companyFacultyCtrl">
+    <div id="header" class="container-fluid ">
+        <header class="main-header">
+            <!-- Logo -->
+            <!--  <a href="index2.html" class="logo"><img src="images/logo.png" alt="User Image" /></a>-->
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle custom-toggle" id="sidebar-toggle-btn" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <!-- Navbar Right Menu -->
+                <div class="col-lg-6 navbar-custom-menu" style="padding-right: 0px;">
+                    <ul class="nav navbar-nav" style="float: right;">
+                        <li style="z-index: 5;color: #fff;font-size: 13px;margin-top: 17px;padding-right: 10px;font-weight: bold;">
+                            <span class="hidden-xs">{{ todaydate | date:'medium'}}</span>
+                        </li>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- <img src="{{user_image}}" class="user-image" alt="User Image" onError="this.src='images/avatar.png';"/>-->
+                                <span class="hidden-xs">{{userName}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                     <!--<img src="{{user_image}}" class="img-circle" alt="User Image" onError="this.src='images/avatar.png';"/>-->
+                                    <img src="images/avatar.png" class="img-circle" alt="User Image"/>
+                                    <p>
+                                        {{userName}}
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a ui-sref="pass">
+                                        <button class="btn btn-default" style="margin-right:5%" ng-click="passwordChange()" ><i class="fa fa-key"></i>&nbsp;Change Password</button>
+                                        </a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#">
+                                            <button class="btn btn-default" ng-controller="logoutCtrl" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;Sign Out</button>
+                                        </a>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <div id="mainContainer" class="row">
+        <div>
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <div id="companyInfo" >
+                        <ul class="nav space-info" style="margin-bottom: 10px;">
+                            <!--<li >Org Name:{{orgName}}</li>-->
+                            <li ><strong class="blink_me">{{branchName}}</strong></li>
+                        </ul>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li  class="active" id="dash" class="active">
+                            <a ui-sref="dash">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li id="assignment" >
+                            <a ui-sref="assignment.list">
+                                <i class="fa fa-clone"></i> <span>Assignments</span>
+                            </a>
+                        </li>
+
+                        <li  class="treeview">
+                            <a href="#">
+                                <i class="fa fa-calendar-check-o"></i> <span>Leave Management</span> <i class="fa fa-angle-right pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a ui-sref="leave.list" id="leave"><i class="fa fa-pencil-square-o"></i>Leave Requests</a></li>
+                                <li><a ui-sref="status.list" id="approval"><i class="fa fa-clipboard"></i>Leave Status</a></li>
+                                <li><a ui-sref="leave.summary" id="summary"><i class="fa fa-pencil-square-o"></i>Leave Summary</a></li>
+                                <li><a ui-sref="leave.transaction" id="tranaction"><i class="fa fa-pencil-square-o"></i>Leave Transaction</a></li>
+                            </ul>
+                        </li>
+
+                        <li id="attendance" >
+                            <a ui-sref="attendance.list">
+                                <i class="fa fa-check"></i> <span>Attendance</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+        </div>
+        <div id="rightContainer" class="content-wrapper" style="overflow-x: hidden" >
+            <!-- <ng-view id="views" ></ng-view>-->
+            <div ui-view style="margin-left:10px;margin-top:10px;"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function() {
+        $('.sidebar-menu li').click(function(){
+            $('.sidebar-menu li').removeClass('active');
+            $(this).addClass('active');
+        })
+    });
+
+    function blinker() {
+        $('.blink_me').fadeOut(500);
+        $('.blink_me').fadeIn(500);
+    }
+    setInterval(blinker, 3000);
+</script>
+</html>

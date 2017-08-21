@@ -1,0 +1,116 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="fetchBranchList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-money"></i>Fees Management</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-8 base-content table-base" style="height:90%;">
+        <div class="container-fluid"  style="height: 90%;padding:0" ng-if="branch_list != undefined && branch_list.length > 0 ">
+            <div class="container-fluid" style="height: 30px;padding:0">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.add"><button type="button" ng-click="addFees()" class="btn btn-color btn-sm">Add Fee</button></a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="padding: 0 0 15px 0">
+                    <select  class="input-sm form-control" ng-model="branch" ng-change="fetchYearList()" ng-options="branch as branch.branchName for branch in branch_list" style="line-height: 1.5">
+                        <option value="">Select Branch</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="padding: 0 0 15px 15px">
+                    <select  class="input-sm form-control" ng-model="year" ng-change="fetchSyllabusList()" ng-options="year as year for year in year_list" style="line-height: 1.5">
+                        <option value="">Select Year</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="padding: 0 0 15px 15px">
+                    <select  class="input-sm form-control" ng-model="syllabus" ng-change="fetchFeeList(branch,year, syllabus)" required ng-options="syllabus as syllabus for syllabus in syllabus_list" style="line-height: 1.5" >
+                        <option value="">Select Syllabus</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if="fee_list == undefined || fee_list.length <= 10">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <!--<th width="15%">Fee Id</th>-->
+                        <th width="10%">Standard</th>
+                        <th width="15%">Admission Fees</th>
+                        <th width="15%">Monthly Fees</th>
+                        <th width="10%">Sports Fees</th>
+                        <th width="10%">Books Fees</th>
+                        <th width="10%">Van Fees</th>
+                        <th width="10%">Year</th>
+                        <!--<th width="20%">Action</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="fee in fee_list">
+                       <!-- <td width="15%">{{fee.feesId}}</td>-->
+                        <td width="10%">{{fee.standard}}</td>
+                        <td width="15%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.admissionFees}}</td>
+                        <td width="15%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.monthlyFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.sportsFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.booksFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.vanFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.year}} </td>
+                        <!--<td width="20%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editFee(fee.feesId)" title="Edit {{fee.feesId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteFee(fee,$index)"><button class="btn-action" title="Delete {{fee.feeId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="fee_list.length == 0 || fee_list == undefined" class="noData">
+                    No Fees Found</div>
+                <!--<div ng-if="fee_list == undefined" class="noData">-->
+                    <!--Processing...</div>-->
+            </div>
+            <div class="container-fluid" style="padding:0" ng-if="fee_list != undefined && fee_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <!--<th width="15%">Fee Id</th>-->
+                        <th width="10%">Standard</th>
+                        <th width="15%">Admission Fees</th>
+                        <th width="15%">Monthly Fees</th>
+                        <th width="10%">Sports Fees</th>
+                        <th width="10%">Books Fees</th>
+                        <th width="10%">Van Fees</th>
+                        <th width="10%">Year</th>
+                        <!--<th width="20%">Action</th>-->
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="fee_list != undefined && fee_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="fee in fee_list">
+                       <!-- <td width="15%">{{fee.feesId}}</td>-->
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.standard}}</td>
+                        <td width="15%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.admissionFees}}</td>
+                        <td width="15%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.monthlyFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.sportsFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.booksFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.vanFees}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fee.year}}</td>
+                        <!--<td width="20%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editFee(fee.feesId)" title="Edit {{fee.feesId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteFee(fee,$index)"><button class="btn-action" title="Delete {{fee.feeId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div ng-if="branch_list.length == 0" class="noData">
+                No Branches Found</div>
+            <div ng-if="branch_list == undefined" class="noData">
+                Processing...</div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

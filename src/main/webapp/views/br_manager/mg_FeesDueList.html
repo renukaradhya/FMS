@@ -1,0 +1,148 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="init()" ng-cloak>
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-money"></i>Fees Transaction</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;width:95%">
+
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0">
+                <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4" style="height: 30px;padding:0">
+                    <ul class="list-inline" style="display:inline-block;">
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                                <option value="" selected>Select Year</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="currentStandard" ng-change="fetchClassRoomlist(x.year,currentStandard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5" >
+                                <option value="" >Select Class</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="currentSection" ng-change="classroomFeeStructure(currentSection);" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5" >
+                                <option value="">Select Section</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="col-lg-7 col-md-7 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+                <div class="col-lg-7 col-md-7 col-sm-8 col-xs-8 text-success response_msg1" style="padding-top: 10px;" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>-->
+                <div class="col-lg-7" style="float: right;color: #3c8dbc; font-size: 12px;list-style-type: none;padding-left: 490px;">
+                    <span>
+                        <ul style="list-style-type: none;padding: 2px;">
+                            <li>
+                                <i class="fa fa-check-square" aria-hidden="true"></i>&nbsp;&nbsp;<span style="color: #777575;" class="blink_me">Paid</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-square-o" aria-hidden="true"></i>&nbsp;&nbsp;<span style="color: #777575;" class="blink_me">Unpaid</span>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+
+            <div class="container-fluid" style="padding: 0px;margin-left: -48px;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">
+                    <div class="radio radio-info radio-inline" >
+                        <form style="margin-top: 13px;  ">
+                            <label >
+                                <input type="radio"  ng-model="radioone"  value ="1"  ng-click="toOnetime('O')" name="optradio">
+                                <span class="label-text">One Time Fee</span>
+                            </label>
+                            <label >
+                                <input type="radio"  ng-model="radiorec"  value ="1"  ng-click="toRecurring('R')" name="optradio">
+                                <span class="label-text">Recurring Fee</span>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="margin-top: 10px;">
+                    <form ng-if="isVisibleS">
+                        <ul class="list-inline" style="display:inline-flex;">
+                            <li>
+                                <select  class="input-sm form-control search-text-box" ng-model="otf"  ng-options="otf as otf.type for otf in one_time_fee" style="line-height: 1.5">
+                                    <option value="" selected>Select Fees Type</option>
+                                </select>
+                            </li>
+
+                            <li style="margin-right: 12px;">
+
+                                <label>
+                                    <input type="checkbox" ng-click="checkboxClick(check)" ng-model="check"  name=""/>
+                                    <span class="label-text"></span>
+                                </label>
+                            </li>
+                            <!--<li><h5>Not In</h5></li>-->
+                            <li>
+                                <button type="button" ng-click="checkDues(currentSection,fee_id,otf)" class="btn btn-color btn-sm">Check</button>
+                            </li>
+                        </ul>
+                    </form>
+                    <form ng-if="isVisibleF">
+                        <ul class="list-inline" style="display:inline-flex;">
+                            <li>
+                                <select  class="input-sm form-control search-text-box" ng-model="rcf"  ng-options="rcf as rcf.mode for rcf in modes" style="line-height: 1.5">
+                                    <option value=""  selected>Fees Mode</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  class="input-sm form-control search-text-box" ng-model="obj"  ng-options="obj as obj.type for obj in rcf.recurringFees" style="line-height: 1.5">
+                                    <option value=""  selected>Fees Type</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  class="input-sm form-control search-text-box" ng-model="instalment"  ng-options="instalment as instalment for instalment in obj.installmentDetails" style="line-height: 1.5">
+                                    <option value="" selected>Select Instalment</option>
+                                </select>
+                            </li>
+                            <li style="margin-right: 12px;">
+
+                                <label>
+                                    <input type="checkbox" ng-click="checkboxClick(check)" ng-model="check"  name=""/>
+                                    <span class="label-text"></span>
+                                </label>
+                            </li>
+                            <!--<li><h5>Not In</h5></li>-->
+                            <li>
+                                <button type="button" ng-click="checkRecurringDues(currentSection,fee_id,rcf,obj,instalment)" class="btn btn-color btn-sm">Check</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 30px;" >
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">{{Theader}}</caption>
+                    <thead>
+                    <tr>
+                        <th width="10%">Student First Name</th>
+                        <th width="10%">Student Last Name</th>
+                        <th width="10%">Current Class</th>
+                        <th width="10%">Current Section</th>
+                        <th width="10%">Current Roll No</th>
+                        <th width="10%">Academic Year</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="due_list != undefined || due_list != 0">
+                    <tr ng-repeat="student in due_list">
+                        <td width="10%">{{student.studentFirstName}}</td>
+                        <td width="10%">{{student.studentLastName}}</td>
+                        <td width="10%">{{student.currentClass}}</td>
+                        <td width="10%">{{student.section}}</td>
+                        <td width="10%">{{student.currentRollNumber}}</td>
+                        <td width="10%">{{student.year}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="due_list.length == 0 || due_list == undefined" class="noData">
+                    No Records Found</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

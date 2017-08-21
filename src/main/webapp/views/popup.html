@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="modal-header">
+        <h3 class="modal-title">Today's Birthdays</h3>
+    </div>
+    <div class="modal-body">
+        <li ng-repeat="obj in birthday_list">{{ "Name: "+obj.firstName }}</li>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        <!--<button class="btn btn-primary" type="submit">Add User</button>-->
+    </div>
+</div>

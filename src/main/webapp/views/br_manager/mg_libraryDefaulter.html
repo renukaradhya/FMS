@@ -1,0 +1,92 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="fetchDefaulterList(defaulterDetails.startValue, defaulterDetails.numPerPage)">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-book"></i>Library Management</li>
+            <li><i class="fa fa-warning"></i>Defaulter</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if="defaulter_list == undefined || defaulter_list.length <= 10">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="10%">Book Id</th>
+                        <th width="10%">Book Name</th>
+                        <th width="10%">Author</th>
+                        <th width="10%">Publication</th>
+                        <th width="10%">Cost of Book</th>
+                        <th width="10%">Issued To</th>
+                        <th width="10%">Issued Date</th>
+                        <th width="10%">Returning Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="library in defaulter_list">
+                        <td width="10%">{{library.bookId}}</td>
+                        <td width="10%">{{library.bookName}}</td>
+                        <td width="10%">{{library.author}}</td>
+                        <td width="10%">{{library.publication}}</td>
+                        <td width="10%">{{library.approximateCost}}</td>
+                        <td width="10%">{{library.issuedTo}}</td>
+                        <td width="10%">{{library.issuedDate}}</td>
+                        <td width="10%">{{library.returnByDate}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="defaulter_list.length == 0" class="noData">No Books Found</div>
+                <!--<div ng-if="defaulter_list == undefined" class="noData">Processing...</div>-->
+            </div>
+           <!-- <div class="container-fluid" style="padding:0" ng-if="defaulter_list != undefined && defaulter_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="10%">Book Id</th>
+                        <th width="10%">Book Name</th>
+                        <th width="10%">Author</th>
+                        <th width="10%">Publication</th>
+                        <th width="10%">Cost of Book</th>
+                        <th width="10%">Issued To</th>
+                        <th width="10%">Issued Date</th>
+                        <th width="10%">Returning Date</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="defaulter_list != undefined && defaulter_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="library in defaulter_list">
+                        <td width="10%">{{library.bookId}}</td>
+                        <td width="10%">{{library.bookName}}</td>
+                        <td width="10%">{{library.author}}</td>
+                        <td width="10%">{{library.publication}}</td>
+                        <td width="10%">{{library.approximateCost}}</td>
+                        <td width="10%">{{library.issuedTo}}</td>
+                        <td width="10%">{{library.issuedDate}}</td>
+                        <td width="10%">{{library.returnByDate}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+            <!-- Pagination -->
+            <div class="container-fluid" style="padding: 0;" ng-show="defaulter_list != undefined && defaulter_list.length > 0">
+               <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="libraryDetails.numPerPage" ng-change="fetchDefaulterList(0, libraryDetails.numPerPage)">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>-->
+                <pagination style="margin: 10px 0;float: right" ng-model="defaulterDetails.currentPage" items-per-page="defaulterDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged1()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

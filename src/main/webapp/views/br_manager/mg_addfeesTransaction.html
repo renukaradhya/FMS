@@ -1,0 +1,198 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="fees.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Add Fees Transaction</li>
+        </ol>
+    </section>
+    <div class="col-lg-11  col-md-11  col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Pay Student Fees
+            </div>
+            <form name="addFeesTransaction" autocomplete="off" class="form-horizontal" ng-submit="createFeesTransaction(currentStudent,ptype,currentSection.classRoomId)">
+
+               <div class="row">
+
+                   <div class="col-lg-4 col-md-4">
+
+                       <div class="form-group required">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Year</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <!--<select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchStandardList(academicYear)" ng-options="x as x.year for x in years" style="line-height: 1.5" >
+                                   <option value="" selected>Select Year</option>
+                               </select>-->
+                               <input type="text" ng-model="academicYear" tooltip="Academic Year"  name="" class="form-control " readonly autofocus>
+                           </div>
+                       </div>
+
+                       <div class="form-group required">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Class</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <select  class="input-sm form-control search-text-box" ng-model="currentStandard" ng-change="fetchClassRoomlist(academicYear,currentStandard)" ng-options="currentStandard as currentStandard.name for currentStandard in standard_list" style="line-height: 1.5" >
+                                   <option value="" selected>Select Class</option>
+                               </select>
+                           </div>
+                       </div>
+
+                       <div class="form-group required">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Section</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <select  class="input-sm form-control search-text-box" ng-model="currentSection" ng-change="fetchStudentList(academicYear,currentStandard,currentSection)" ng-options="currentSection as currentSection.section for currentSection in section_list" style="line-height: 1.5" >
+                                   <option value="" selected>Select Section</option>
+                               </select>
+                           </div>
+                       </div>
+                       <div class="clearfix"></div>
+                       <div class="form-group required">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Student Name</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <select  class="input-sm form-control search-text-box" ng-model="currentStudent" ng-change="festchStudentFeesStructure(currentSection, currentStudent)" ng-options="currentStudent as currentStudent.studentFirstName for currentStudent in student_list" style="line-height: 1.5" >
+                                   <option value="" selected>Select Student</option>
+                               </select>
+                           </div>
+                       </div>
+
+                       <div class="form-group required">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Mode Of Payment</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <select  class="input-sm form-control search-text-box" ng-model="ptype" ng-change="" required ng-options="ptype as ptype for ptype in payment_type" style="line-height: 1.5" >
+                                   <option value="" selected>Select Mode</option>
+                               </select>
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Payment Details</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <input type="text" ng-model="add.paymentDetails" tooltip="Enter Payment Details" name="" class="form-control"  capitalize-first>
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Recieved By</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <input type="text" ng-model="add.recievedBy" tooltip="Enter Payment Details" name="" class="form-control" capitalize-first >
+                           </div>
+                       </div>
+
+                     <!--<div class="form-group">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Reciept Id</label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <input type="text" ng-model="add.recieptId" tooltip="Enter Payment Details" name="" class="form-control"  >
+                           </div>
+                       </div>-->
+
+                   </div>
+                   <div class="col-lg-4 col-md-4">
+                       <div class="form-group">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label"></label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <p class="control-label">Add One Time Fees</p>
+                           </div>
+                       </div>
+
+                       <fieldset  data-ng-repeat="otf in otfs">
+
+                           <div class="form-group">
+                               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Fees Type</label>
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                   <select  class="input-sm form-control" ng-model="otf.feeId" ng-change="otf.amount=otf.feeId.withDiscountAmount" required ng-options="one as one.type for one in onetime_type" style="line-height: 1.5" >
+                                       <option value="" selected>Select Type</option>
+                                   </select>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Amount</label>
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                   <!--<input type="number" ng-model="otf.amount" tooltip="Enter Amount in Numbers" name="" placeholder="Enter The Amount" class="form-control" required>-->
+                                   <input type="text" ng-model="otf.amount" tooltip="Enter Amount in Numbers" name="amount1" placeholder="Enter The Amount" class="form-control"  required>
+                               </div>
+                              <!-- <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFeesTransaction.amount1.$error.pattern">
+                                   Enter the amount correctly</div>-->
+                           </div>
+
+                       </fieldset>
+                       <div class="form-group">
+                           <div class="text-center">
+                               <button type="button" class="addfields"   ng-click="addOneTime()">+</button>
+                               <button type="button" class="remove" style="margin-left: 30px"  ng-click="removeOneTime()">-</button>
+                           </div>
+                       </div>
+                   </div>
+
+                   <div class="col-lg-4 col-md-4">
+
+                       <div class="form-group">
+                           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label"></label>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               <p class="control-label">Add Recurring Fees</p>
+                           </div>
+                       </div>
+
+                       <fieldset  data-ng-repeat="mode in modes">
+
+                           <div class="form-group">
+                               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Fees Type</label>
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                   <select  class="input-sm form-control" ng-model="mode.feeId" required ng-change="installments(mode.feeId);mode.amount=mode.feeId.withDiscountAmount;mode.mode=mode.feeId.mode;" ng-options="type as type.type for type in recurring_type" style="line-height: 1.5" >
+                                       <option value="" selected>Select Type</option>
+                                   </select>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Amount</label>
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                   <input type="text" ng-model="mode.amount" tooltip="Enter Amount in Numbers" name="amount2" placeholder="Enter The Amount" class="form-control" required>
+                               </div>
+                               <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFeesTransaction.amount1.$error.pattern">
+                                   Enter the amount correctly</div>-->
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Fees Mode</label>
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                   <!--<select  class="input-sm form-control" ng-model="mode.mode" required ng-options="mode as mode.mode for mode in recurring_type" style="line-height: 1.5" >
+                                       <option value="" selected>Select Mode</option>
+                                   </select>-->
+                                   <input type="text" ng-model="mode.mode" tooltip="Fees Mode" name="" class="form-control" readonly required>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Installment Details</label>
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                   <select  class="input-sm form-control" ng-model="mode.installmentDetails" required ng-options="installmentDetails as installmentDetails for installmentDetails in installment_list" style="line-height: 1.5" >
+                                       <option value="" selected>Select Type</option>
+                                   </select>
+                               </div>
+                           </div>
+
+                       </fieldset>
+                       <div class="form-group">
+                           <div class="text-center">
+                               <button type="button" class="addfields"   ng-click="addNewMode()">+</button>
+                               <button type="button" class="remove" style="margin-left: 30px" ng-click="removeMode()">-</button>
+                           </div>
+                       </div>
+
+                   </div>
+               </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="addFeesTransaction.$invalid">Pay</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,45 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="classroom.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Vehicle Spreadsheet</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Vehicle Spreadsheet
+            </div>
+            <div class="container-fluid">
+                <div class="container-fluid form-inline" style="margin: 20px;" ng-controller="fileUploadCtrl">
+                    <div class="container-fluid">
+                        <ul class="list-inline" style="margin:0;display:inline-flex">
+                            <li>
+                                <input type = "file" class="btn btn-sm" style="line-height: 1.5;color: #333;" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" file-model = "xlsVehicle"/>
+                            </li>
+                            <li>
+                                <button tooltip="Upload" class="btn btn-color btn-sm" ng-click = "uploadVehicle()">Upload Vehicle</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container-fluid " style="margin: 20px;" ng-controller="fileUploadCtrl">
+                    <div class="container-fluid">
+                        <ul class="list-inline" style="margin:0;display:inline-block">
+                            <li>
+                                <button type="button" tooltip="Download" class="btn btn-color btn-sm" ng-click="downloadVehicle()" >Download Vehicle</button>
+                            </li>
+                            <li>
+                                <button type="button" tooltip="Go Back" class="btn btn-color btn-sm" ng-click="cancel()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

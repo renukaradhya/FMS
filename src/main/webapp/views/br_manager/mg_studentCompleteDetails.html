@@ -1,0 +1,245 @@
+<div class="container-fluid" style="height: 140%;padding: 0px;">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-group"></i>Student Management</li>
+            <li><i class="fa fa-child"></i>Students</li>
+            <li><i class="fa fa-info"></i>Full Details</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content" style="height:120%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="row">
+                <div class="container-fluid" style="height: 30px;padding:0;">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 20px">
+                        <a ui-sref="^.list"><button class="btn btn-color btn-sm" ng-click="back()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="border: 1px solid #d2d6de; background: #ffffff;margin-left: 5px;margin-right: 5px; margin-top: 10px;">
+                <div class="col-lg-4">
+                    <table style="padding-left: 30px">
+                        <tbody>
+                        <tr ng-if="image">
+                            <td width="150px" height="250px" class="text-center" style="color: #777575;padding-left: 30px">
+                                <img class = "img-thumbnail img-responsive" ng-src="data:image/JPEG;base64,{{photo}}">
+                            </td>
+                        </tr>
+                        <tr ng-if="!image && gender!='Male'">
+                            <td width="150px" height="250px"  class="text-center" style="color: #777575;padding-left: 30px">
+                                <img class="img-thumbnail img-responsive" src="images/female.png"/>
+                            </td>
+                        </tr>
+                        <tr ng-if="!image && gender!='Female'">
+                            <td width="150px" height="250px"  class="text-center" style="color: #777575;padding-left: 30px">
+                                <img class="img-thumbnail img-responsive" src="images/male.png"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-8">
+                    <table style="padding-left: 30px">
+                        <tbody>
+                        <tr>
+                            <td class="text-center" style="padding-left: 30px">
+                                <div class="headline text-center" style="padding-left: 10px;"><h2 style="color: #777575;">{{branchName}}</h2></div>
+                                <div class="text-center" style="padding-left: 10px;"><h2 style="color: #777575;">{{currentYear}}</h2></div>
+                                <div class="headline text-center" style="padding-left: 10px;"><h3 style="color: #777575;">Student Profile</h3></div><br/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" style="border: 1px solid #d2d6de;margin-left: 5px;margin-right: 5px;background: #ffffff;margin-top: 4px;padding: 5px;">
+                <div class="col-lg-4" style="padding-left: 30px; padding-top: 10px">
+                    <table style="padding-left: 30px">
+                        <tbody>
+                        <!--<tr style="font-size: large;padding-left: 30px">
+                            <th>Student Id:</th>
+                            <td>{{studentId}}<br/></td>
+                        </tr>-->
+                        <!--<tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>-->
+                        <tr style=" font-size: large;padding-left: 30px;color: #777575;" >
+                            <th>Roll No:</th>
+                            <td>{{rollNumber}}<br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Current Class:</th>
+                            <td>{{class}}<br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Section:</th>
+                            <td>{{section}}<br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Route Name:</th>
+                            <td>{{stud.routeName}}<br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Vehicle Reg. No:</th>
+                            <td>{{stud.vehicleRegNumber}}<br/></td>
+                        </tr>
+
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Route Number:</th>
+                            <td>{{routeNumber}} <br/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-4" ><br/>
+                    <table>
+                        <tbody >
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>First Name:</th>
+                            <td>{{ fname}} <br/> </td>
+                        </tr>
+                        <tr style="font-size: large">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>Last Name:</th>
+                            <td>{{ lname}} <br/> </td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Birth Date:</th>
+                            <td>{{dob}}<br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Email Id:</th>
+                            <td>{{email}}<br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Contact No:</th>
+                            <td>{{phoneNumber}} <br/></td>
+                        </tr>
+
+                        <tr style="font-size: large;padding-left: 30px">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;padding-left: 30px;color: #777575;" class="clr">
+                            <th>Blood Group: </th>
+                            <td>{{blood}} <br/></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-4"><br/>
+                    <table>
+                        <tbody style="color: #777575;">
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>Father First Name:</th>
+                            <td>{{  fatherFname}} <br/> </td>
+                        </tr>
+                        <tr style="font-size: large">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>Father Last Name:</th>
+                            <td>{{  fatherLname}}</td>
+                        </tr>
+                        <tr style="font-size: large">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>Mother First Name:</th>
+                            <td>{{  motherFname}}<br/> </td>
+                        </tr>
+                        <tr style="font-size: large">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>Mother Last Name:</th>
+                            <td>{{motherLname}} <br/> </td>
+                        </tr>
+
+                        <tr style="font-size: large">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>Year of Joining:</th>
+                            <td>{{  joiningYear}} <br/> </td>
+                        </tr>
+
+                        <tr style="font-size: large">
+                            <th> </th>
+                            <td> <br/></td>
+                        </tr>
+                        <tr style="font-size: large;color: #777575;" class="clr">
+                            <th>Gender:</th>
+                            <td>{{  gender}} <br/> </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row" style="padding-top: 30px;border: 1px solid #ccc;margin-left: 5px;margin-right: 5px;margin-top: 4px;">
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                    <form>
+                        <FIELDSET class="legend" style="padding-left: 30px;" >
+                            <LEGEND style="color: #777575;"><b>Local Address</b></LEGEND>
+                            <p style="font-size: 20px;color: #777575;" class="clr">{{localAddress}}</p>
+                        </FIELDSET>
+                    </form>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                    <form>
+                        <FIELDSET class="legend" style="padding-left: 30px;" >
+                            <LEGEND style="color: #777575;"><b>Permanent Address</b></LEGEND>
+                            <p style="font-size: 20px;color: #777575;" class="clr">{{permanentAddress}}</p>
+                        </FIELDSET>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

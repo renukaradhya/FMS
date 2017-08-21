@@ -1,0 +1,152 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="fetchYearList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-money"></i>Fees Management</a></li>
+            <li><i class="fa fa-eye"></i>View</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0;margin-left:-15px;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <a ui-sref="^.list"><button class="btn btn-color btn-sm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button></a>
+                </div>
+            </div>
+
+            <div class="container-fluid" style="height:auto;padding:0;margin-top: 10px;">
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div>
+                        <label class="col-lg-4 col-md- col-sm-4 col-xs-4 control-label">Fees Id</label>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="color: #FA8072">
+                            {{ feeDetails.feeId}}
+                        </div>
+                    </div>
+                </div>-->
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <div>
+                        <label class="col-lg-4 col-md- col-sm-4 col-xs-4 control-label">Fees Name</label>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="color: #f4f4f4">
+                            {{ feeDetails.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div>
+                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">Year</label>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="color: #f4f4f4">
+                            {{ feeDetails.year}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 20px;">
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">ONE TIME FEES</caption>
+                    <thead>
+                    <tr>
+                        <!-- <th width="10%">One Time Fees Id</th>-->
+                        <th width="10%">Type</th>
+                        <th width="10%">Pay By Date</th>
+                        <th width="10%">Amount</th>
+                        <th width="5%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="one in feeDetails.oneTimeFees">
+                        <!--<td width="10%">{{one.oneTimeFeeId}}</td>-->
+                        <td width="10%">{{one.type}}</td>
+                        <td width="10%">{{one.payByDate}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>{{one.amount}}</td>
+                        <td width="5%">
+                            <a href="#" ng-click="deactivateOneTimeFee(one,$index)"><button class="btn-action" title="Delete {{one.oneTimeFeeId}}"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    <!--<tr>
+                        <td>Total:</td>
+                        <td>{{one.totalRecurringFee}}</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+                <div ng-if="feeDetails.oneTimeFees.length == 0 || feeDetails.oneTimeFees == undefined" class="noData">
+                    No Fees Found</div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 pull-right">
+                        <table>
+                            <tr>
+                                <th class="control-label" style="color: #777575">Total One Time Fees:</th>
+                                <td><p style="margin-left: 15px;padding-top: 10px;color: #777575;"><i class="fa fa-inr" aria-hidden="true"></i>{{totalOneTimeFees | filter : Rs}}</p></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid" style="height:auto;padding:0;margin-top: 20px;">
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Fees Mode</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <ul class="list-inline" style="margin:0;display:inline-block ">
+                            <li>
+                                <select  class="input-sm form-control search-text-box" ng-model="recMode" ng-change="onModeChange(recMode)" ng-options="recMode as recMode for recMode in mode_list" style="line-height: 1.5">
+                                    <option value="" selected="selected">Select Mode</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 20px;">
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #777575;" class="text-center">RECURRING FEES</caption>
+                    <thead>
+                    <tr>
+                        <!-- <th width="10%">Recurring Fees Id</th>-->
+                        <th width="10%">Type</th>
+                        <th width="10%">Mode</th>
+                        <th width="10%">No of Instalments</th>
+                        <th width="10%">Amount</th>
+                        <th width="10%">Total</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="rec in rec_list">
+                        <!-- <td width="10%">{{rec.recurringId}}</td>-->
+                        <td width="10%">{{rec.type}}</td>
+                        <td width="10%">{{rec.mode}}</td>
+                        <td width="10%">{{rec.noOfInstalments}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>{{rec.amount}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>{{ rec.noOfInstalments * rec.amount}}</td>
+                        <td width="10%">
+                            <a href="#" ng-click="deactivateRecurringFee(rec,$index)"><button class="btn-action" title="Delete {{rec.recurringId}}"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                         <td>Total Recurring Fee:</td>
+                         <td>{{rec.totalRecurring}}</td>
+                     </tr>-->
+                    </tbody>
+                </table>
+                <div ng-if="rec_list.length == 0 || rec_list == undefined" class="noData">
+                    No Fees Found</div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 pull-right">
+                        <table>
+                            <tr>
+                                <th class="control-label" style="color: #777575">Total Recurring Fees: </th>
+                                <td><p style="margin-left: 15px;padding-top: 10px;color: #777575;"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{totalRecurringFees | filter : Rs}}</p></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

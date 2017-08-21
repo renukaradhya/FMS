@@ -1,0 +1,140 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-calendar-check-o"></i>Leave Management</li>
+            <li><i class="fa fa-plus"></i>Request Leave</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div class="container-fluid text-success response_msg" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Request Leave
+            </div>
+            <form name="requestLeave" autocomplete="off" class="form-horizontal" ng-submit="submitLeaveRequest()">
+
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Type of Leave</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="Casual" ng-model="add.type">
+                                <span class="label-text">Casual</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="Sick" ng-model="add.type">
+                                <span class="label-text">Sick</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="Earned" ng-model="add.type">
+                                <span class="label-text">Earned</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Half Day Leave</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <label>
+                            <input type="checkbox" ng-model="halfDay.value" name="check" >
+                            <span style="margin-left: 0px;color: #777575;font-weight: 500;display: inline-block;" class="label-text">&nbsp;&nbsp;&nbsp;Half Day</span>
+                        </label>
+                    </div>
+                </div>
+
+               <!-- <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Full Day/Half-Day</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="false" ng-model="add.halfDay">
+                                <span class="label-text">Full Day</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="true" ng-model="add.halfDay">
+                                <span class="label-text">Half Day</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>-->
+
+                <div class="form-group required" ng-if="halfDay.value">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Time Frame</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="timeFrame" value="1st Half" ng-model="add.timeFrame">
+                                <span class="label-text">1st Half</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="timeFrame" value="2nd Half" ng-model="add.timeFrame">
+                                <span class="label-text">2nd Half</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">From</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.fromDate" tooltip="Select Date In Year-Month-Date Format" name="date" ui-date="dateOptions" placeholder="YYYY-MM-DD" id="date" class="form-control" required autofocus />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">To</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.toDate" tooltip="Select Date In Year-Month-Date Format" name="date2" ui-date="dateOptions" placeholder="YYYY-MM-DD"` class="form-control" required autofocus />
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Academic Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <!--<select  class="input-sm form-control search-text-box" ng-model="add.x"  ng-options="x as x.year for x in years" style="line-height: 1.5" placeholder="year">
+                            <option value="" selected="selected">Select Year</option>
+                        </select>-->
+                        <input type="text" ng-model="academicYear" tooltip="Academic Year"  name="" class="form-control " readonly autofocus>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.year" name="leaveYear" class="form-control" placeholder="YYYY" maxlength="7" ng-pattern="/^[0-9]{4}-[0-9]{2}$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addInventory.yearOfManufacturer.$error.pattern">
+                        Year should be in format such as <b>YYYY</b></div>
+                </div>-->
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Reason</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <textarea type="textarea" ng-model="add.reason" capitalize-first tooltip="Enter A Valid Reason" class="form-control" name="reason" required autofocus ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm"  ng-disabled="requestLeave.$invalid">Request</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

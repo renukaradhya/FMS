@@ -1,0 +1,78 @@
+
+<div class="container-fluid" style="height: 100%;padding-left: 0px" ng-init="fetchYearList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="reports.main"> <i class="fa fa-file"></i>Student Marksheet</a></li>
+        </ol>
+    </section>
+    <div class="container-fluid base-content" style="margin-right:0;height: auto;width: 1070px">
+        <h3 class="text-type" style="margin-top: 10px;color: #777575;">Student Admission Ticket</h3>
+        <div class="container-fluid" style="padding: 0;">
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8" style="padding: 10px 10px 10px 0">
+                <form name="markssheet" class="form-horizontal" ng-submit="examHallTicket(z, student, assessment)">
+
+                    <div class="form-group">
+                        <ul class="list-inline" style="margin:0;display:inline-flex">
+                            <li>
+                                <select  class="input-sm form-control" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                                    <option value="" selected="selected">Select Year</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  class="input-sm form-control" ng-model="y" ng-change="fetchSectionList(y,x.year)" ng-options="y as y.name for y in standard_list" style="line-height: 1.5">
+                                    <option value="" selected="selected">Select Class</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  class="input-sm form-control" ng-model="z" ng-change="fetchStudentList(x.year, y, z)" ng-options="z as z.section for z in classroom_list" style="line-height: 1.5">
+                                    <option value="" selected="selected">Select Section</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  class="input-sm form-control" ng-model="student"  ng-change="fecthAssesmentList(z)" ng-options="student as student.studentFirstName for student in student_list" style="line-height: 1.5">
+                                    <option value ="" selected="selected">Select Student</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  class="input-sm form-control" ng-model="assessment" ng-options="assessment as assessment.assessmentName for assessment in assessment_list" style="line-height: 1.5">
+                                    <option value ="" selected="selected">Select Assessment</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="form-group">
+                        <ul class="list-inline" style="margin:0;display:inline-flex">
+                            <li>
+                                <button type="submit" tooltip="Generate Report" class="btn btn-color btn-sm" >Generate Hall Ticket</button>
+                            </li>
+                            <li>
+                                <button type="button" ng-click="back()" tooltip="Go Back" class="btn btn-color btn-sm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4" ng-show="success" style="padding:10px 0 10px 10px;text-align: right">
+                <div class="btn-group">
+                    <button type="button" ng-click="hallTicketPdf()" class="btn btn-color ">
+                        Download
+                    </button>
+                   <!-- <ul class="dropdown-menu" style="min-width: 89px">
+                        <li><a href="#">PDF</a></li>
+                        &lt;!&ndash; <li><a href="#" ng-click="downloadXls()">Xls</a></li>&ndash;&gt;
+                    </ul>-->
+                </div>
+                <!--<button type="button"  style="margin-right: 10px" tooltip="In progress" class="btn btn-color btn-sm">Archive</button>-->
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inner-base-content" style="height: auto;width: 1049px;padding: 10px;">
+            <div id="pdf-holder" ng-show="success" style="height: 100%;"></div>
+            <div class="noData" ng-hide="success">
+                No Data Found...
+            </div>
+        </div>
+    </div>
+</div>

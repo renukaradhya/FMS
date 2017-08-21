@@ -1,0 +1,162 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building"></i>Classroom Management</li>
+            <li><i class="fa fa-clock-o"></i>Time Table</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+            <div class="container-fluid" style="height: 30px;padding:0">
+
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <ul class="list-inline" style="margin:0;display:inline-flex">
+                        <li>
+                            <a ui-sref="^.add"><button type="button" style="margin-left: -5px;" tooltip="Add" ng-click="addTimetable()" class="btn btn-color btn-sm">Add Time Table</button></a>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5" placeholder="year">
+                                <option value="">Select Year</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="standard" ng-change="fetchSectionList(x.year, standard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                                <option value="" selected>Select Class</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="currentClassroom" ng-change="fetchTimeTable(currentClassroom)" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5">
+                                <option value="">Select Section</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 pull-right" style="font-size: medium;padding: 0 0 10px 0px" ng-if="timetable != undefined && timetable != ''" >
+                    <button type="button" ng-click="deleteTimetable(currentClassroom.classRoomId)" class="btn btn-color btn-sm">Delete Time Table</button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if="timetable_list== undefined || timetable_list.length <= 10">
+                <table class="table table-striped time-table">
+                    <thead>
+                    <tr style="height: 10%">
+                        <th width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Day\Time</th>
+
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[0].periodStartTime}}</th>
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[1].periodStartTime}}</th>
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[2].periodStartTime}}</th>
+                        <th width="10%" class="timeTable" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[3].periodStartTime}}</th>
+                       <!-- <th width="10%">Break</th>-->
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[4].periodStartTime}}</th>
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[5].periodStartTime}}</th>
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[6].periodStartTime}}</th>
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[7].periodStartTime}}</th>
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[8].periodStartTime}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr style="height: 10%">
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Monday</th>
+
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[0].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[1].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[2].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[3].subject}}</td>
+                        <!--<td width="10%">Lunch Break</td>-->
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[4].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[5].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[6].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[7].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.monday[8].subject}}</td>
+                    </tr>
+
+                    <tr>
+                        <th width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Tuesday</td>
+
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[0].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[1].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[2].subject}}</td>
+                        <td width="10%"  style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[3].subject}}</td>
+                        <!--<td width="10%">Lunch Break</td>-->
+                        <td width="10%" style="padding-top: 15px; border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[4].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[5].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[6].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[7].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.tuesday[8].subject}}</td>
+
+                    </tr>
+
+                    <tr>
+                        <th width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Wednesday</td>
+
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[0].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[1].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[2].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[3].subject}}</td>
+                        <!--<td width="10%">Lunch Break</td>-->
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[4].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[5].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[6].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[7].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.wednesday[8].subject}}</td>
+
+                    </tr>
+
+                    <tr>
+                        <th width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Thursday</td>
+
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[0].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[1].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[2].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[3].subject}}</td>
+                       <!-- <td width="10%">Lunch Break</td>-->
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[4].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[5].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[6].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[7].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.thursday[8].subject}}</td>
+                    </tr>
+
+                    <tr>
+                        <th width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Friday</td>
+
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[0].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[1].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[2].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[3].subject}}</td>
+                        <!--<td width="10%">Lunch Break</td>-->
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[4].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[5].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[6].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[7].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.friday[8].subject}}</td>
+                    </tr>
+
+                    <tr>
+                        <th width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Saturday Timings</td>
+
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[0].periodStartTime}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[1].periodStartTime}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[2].periodStartTime}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[3].periodStartTime}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[4].periodStartTime}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[5].periodStartTime}}</td>
+                    </tr>
+                    <tr>
+                        <th width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">Saturday</td>
+
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[0].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[1].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[2].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[3].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[4].subject}}</td>
+                        <td width="10%" style="padding-top: 15px;border-top: 1px solid #f4f4f4;font-size: 12px;font-weight: 600; vertical-align: middle;width: 10%;">{{timetable.saturday[5].subject}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

@@ -1,0 +1,88 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="branch.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Update Holiday</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Update  Holiday
+            </div>
+            <form name="editHoliday" autocomplete="off" class="form-horizontal" ng-submit="updateHoliday(edit.startTime)">
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Type</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="edit.type" class="form-control" name="type" capitalize-first required autofocus  ng-pattern="/^[a-zA-Z ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editHoliday.type.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Reason</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.reason" name="reason" class="form-control" capitalize-first  required autofocus maxlength="128" ng-pattern="/^[a-zA-Z ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editHoliday.reason.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">To</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.to" name="to" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.year" name="year" class="form-control" readonly>
+                    </div>
+                </div>-->
+
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.standard" name="standard" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.section" name="section" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Start Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.startTime" ui-date="dateOptions" id="date"  name="startTime" class="form-control" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">End Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.endTime" ui-date="dateOptions"  name="endTime" class="form-control" required />
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" tooltip="Update Details" class="btn btn-color btn-sm" ng-disabled="editHoliday.$invalid">Update</button>
+                        <button type="button" tooltip="Cancel Updation" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

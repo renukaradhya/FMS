@@ -1,0 +1,73 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-th"></i>Settings</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-8 base-content table-base" style="height:90%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-3 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.set"><button type="button" tooltip="Email" ng-click="setValues()" class="btn btn-color btn-sm">Email/Fees Setting</button></a>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.sys"><button type="button" tooltip="Syllabus" ng-click="basicSetting()" class="btn btn-color btn-sm">Syllabus Setting</button></a>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.cat"><button type="button" tooltip="Category" ng-click="basicSetting()" class="btn btn-color btn-sm">Category Setting</button></a>
+                </div>
+            </div>
+            <div class="container-fluid text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg2 == undefined || response_msg2 == ''"  >{{response_msg2}}</div>
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <!--<th width="20%">Id</th>-->
+                        <th width="20%">Syllabus</th>
+                        <th width="20%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="syllabus_list != undefined || syllabus_list.length <= 10">
+                    <tr ng-repeat="obj in syllabus_list">
+                       <!-- <td width="20%">{{obj.id}}</td>-->
+                        <td width="20%">{{obj.syllabus}}</td>
+                        <td width="20%">
+                            <a href="#" ng-click="deleteSyllabus(obj,$index)"><button class="btn-action" title="Delete Syllabus"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="syllabus_list.length == 0 || syllabus_list == 0" class="noData">
+                    No Records Found</div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;margin-top:20px;padding: 0;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                       <!-- <th width="20%">Id</th>-->
+                        <th width="20%">Category</th>
+                        <th width="20%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="categories != undefined || categories.length <= 10">
+                    <tr ng-repeat="obj in categories">
+                        <!--<td width="20%">{{obj.id}}</td>-->
+                        <td width="20%">{{obj.name}}</td>
+                        <td width="20%">
+                            <a href="#" ng-click="deleteCategory(obj,$index)"><button class="btn-action" title="Delete Category"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="categories.length == 0 || categories == undefined" class="noData">
+                    No Records Found</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

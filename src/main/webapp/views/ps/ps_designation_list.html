@@ -1,0 +1,69 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-th"></i>Settings</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-8 base-content table-base" style="height:90%;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-3 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.desig"><button type="button" tooltip="Post Designation" ng-click="addDesignation()" class="btn btn-color btn-sm">Post Designation</button></a>
+                </div>
+            </div>
+            <div class="container-fluid text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg3 == undefined || response_msg3 == ''"  >{{response_msg3}}</div>
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">Teaching Staff Roles</caption>
+                    <thead>
+                    <tr>
+                        <!--<th width="20%">Serial No</th>-->
+                        <th width="20%">Designation</th>
+                        <th width="20%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="designation_list != undefined || designation_list.length <= 10">
+                    <tr ng-repeat="obj in designation_list">
+                        <!--<td width="20%">{{obj.id}}</td>-->
+                        <td width="20%">{{obj.designation}}</td>
+                        <td width="20%">
+                            <a href="#" ng-click="deleteDesignation(obj,$index)"><button class="btn-action" title="Delete Role"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="designation_list.length == 0 || designation_list == undefined" class="noData">
+                    No Records Found</div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 30px;" >
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">Non-Teaching Staff Roles</caption>
+                    <thead>
+                    <tr>
+                       <!-- <th width="20%">Serial No</th>-->
+                        <th width="20%">Designation</th>
+                        <th width="20%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="non_teaching_staff != undefined || non_teaching_staff.length <= 10">
+                    <tr ng-repeat="obj1 in non_teaching_staff">
+                       <!-- <td width="20%">{{obj1.id}}</td>-->
+                        <td width="20%">{{obj1.designation}}</td>
+                        <td width="20%">
+                            <a href="#" ng-click="deleteDesignation(obj1,$index)"><button class="btn-action" title="Delete Role"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="non_teaching_staff.length == 0 || non_teaching_staff == undefined" class="noData">
+                    No Records Found</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

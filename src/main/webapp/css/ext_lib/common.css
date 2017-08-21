@@ -1,0 +1,16 @@
+
+
+
+
+legend {
+    display: block;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: 0;
+}
+input {
+    text-transform: capitalize;
+}
+textarea {
+    text-transform: capitalize;
+}

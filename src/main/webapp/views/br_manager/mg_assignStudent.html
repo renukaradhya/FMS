@@ -1,0 +1,79 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="classroom.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Assign Student</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Assign Student To Vehicle
+            </div>
+            <form name="assignStudents" autocomplete="off" class="form-horizontal" ng-submit="assignStudentsVehicle(assign.studentId, vehicle)">
+
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="assign.year" class="form-control" maxlength="7" name="year" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="assign.standard" class="form-control" maxlength="16" name="standard" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="assign.section" class="form-control" maxlength="16" name="section" readonly>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="assign.studentId" class="form-control" maxlength="16" name="studentId" readonly>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="assign.studentFirstName" class="form-control" maxlength="16" name="studentId" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Vehicle Route Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select class="input-sm form-control" ng-model="vehicle" ng-options="vehicle as vehicle.routeNumber for vehicle in vehicle_list" style="line-height: 1.5">
+                            <option value="" selected>Select Route No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Vehicle Route Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="vehicle.routeName" class="form-control" maxlength="16" name="standard" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="assignStudents.$invalid">Assign</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

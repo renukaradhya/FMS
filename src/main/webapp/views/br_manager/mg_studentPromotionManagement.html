@@ -1,0 +1,69 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="init();">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-group"></i>Student Management</li>
+            <li><i class="fa fa-arrow-up"></i>Promotions</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+            <div class="container-fluid" style="margin-bottom: 20px;margin-left: -15px;">
+                <div class="col-lg-6 col-md-6 col-sm-11 col-xs-11">
+                    <ul class="list-inline" style="margin:0;display:inline-block;padding-top: 10px">
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5;margin-left: -20px;width: 100px;">
+                                <option value="" selected="selected">Select Year</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="standard" ng-change="fetchSectionList(x.year,standard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Standard</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="currentSection" ng-change="fetchStudentList(x.year,standard, currentSection)" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Section</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="currentStudent" ng-change="fetchStudentDetails(currentStudent,x.year,standard,currentSection.section)" ng-options="currentStudent as currentStudent.studentFirstName for currentStudent in student_list" style="line-height: 1.5" >
+                                <option value="" selected="selected">Select Student</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-11 col-xs-11 text-success response_msg" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+            <div  class="container-fluid" style="margin: 15px; height:auto;padding:0;" ng-if="student_list != undefined">
+                <table class="table table-striped" style="margin-left: -15px;">
+                    <thead>
+                    <tr>
+                       <!-- <th width="15%">Student Id</th>-->
+                        <th width="20%">First Name</th>
+                        <th width="20%">Last Name</th>
+                        <th width="15%">Year</th>
+                        <th width="15%">Promotion</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-hide="student_list.length == 0 || student_details == undefined">
+                    <tr>
+                       <!-- <td width="15%">{{student_details.studentId}}</td>-->
+                        <td width="20%">{{student_details.studentFirstName}}</td>
+                        <td width="20%">{{student_details.studentLastName}}</td>
+                        <td width="20%">{{student_details.currentYear}}</td>
+                        <td width="10%">{{student_details.promote}}</td>
+                        <td width="10%">
+                            <a><button class="btn-action" style="margin-right:5%" ng-if="student_details.promote != true"  ng-click="promoteStudent(x.year,currentSection,currentStudent.studentId)" title="Promote Student">Promote</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="student_list.length == 0 || student_details == undefined" class="noData">No students Found</div>
+                <!--<div ng-if="student_list == undefined" class="noData">Processing...</div>-->
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

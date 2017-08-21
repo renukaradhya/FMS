@@ -1,0 +1,70 @@
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="setValues()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-plus"></i>Initial Settings</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+               Initial Settings
+            </div>
+            <form name="settings" autocomplete="off" class="form-horizontal" ng-submit="initialSetup()">
+
+                <div class="form-group required">
+                    <label class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label">Enable Email Notification</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="email" value="true" ng-model="add.isEnableEmail">
+                                <span class="label-text">Yes</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="email" value="false" ng-model="add.isEnableEmail">
+                                <span class="label-text">No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label">Show Fees Structure in Android App</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="fees" value="true" ng-model="add.isEnableFees">
+                                <span class="label-text">Yes</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="fees" value="false" ng-model="add.isEnableFees">
+                                <span class="label-text">No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="settings.$invalid">Set</button>
+                        <a ui-sref="settings.basic"><button type="button"  class="btn btn-color btn-sm" >Cancel</button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+
+        <!--<div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <strong>*</strong> Time Should be <strong>HH:MM;SS</strong> Format.
+        </div>-->
+
+    </div>
+</div>
+

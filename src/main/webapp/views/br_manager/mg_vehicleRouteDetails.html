@@ -1,0 +1,97 @@
+<div class="container-fluid" style="height:100%;padding: 0px;" ng-init="fetchVehicleList(0,vehicleDetails.numPerPage)">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-car"></i>Vehicle</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-11 base-content table-base" style="height:auto;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.list"><button type="button" tooltip="Add" class="btn btn-color btn-sm">Back</button></a>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;">
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">Route Details</caption>
+                    <thead>
+                    <tr>
+                        <th width="10%">Name</th>
+                        <th width="10%">Route Number</th>
+                        <th width="10%">Starting Point</th>
+                        <th width="10%">Ending Point</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="vehicle_route_details != undefined">
+                    <tr>
+                        <td width="10%">{{vehicle_route_details.name}}</td>
+                        <td width="10%">{{vehicle_route_details.routeNumber}}</td>
+                        <td width="10%">{{vehicle_route_details.startingPoint}}</td>
+                        <td width="10%">{{vehicle_route_details.endingPoint}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="vehicle_route_details == undefined" class="noData">
+                    No vehicles Found</div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 30px;" >
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">Boarding Points</caption>
+                    <thead>
+                    <tr>
+                        <th width="10%">Boarding Point</th>
+                        <th width="10%">Pick Time</th>
+                        <th width="10%">Drop Time</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="point_boarding == undefined || point_boarding.length <= 100">
+                    <tr ng-repeat="obj in point_boarding">
+                        <td width="10%">{{obj.boardingPointName}}</td>
+                        <td width="10%">{{obj.pickTime}}</td>
+                        <td width="10%">{{obj.dropTime}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="point_boarding.length == 0 || point_boarding == undefined" class="noData">
+                    No Data Found</div>
+               <!-- <div ng-if="point_boarding == undefined" class="noData">
+                    Processing...</div>-->
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 30px;" >
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">Vehicle Staff Details</caption>
+                    <thead>
+                    <tr>
+                        <th width="10%">First Name</th>
+                        <th width="10%">Last Name</th>
+                        <th width="10%">Role</th>
+                        <th width="10%">Gender</th>
+                        <th width="10%">Ccntact Number</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="staff_details == undefined || staff_details.length <= 10">
+                    <tr ng-repeat="obj1 in staff_details">
+                        <td width="10%">{{obj1.firstName}}</td>
+                        <td width="10%">{{obj1.lastName}}</td>
+                        <td width="10%">{{obj1.role}}</td>
+                        <td width="10%">{{obj1.gender}}</td>
+                        <td width="10%">{{obj1.phonenumber}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="staff_details.length == 0 || staff_details == undefined" class="noData">
+                    No Data Found</div>
+                <!--<div ng-if="staff_details == undefined" class="noData">
+                    Processing...</div>-->
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

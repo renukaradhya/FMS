@@ -1,0 +1,105 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="fetchYearList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-balance-scale"></i>Assessment Management</li>
+            <li><i class="fa fa-graduation-cap"></i>Assessment Result</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;width:95%">
+        <div class="container-fluid content-header"  style="height: 90%;padding:0">
+            <div class="container-fluid" style="height: 30px;padding:0;">
+
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8" style="font-size: medium;padding: 0 0 10px 9px" >
+                    <ul class="list-inline " style="margin:0;display:inline-block">
+                        <li>
+                            <a><button tooltip="Add" class="btn btn-color btn-sm" ng-click="addMarks(currentClassroom,assessment,currentStudent)">Add Marks</button></a>
+                        </li>
+                        <li>
+                            <a><button tooltip="Edit" class="btn btn-color btn-sm" ng-click="updateMarks(currentClassroom,assessment,currentStudent)">Edit Marks</button></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-2 col-sm-3 col-xs-4" ng-hide=" marks_list == undefined ||  marksObtained == undefined">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+
+            <div class="container-fluid" style="margin-top: 10px;" >
+                <ul class="list-inline " style="margin:0 0 0 -5px;display:inline-block">
+                    <li>
+                        <select  class="input-sm form-control" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                            <option value="" selected>Select Year</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control" ng-model="currentStandard" ng-change="fetchSectionList(currentStandard,x.year)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                            <option value="" selected>Select Class</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control" ng-model="currentClassroom" ng-change="fetchStudentList(x.year, currentStandard, currentClassroom)" ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                            <option value="" selected>Select Section</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control" ng-model="currentStudent"  ng-change="fecthAssesmentList(currentClassroom)" ng-options="student as student.studentFirstName for student in student_list" style="line-height: 1.5">
+                            <option value ="" selected>Select Student</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control" ng-model="assessment" ng-change="studentMarksListforAssess(currentClassroom, currentStudent, assessment)" ng-options="assessment as assessment.assessmentName for assessment in assessment_list" style="line-height: 1.5">
+                            <option value ="" selected>Select Assessment</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div  class="container-fluid" style="height:auto;padding-top: 10px;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="10%">Subject</th>
+                        <th width="10%">Obtained Marks</th>
+                        <th width="10%">Max Marks</th>
+                        <th width="10%">Grade</th>
+                        <th width="10%">Result</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if=" marks_list != undefined && marksObtained != undefined">
+                    <tr ng-repeat="mark in marksObtained">
+                        <td width="10%">{{mark.subject}}</td>
+                        <td width="10%">{{mark.obtainedScore}}</td>
+                        <td width="10%">{{mark.maxScore}}</td>
+                        <td width="10%">{{mark.grade}}</td>
+                        <td width="10%">{{mark.passed}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="marksObtained.length == 0 || marksObtained == undefined" class="noData">
+                No Data Found</div>
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if=" marks_list != undefined && marksObtained != undefined">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left:30px;">
+                        <label class="control-label"><b>Assessment Name:</b> {{marks_list.assessmentName}}</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <label class="control-label"><b>Result:</b> {{marks_list.passed}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left:30px;padding-top: 50px">
+                        <label class="control-label"><b style="color: red">Remarks:</b> {{marks_list.comments}} </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

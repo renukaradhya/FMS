@@ -1,0 +1,106 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="fetchInventoryList(0,inventoryDetails.numPerPage)">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-cubes"></i>Inventory Management</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width: 95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <!-- Add Inventary -->
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.add"><button type="button" ng-click="addInventoryEntry()" class="btn btn-color btn-sm">Add Inventory</button></a>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+
+            <!-- Show Iventary -->
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if="inventory_list== undefined || inventory_list.length <= 10">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <!--  <th width="10%">Inventory Id</th>-->
+                        <th width="10%">Inventory Name</th>
+                        <th width="10%">Manufactured Year</th>
+                        <th width="10%">Purchase Date</th>
+                        <th width="10%">Approximate Cost</th>
+                        <th width="10%">Category</th>
+                        <th width="10%">Serial Number</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="inventory in inventory_list">
+                       <!-- <td width="10%">{{inventory.inventoryId}}</td>-->
+                        <td width="10%">{{inventory.inventoryType}}</td>
+                        <td width="10%">{{inventory.yearOfManufacturer}}</td>
+                        <td width="10%">{{inventory.dateOfPurchase}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;&nbsp;{{inventory.approximateCost}}</td>
+                        <td width="10%">{{inventory.category}}</td>
+                        <td width="10%">{{inventory.serialNumber}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editInventoryEntry(inventory.inventoryId)" title="Edit Inventory"><i class="fa fa-pencil " rel="popover">&nbsp;Edit</i></button></a>
+                            <a href="#" ng-click="deleteInventory(inventory,$index)"><button class="btn-action" title="Delete Inventory"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="inventory_list.length == 0" class="noData">No Inventories Found</div>
+                <!--<div ng-if="inventory_list == undefined" class="noData">Processing...</div>-->
+            </div>
+            <!--<div class="container-fluid" style="padding:0" ng-if="inventory_list != undefined && inventory_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                       &lt;!&ndash; <th width="10%">Inventory Id</th>&ndash;&gt;
+                        <th width="10%">Inventory Name</th>
+                        <th width="10%">Manufactured Year</th>
+                        <th width="10%">Purchase Date</th>
+                        <th width="10%">Approximate Cost</th>
+                        <th width="10%">Category</th>
+                        <th width="10%">SerialNumber</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="inventory_list != undefined && inventory_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="inventory in inventory_list">
+                        &lt;!&ndash;<td width="10%">{{inventory.inventoryId}}</td>&ndash;&gt;
+                        <td width="10%">{{inventory.inventoryType}}</td>
+                        <td width="10%">{{inventory.yearOfManufacturer}}</td>
+                        <td width="10%">{{inventory.dateOfPurchase}}</td>
+                        <td width="10%">{{inventory.approximateCost}}</td>
+                        <td width="10%">{{inventory.category}}</td>
+                        <td width="10%">{{inventory.serialNumber}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editInventoryEntry(inventory.inventoryId)" title="Edit Inventory"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteInventory(inventory,$index)"><button class="btn-action" title="Delete Inventory"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+
+
+            <div class="container-fluid" style="padding: 0;margin-top: auto" ng-show="inventory_list != undefined && inventory_list.length > 0">
+                <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="inventoryDetails.numPerPage" ng-change="init()">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>-->
+                <pagination style="margin: 10px 0;float: right" ng-model="inventoryDetails.currentPage" items-per-page="inventoryDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

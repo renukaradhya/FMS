@@ -1,0 +1,203 @@
+
+<div class="container-fluid" style="height: 120%;padding: 0" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-user"></i>Staff Management</li>
+            <li><i class="fa fa-group"></i>Non-Teaching Staff</li>
+            <li><i class="fa fa-plus"></i>Add Non-Teaching Staff</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Add Non-Teaching Staff
+            </div>
+            <form name="addFaculty" autocomplete="off" class="form-horizontal" ng-submit="postNonTeachingFaculty(noOfExperience)">
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Role</label>
+                            <div  class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <select  class="input-sm form-control" ng-model="add.x" required  ng-options="x as x.designation for x in roles_list" style="line-height: 1.5">
+                                    <option value="">Select Designation</option>
+                                </select>
+                                <!--<input type="text" ng-model="add.x.role" tooltip="Alphabets Are Accepted" class="form-control" name="role" required capitalize-first autofocus maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">-->
+
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Staff Id</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                                <input type="text" ng-model="add.staffId" tooltip="" class="form-control" name="staffId" required capitalize-first autofocus maxlength="64" >
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">First Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                                <input type="text" ng-model="add.firstName" tooltip="Alphabets Are Accepted" class="form-control" name="firstName" required capitalize-first autofocus maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFaculty.firstName.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Last Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.lastName" tooltip="Alphabets Are Accepted" capitalize-first name="lastName" class="form-control"   autofocus maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFaculty.lastName.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Qualification</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.qualification" tooltip="Alphabets And Special Character Are Accepted" name="qualification" class="form-control" required autofocus >
+                            </div>
+                           <!-- <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFaculty.qualification.$error.pattern">
+                                Only alphabets are allowed including space, dot(.) and comma(,)</div>-->
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Experience</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="number" ng-model="noOfExperience" tooltip="Experience at date of joining" style="text-transform: capitalize;" name="noOfExperience" min="0" max="50" class="form-control"   autofocus >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Is Permanent</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <label>
+                                    <input type="checkbox" ng-model="isPermanent.value" name="check" >
+                                    <span style="margin-left: 0px;color: #777575;font-weight: 500;display: inline-block;" class="label-text">&nbsp;&nbsp;&nbsp;Permanent</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Date Of Joining</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.dateOfJoining" tooltip="Select DOJ In Year-Month-Date Format" name="date" ui-date="dateOptions"  class="form-control" required placeholder="YYYY-MM-DD"  autofocus />
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Date Of Birth</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.dateOfBirth" tooltip="Select DOB In Year-Month-Date Format" name="date2" ui-date="dateOptions" class="form-control" required placeholder="YYYY-MM-DD"  autofocus />
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Gender</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sex" value="Male" ng-model="add.gender">
+                                        <span class="label-text">Male</span>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sex" value="Female" ng-model="add.gender">
+                                        <span class="label-text">Female</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Blood Group</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <select class="input-sm form-control" ng-model="add.blood" required ng-options="x as x for x in bg_list" style="line-height: 1.5">
+                                    <option value="" selected="selected">Blood Group</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Driving License Number</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.drivingLicenseNumber" tooltip="Alphabets Are Accepted" name="drivingLicenseNumber" class="form-control"  autofocus maxlength="64" ng-pattern="/^[a-zA-Z0-9 ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFaculty.drivingLicenseNumber.$error.pattern">
+                                Only alphabets and numbers are allowed including space</div>
+                        </div>
+
+                        <div class="form-group required" >
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">License ExpiryDate</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.licenseExpiryDate" tooltip="Alphabets Are Accepted"  name="licenseExpiryDate" class="form-control" ui-date="dateOptions" autofocus  >
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Father First Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.fatherFirstName" tooltip="Alphabets Are Accepted" capitalize-first name="fatherFirstName" class="form-control"  required autofocus maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFaculty.fatherFirstName.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Father Last Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.fatherLastName" tooltip="Alphabets Are Accepted" capitalize-first name="fatherLastName" class="form-control"   autofocus maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFaculty.fatherLastName.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Local Address</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <textarea type="text" ng-model="add.localAddress" tooltip="Enter Proper Local Address" capitalize-first name="localAddress" class="form-control"  required autofocus ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Permanent Address</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <textarea type="text" ng-model="add.permanentAddress" tooltip="Enter Proper Permanent Address" capitalize-first name="permanentAddress" class="form-control"  required autofocus ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Phone Number</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.phonenumber"  tooltip="Ten Digit Numbers Are Accepted" name="phonenumber" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Secondary Phone Number</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="add.secondryPhonenumber"  tooltip="Ten Digit Numbers Are Accepted" name="secondryPhonenumber" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="addFaculty.$invalid">Create</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

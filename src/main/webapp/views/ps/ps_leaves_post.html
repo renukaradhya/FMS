@@ -1,0 +1,95 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="addLeaves();">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ><i class="fa fa-cubes"></i>Organization</a></li>
+            <li><i class="fa fa-plus"></i>Leave</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Leave Settings
+            </div>
+            <form name="settings" autocomplete="off" class="form-horizontal" ng-submit="setLeaves()">
+
+                <fieldset  data-ng-repeat="role in leave_list" ng-init="listDesignation();">
+
+                    <div class="form-group required">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Designation</label>
+                        <div  class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select  class="input-sm form-control" ng-model="role.x"  ng-options="x as x.designation for x in roles" style="line-height: 1.5">
+                                <option value="">Select Designation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">No of Sick Leaves</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type="number" ng-model="role.noOfSickLeaves" tooltip="Enter the No of sick leaves allowed" name="sick" ng-pattern="/^[0-9]*$/" class="input-sm form-control" required >
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="settings.sick.$error.pattern">
+                            Enter only numbers</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">No of Casual Leaves</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type="number" ng-model="role.noOfCasualLeaves" tooltip="Enter the No of Casual Leaves Allowed" ng-pattern="/^[0-9]*$/" name="casual" class="input-sm form-control" required >
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="settings.casual.$error.pattern">
+                            Enter only numbers</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">No of Earned Leaves</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type="number" ng-model="role.noOfEarnedLeave" tooltip="Enter the No of Casual Leaves Allowed" ng-pattern="/^[0-9]*$/" name="earned" class="input-sm form-control" required >
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="settings.earned.$error.pattern">
+                            Enter only numbers</div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Term</label>
+                        <div  class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select  class="input-sm form-control" ng-model="role.term"  ng-options="term as term for term in terms" style="line-height: 1.5">
+                                <option value="">Select Term</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="button" class="addfields" style="" ng-show="$last" ng-click="addLeave()">+</button>
+                            <button type="button" class="remove" style="margin-left: 30px" ng-show="$last" ng-click="removeLeave()">-</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="settings.$invalid">Create</button>
+                        <a ui-sref="^.leavelist"><button type="button"  class="btn btn-color btn-sm" >Cancel</button></a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+       <!-- <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;<strong class="blink_me">Press + symbol to add another Designation.</strong>
+        </div>
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;<strong class="blink_me">Press - symbol to remove currently entered Designation.</strong>
+        </div>-->
+    </div>
+</div>
+

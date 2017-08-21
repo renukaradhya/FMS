@@ -1,0 +1,91 @@
+
+<div class="container-fluid" style="height: 100%;padding-left: 0px" >
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="reports.main"> <i class="fa fa-file"></i>Report dashboard</a></li>
+        </ol>
+    </section>
+    <div class="container-fluid base-content" style="margin-right:0;height: auto;width: 1070px">
+        <h3 class="text-type" style="margin-top: 10px;color: #777575;">Study Certificate</h3>
+        <div class="container-fluid" style="padding: 0;">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 10px 10px 0">
+                <form name="gettc" class="form-horizontal" ng-submit="studyCertificate(currentStudent.studentId)">
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 20px">
+                        <select  class="input-sm form-control" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Year</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 20px">
+                        <select  class="input-sm form-control" ng-model="currentStandard" ng-change="fetchSectionList(currentStandard,x.year)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Class</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 20px">
+                        <select  class="input-sm form-control" ng-model="currentClassroom" ng-change="fetchStudentList(x.year, currentStandard, currentClassroom)" ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Section</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 20px">
+                        <select  class="input-sm form-control" ng-model="currentStudent"  ng-change="fecthAssesmentList(currentClassroom)" ng-options="student as student.studentFirstName for student in student_list" style="line-height: 1.5">
+                            <option value ="" selected="selected">Select Student</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-inline">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="padding-left: 9px">
+                            <h4 style="color: #777575;">Student Name: {{currentStudent.studentFirstName+" "+ currentStudent.studentLastName }}</h4>
+                        </div>
+                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 30px; padding-left: 80px">
+                             <h4>Roll Number: {{currentStudent.rollNumber}}</h4>
+                         </div>-->
+                    </div>
+
+                    <div class="form-group">
+                        <ul class="list-inline" style="margin:0;display:inline-block">
+                            <li style="padding-left:9px;">
+                                <button type="submit" tooltip="Generate Certificate" class="btn btn-color btn-sm" >Generate Certificate</button>
+                            </li>
+                            <li>
+                                <button type="button" ng-click="back()"  class="btn btn-color btn-sm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--  <div class="form-group form-inline">
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                              <button type="submit" class="btn btn-color btn-sm" >Show</button>
+                          </div>
+
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 10px">
+                              <button type="button" ng-click="back()" tooltip="back" class="btn btn-color btn-sm">Back</button>
+                          </div>
+                      </div>-->
+                </form>
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-show="success" style="padding:10px 0 10px 10px;text-align: right">
+                <div class="btn-group">
+                    <button type="button" ng-click="studyPdf()" class="btn btn-color ">
+                        Download
+                    </button>
+                   <!-- <ul class="dropdown-menu" style="min-width: 89px">
+                        <li><a href="#" class="dropPdf"  >PDF</a></li>
+                        &lt;!&ndash;<li><a href="#" ng-click="downloadXls()">Xls</a></li>&ndash;&gt;
+                    </ul>-->
+                </div>
+                <!-- <button type="button"  style="margin-right: 10px" tooltip="In progress" class="btn btn-color btn-sm">Archive</button>-->
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inner-base-content" style="height: auto;width: 1049px;padding: 10px;">
+            <div id="pdf-holder" ng-show="success" style="height: 100%;"></div>
+            <div class="noData" ng-hide="success">
+                No Data Found...
+            </div>
+        </div>
+    </div>
+</div>

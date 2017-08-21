@@ -1,0 +1,133 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-cloak ng-init="fetchVehicleList(0,100)">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-bus"></i>Vehicle Management</li>
+            <li><i class="fa fa-tint"></i>Fuelbook Details</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <!-- Add Inventary -->
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.add"><button type="button" tooltip="Add" ng-click="addFuelbookEntry()" class="btn btn-color btn-sm">Add Fuel Book Entry</button></a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+                </div>
+                <div class="row">
+                    <form name="selectDate" ng-submit="fetchFuelbookTime(currentVehicle, startDate, endDate,fuelbookDetails.startValue,fuelbookDetails.numPerPage)" class="form-horizontal">
+
+                        <div class="form-group form-inline">
+                            <ul class="list-inline" style="margin:0;display:inline-block">
+                                <li>
+                                    <select  class="input-sm form-control" ng-model="currentVehicle" ng-change="onChanged()"  ng-options="vehicle as vehicle.vehicleRegNo for vehicle in vehicle_list" style="line-height: 1.5">
+                                        <option value="" selected="selected">Select Reg No</option>
+                                    </select>
+                                </li>
+                                <li style="width: auto;height: 25px;">
+                                    <label>
+                                        {{currentVehicle.vehicleType}}
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="text" ng-model="startDate" name="date" ui-date="dateOptions" id="date" class="input-sm form-control" required placeholder="YYYY-MM-DD" autofocus />
+                                </li>
+                                <li>
+                                    <input type="text" ng-model="endDate" name="date2" ui-date="dateOptions" class="input-sm form-control" required placeholder="YYYY-MM-DD" autofocus />
+                                </li>
+                                <li>
+                                    <button type="submit" class="btn btn-color btn-sm" ng-disabled="selectDate.$invalid">Search</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+            <!-- Show Iventary -->
+            <div  class="container-fluid" style="height:auto;padding-top: 60px;" ng-if="fuelbook_lists== undefined || fuelbook_lists.length <= 10">
+                <table class="table table-striped" style="margin-left:-15px;">
+                    <thead>
+                    <tr>
+                        <th width="15%">Driver Name</th>
+                        <th width="15%">Date</th>
+                        <th width="15%">Kms Reading</th>
+                        <th width="15%">Cost of Fuel</th>
+                        <th width="15%">Type of Fuel</th>
+                        <th width="15%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="fuelbook in fuelbook_lists">
+                        <td width="15%">{{fuelbook.driverName}}</td>
+                        <td width="15%">{{fuelbook.date}}</td>
+                        <td width="15%">{{fuelbook.kmsReading}}</td>
+                        <td width="15%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{fuelbook.costOfFuel}}</td>
+                        <td width="15%">{{fuelbook.typeOfFuel}}</td>
+                        <td width="15%">
+                           <!-- <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editFuelbook(fuelbook.date)"><i class="fa fa-pencil " rel="popover"></i></button></a>-->
+                            <a href="#" ng-click="deleteFuelbookEntry(fuelbook,$index)"><button class="btn-action" title="Delete Fuel book Entry"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="fuelBookLists.length == 0 || fuelbook_lists == undefined" class="noData">
+                    No Fuel Book Entries Found</div>
+              <!--  <div ng-if="fuelbook_lists == undefined" class="noData">
+                    Processing...</div>-->
+            </div>
+           <!-- <div class="container-fluid" style="padding:0" ng-if="fuelbook_lists != undefined && fuelbook_lists.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="15%">Driver Name</th>
+                        <th width="15%">Date</th>
+                        <th width="15%">Kms Reading</th>
+                        <th width="15%">Cost of Fuel</th>
+                        <th width="15%">Type of Fuel</th>
+                        <th width="15%">Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="fuelbook_lists != undefined && fuelbook_lists.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="fuelbook in fuelbook_lists">
+                        <td width="15%">{{fuelbook.driverName}}</td>
+                        <td width="15%">{{fuelbook.date}}</td>
+                        <td width="15%">{{fuelbook.kmsReading}}</td>
+                        <td width="15%">{{fuelbook.costOfFuel}}</td>
+                        <td width="15%">{{fuelbook.typeOfFuel}}</td>
+                        <td width="15%">
+                            &lt;!&ndash;<a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editFuelbook(fuelbook.date)"><i class="fa fa-pencil " rel="popover"></i></button></a>&ndash;&gt;
+                            <a href="#" ng-click="deleteFuelbookEntry(fuelbook,$index)"><button class="btn-action" title="Delete {{fuelbook.date}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+
+            <!-- Pagination -->
+            <div class="container-fluid" style="padding: 0;margin-right: 30px;" ng-show="fuelbook_lists != undefined && fuelbook_lists.length > 0">
+                <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="fuelbookDetails.numPerPage" ng-change="init()">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>-->
+                <pagination style="margin: 10px 0;float: right" ng-model="fuelbookDetails.currentPage" items-per-page="fuelbookDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged(currentVehicle, startDate, endDate)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

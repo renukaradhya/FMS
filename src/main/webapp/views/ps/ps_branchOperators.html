@@ -1,0 +1,102 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="fetchBranchList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-group"></i>User Management</a></li>
+            <li><i class="fa fa-user"></i>Branch Operators</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-8 base-content table-base" style="height:90%;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <ul class="list-inline" style="margin:0;display:inline-block">
+                        <li>
+                            <a ui-sref="^.add"><button type="button" style="margin-left: -5px;" tooltip="Add" ng-click="addOperator()" class="btn btn-color btn-sm">Add Operator</button></a>
+
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="currentBranch" ng-change="fetchOperatorManagerList(currentBranch)" ng-options="branch as branch.branchName for branch in branch_list" style="line-height: 1.5;width: 120px;">
+                                <option value="">Select Branch</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if="bo_list != undefined || bo_list.length != 0">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="20%">Branch Name</th>
+                        <th width="20%">FirstName</th>
+                        <th width="20%">LastName</th>
+                        <th width="20%">Gender</th>
+                        <th width="20%">Blood Group</th>
+                        <th width="20%">Phone Number</th>
+                        <!--<th width="20%">Action</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="branchOperator in bo_list">
+                        <td width="20%">{{branchOperator.branchName}}</td>
+                        <td width="20%">{{branchOperator.firstName}}</td>
+                        <td width="20%">{{branchOperator.lastName}}</td>
+                        <td width="20%">{{branchOperator.gender}}</td>
+                        <td width="20%">{{branchOperator.blood}}</td>
+                        <td width="20%">{{branchOperator.phoneNumbers[0].phoneNumber}}
+                        </td>
+                       <!-- <td width="20%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editOperator(branchOperator.branchId)" title="Edit {{branchOperator.branchId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteOperator(branchOperator,$index)"><button class="btn-action" title="Delete {{branchOperator.branchId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="bo_list.length == 0" class="noData">
+                    No Branch Operators Found</div>
+                <!--<div ng-if="bo_list == undefined" class="noData">-->
+                    <!--Processing...</div>-->
+            </div>
+            <!--<div class="container-fluid" style="padding:0" ng-if="bo_list != undefined && bo_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="20%">Branch Name
+                        </th>
+                        <th width="20%">FirstName
+                        </th>
+                        <th width="20%">LastName
+                        </th>
+                        <th width="20%">Type
+                        </th>
+                        &lt;!&ndash;<th width="20%">Action</th>&ndash;&gt;
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="bo_list != undefined && bo_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="branchOperator in bo_list">
+                        <td width="20%">{{branchOperator.branchName}}
+                        </td>
+                        <td width="20%">{{branchOperator.firstName}}
+                        </td>
+                        <td width="20%">{{branchOperator.lastName}}
+                        </td>
+                        <td width="20%">{{branchOperator.phoneNumbers[0].phoneNumber}}
+                        </td>
+                        &lt;!&ndash;<td width="20%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editOeprator(branchOperator.branchId)" title="Edit {{branchOperator.branchId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteOperator(branchOperator,$index)"><button class="btn-action" title="Delete {{branchOperator.branchId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>&ndash;&gt;
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

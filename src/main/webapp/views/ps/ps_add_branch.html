@@ -1,0 +1,94 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building"></i>Branches</li>
+            <li><i class="fa fa-plus"></i>Add Branch</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Add Branch
+            </div>
+            <form name="addBranch" autocomplete="off" class="form-horizontal" ng-submit="createBranch()">
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Branch Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="add.branchName" capitalize-first tooltip="Alphabets And Numbers Are Accepted" class="form-control" name="name" required autofocus >
+                    </div>
+                    <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addBranch.name.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>-->
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Address</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<input type="text" ng-model="add.address" tooltip="Enter A Valid Address" name="type" class="form-control" >-->
+                        <textarea type="text" ng-model="add.address" capitalize-first tooltip="Enter A Valid Address" name="type" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">PinCode</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.pincode" tooltip="Six Numbers Are Accepted" class="form-control" maxlength="6" name="pincode" ng-pattern="/^\d*$/">
+                    </div>
+                    <div class="col-lg-4" style="color:red;padding:0" ng-show="addBranch.pincode.$error.pattern">
+                        Only numbers are allowed</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Phone Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.phoneNumber" tooltip="Ten Digit Numbers Are Accepted" class="form-control"  name="phoneNumber" >
+                    </div>
+                    <div class="col-lg-4" style="color:red;padding:0" ng-show="addBranch.phoneNumber.$error.pattern">
+                        Phone Number should be 10 digit number</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Fax Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.faxNumber" tooltip="Enter the Fax Number" capitalize-first class="form-control input-text"  name="faxNumber"  autofocus >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Email Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="email" ng-model="add.email" tooltip="Enter A Valid Email Id" class="form-control"  name="email"  ng-pattern="/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/" />
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addBranch.email.$error.pattern">
+                        Email Id should be like <b>email@example.com</b></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Master Email Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="email" ng-model="add.masterEmailId" tooltip="Enter A Valid Email Id" class="form-control" name="email2"  ng-pattern="/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/" />
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addBranch.email2.$error.pattern">
+                        Email Id should be like <b>email@example.com</b></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Master Email Password</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="password" ng-model="add.masterEmailPassword" tooltip="Enter A Valid Password" name="password" class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="addBranch.$invalid">Create</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

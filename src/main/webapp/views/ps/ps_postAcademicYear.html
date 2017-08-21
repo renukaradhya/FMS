@@ -1,0 +1,45 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ><i class="fa fa-cubes"></i>Organization</a></li>
+            <li><i class="fa fa-plus"></i>Settings</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Set Academic Year
+            </div>
+            <form name="settings" autocomplete="off" class="form-horizontal" ng-submit="postAcademicYear(academic)">
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Academic Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="academic" capitalize-first tooltip="Enter the academic year" class="form-control" name="year" required autofocus >
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="settings.year.$error.pattern">
+                        Year should be in yyyy-yy format</div>
+                </div>
+
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="settings.$invalid">Save</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;<strong class="blink_me">Year should be in YYYY-YY format.</strong>
+        </div>
+    </div>
+</div>
+

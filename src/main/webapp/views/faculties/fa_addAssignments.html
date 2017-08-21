@@ -1,0 +1,97 @@
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-clone"></i>Assignments</li>
+            <li><i class="fa fa-plus"></i>Add Assignment</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content">
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div class="container-fluid text-success response_msg" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Assignment
+            </div>
+            <form name="addAssignment" autocomplete="off" class="form-horizontal" ng-submit="createAssignment(currentClassroom, subject)">
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Academic Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<select  class="form-control" ng-model="x" required ng-change="fetchStandardList(academicYear)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                            <option value="">Select Year</option>
+                        </select>-->
+                        <input type="text" ng-model="academicYear" tooltip="Academic Year"  name="" class="form-control " readonly autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="form-control" ng-model="standard" required ng-change="fetchSectionList(standard, academicYear)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                            <option value="" selected>Select Class</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="form-control" ng-model="currentClassroom" required ng-change="listSubjects(currentClassroom)"   ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                            <option value="">Select Section</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Subject</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="form-control" ng-model="subject"  required  ng-options="subject as subject.subjectName for subject in sub_list" style="line-height: 1.5">
+                            <option value="">Select Subject</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Assignment Name</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type="text" ng-model="add.assignmentName" capitalize-first tooltip="Only Alphabets are allowed" name="assignmentName" class="form-control"  maxlength="64" required autofocus ng-pattern="/^[a-zA-Z ]*$/">
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addAssignment.assignmentName.$error.pattern">
+                            Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Description</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <textarea type="text" ng-model="add.description" capitalize-first tooltip="Type in the assignment description" class="form-control"  name="description" required autofocus ></textarea>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Start Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.startDate" tooltip="Select Date In Year-Month-Date Formate" class="form-control" ui-date="dateOptions" placeholder="YYYY-MM-DD" id="date"  name="startDate" required autofocus />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">End Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.endDate" tooltip="Please select the End Date" class="form-control" ui-date="dateOptions" placeholder="YYYY-MM-DD" name="endDate" required autofocus />
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="addAssignment.$invalid">Create</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+

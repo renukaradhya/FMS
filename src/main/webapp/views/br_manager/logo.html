@@ -1,0 +1,64 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-cog"></i>Settings</li>
+            <li><i class="fa fa-plus"></i> Upload Photo</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Upload Photo
+            </div>
+            <div class="row" style="padding-bottom: 30px">
+                <form name="uploadPhoto" autocomplete="off" class="form-horizontal">
+                    <div class="container-fluid">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+                    </div>
+
+                   <!-- <div class="form-inline ">
+                        <div class="container-fluid" style="height: 30px;padding-top: 40px" ng-controller="fileUploadCtrl">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+
+                               &lt;!&ndash; <label for="file-upload" class="custom-file-upload">
+                                    <i class="fa fa-cloud-upload"></i> Choose File
+                                </label>
+                                <input id="file-upload" type="file" file-model = "orgLogo"/>&ndash;&gt;
+
+                                <input type = "file" class="btn btn-search pull-right" style="line-height: 1.5;color: #ffffff" file-model = "orgLogo"/>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <button tooltip="Upload" class="btn btn-color btn-sm " ng-disabled="uploadPhoto.$invalid" ng-click = "uploadOrgLogo()">Organization Logo</button>
+                            </div>
+                        </div>
+                       &lt;!&ndash; <div ng-if="file != undefined"><strong>Select File:</strong>&nbsp;{{ orgLogo.name }}</div>&ndash;&gt;
+                    </div>-->
+
+                    <div class="form-inline ">
+                        <div class="container-fluid" style="height: 30px;padding-top: 40px" ng-controller="photoCtrl">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+
+                                <!--<label for="file-upload1" class="custom-file-upload">
+                                    <i class="fa fa-cloud-upload"></i> Choose File
+                                </label>
+                                <input id="file-upload1" type="file" file-model = "branchLogo"/>-->
+
+                                <input type = "file" class="btn btn-search pull-right" style="line-height: 1.5;color: #333" accept="image/*" image-model = "branchLogo"/>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <button tooltip="Upload" class="btn btn-color btn-sm" ng-disabled="uploadPhoto.$invalid" ng-click = "uploadBranchLogo()">Branch Photo</button>
+                            </div>
+                        </div>
+                        <!--<div ng-if="file != undefined"><strong>Select File:</strong>&nbsp;{{ branchLogo.name }}</div>-->
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

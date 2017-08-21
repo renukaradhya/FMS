@@ -1,0 +1,107 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-bus"></i>Vehicle Management</li>
+            <li><i class="fa fa-pencil"></i>Edit</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Edit Vehicle
+            </div>
+            <form name="editVehicle" autocomplete="off" class="form-horizontal" ng-submit="editVehicleEntry(edit.vehicleId)">
+
+               <!-- <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Vehicle Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="edit.vehicleId" class="form-control" name="vehicleId" required readonly>
+                    </div>
+                </div>-->
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Vehicle Type</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="edit.vehicleType" capitalize-first tooltip="Alphabets Are Accepted" class="form-control" name="vehicleType" required autofocus maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editVehicle.vehicleType.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Vehicle Reg No</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.vehicleRegNo" tooltip="Alphabets And Numbers Are Accepted" name="vehicleRegNo" class="form-control"  maxlength="16" ng-pattern="/^([A-Z|a-z]{2}\s{1}\d{2}\s{1}[A-Z|a-z]{1,2}\s{1}\d{1,4})?([A-Z|a-z]{3}\s{1}\d{1,4})?$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editVehicle.vehicleRegNo.$error.pattern">
+                        Only alphabets and numbers are allowed including space
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Vehicle Model</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.vehicleModel" tooltip="Vehicle Model In YYYY Formate" class="form-control" maxlength="4" name="vehicleModel" ng-pattern="/^[0-9]{4}$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editVehicle.vehicleModel.$error.pattern">
+                        Model should be a Year</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year Of Manufacter</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.yearOfManufacter" tooltip="YOM In YYYY Formate" name="yearOfManufacter" class="form-control"  maxlength="4" ng-pattern="/^[0-9]{4}$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editVehicle.yearOfManufacter.$error.pattern">
+                        Year should be in format such as <b>YYYY</b></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Seat Capacity</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.seatCapacity" tooltip="Two Digit Numbers Are Accepted" class="form-control" min="0" max="99" maxlength="2" readonly name="seatCapacity" ng-pattern="/^[0-9]{2}$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editVehicle.seatCapacity.$error.pattern">
+                        Only two digit number is allowed</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Purchase Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.dateOfPurchase" tooltip="Select purchase date of vehicle" name="date" ui-date="dateOptions" id="date" class="form-control" required placeholder="YYYY-MM-DD"  autofocus />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Insurance Renewal</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.insuranceRenewal" tooltip="Select Insurance Renewal Date In Year-Month-Date Formate" value="{{ edit.insuranceRenewal | date: 'yyyy-MM-dd'}}" name="insuranceRenewal" ui-date="dateOptions" class="form-control" />
+                    </div>
+                    <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editVehicle.insuranceRenewal.$error.pattern">
+                        Date should be in <b>YYYY-MM-DD</b> format.</div>-->
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Next Renewal Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.nextRenewalDate" tooltip="Select Next Renewal Date In Year-Month-Date Formate" value="{{ edit.nextRenewalDate | date: 'yyyy-MM-dd'}}" name="nextRenewalDate" ui-date="dateOptions" class="form-control"  />
+                    </div>
+                    <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editVehicle.nextRenewalDate.$error.pattern">
+                        Date should be in <b>YYYY-MM-DD</b> format.</div>-->
+                </div>
+
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" tooltip="Update Vehicle" class="btn btn-color btn-sm" ng-disabled="editVehicle.$invalid">Update</button>
+                        <button type="button" tooltip="Cancel Updation" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

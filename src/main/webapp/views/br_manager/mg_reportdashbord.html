@@ -1,0 +1,267 @@
+<div class="container-fluid" style="height: 120%;padding-left: 0px; padding-top: 0px">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-archive"></i>Others</li>
+            <li><i class="fa fa-file"></i>Report Generation</li>
+        </ol>
+    </section>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
+<!-- Main -->
+    <div class="col-lg-10 container-fluid base-content">
+
+        <div class = "row">
+            <!--<div class="col-md-4">
+                <a ui-sref="reports.branchFee">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2;"><h4>Branch Fee Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Fee Transaction report of the branch. List of student information including
+                            transaction done by each student and fees paid by them.
+                        </p>
+                    </div></a>
+            </div>-->
+            <div class="col-md-4">
+                <a ui-sref="transferCertificate.study">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Study Certificate</h4></div>
+
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Study Certificate.
+                            This provides information about the student in school. From which class and year he joined the school to which class and year he left the school.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a ui-sref="transferCertificate.view">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Transfer Certificate</h4></div>
+
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Transfer Certificate.
+                            This provides all the information about the student in school with all his personel and behavioral information.
+                        </p>
+                    </div></a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a  ui-sref="reports.classFees">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Classroom Transactions Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This provides Classroom transactions information. All the transactions done for the classroom particular year
+                            of all students in that classroom
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <a ui-sref="reports.studentFee">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Student Fee Transactions</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Fee Transaction report of the student. all the student fees transaction done by them.
+                        </p>
+                    </div></a>
+            </div>
+            <div class="col-md-4">
+                <a ui-sref="students.student">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Student Report</h4></div>
+
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Student report.
+                            This provides the list of all the student present in the particular classroom or list of students assigned for the vehicle.
+                        </p>
+                    </div></a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a  ui-sref="feeTran.duereport">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Fee Report for Fees Type</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This api provides the fees due list of students available in the classroom.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <a ui-sref="feeReport.fee">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Fee Structure Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Fee Structure report of the branch. For all standards this report list
+                            the fees to be paid by the students to get admission.
+                        </p>
+                    </div></a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a ui-sref="subjects.sub">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Subject Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides  Subject report of the branch. List of student information including
+                            transaction done by each student and fees paid by them.
+                        </p>
+                    </div></a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a  ui-sref="intryreport.inventary" >
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Inventory Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Inventory report of the branch. For all standards this report list
+                            the fees to be paid by the students to get admission.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <a ui-sref="classroomreports.classroom" >
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Classroom Report</h4></div>
+
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Classroom report for the particlar section.
+                            This list all the student information in classroom.
+                        </p>
+                    </div></a>
+            </div>
+            <div class="col-md-4">
+                <a  ui-sref="vehiclereports.students" >
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Student for Vehicle Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides all the  Students report assigned to a vehicle. List of Students information
+                            those are travelling in the vehicle from different routes from/to school and home.
+                        </p>
+                    </div></a>
+            </div>
+            <div class="col-md-4">
+                <a ui-sref="events.eve">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Events Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Evnets report for the particlar section.
+                            This list all the student information in classroom.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <a ui-sref="facultyreports.faculty">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Faculty Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Faculty Report of the branch. For all standards this report list
+                            the fees to be paid by the students to get admission.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a ui-sref="marksheet.each">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Assessment Result</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Student Marksheet for the particular assessment. held on the subjects which assigned to classroom in which the student is studying.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a ui-sref="marksheet.class">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Classroom Result</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Marksheet for the Classroom of the particular assessment. held on the subjects which are assigned to that classroom.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <a ui-sref="marksheet.annual">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Annual Result</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Overall result of the student performance in academic year. This result is aggregation of the all the assessment results.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a  ui-sref="library.report">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Library Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This provides library information. All the books available in the library from differnt
+                            authours and different publications. Book cost and etc..
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a  ui-sref="vehiclereports.vehicle">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Vehicle Report</h4></div>
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides all the  Vehicles report of the branch. List of vehicle information
+                            that are running in the different routes for pick-up and droping of students from/to school and home.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <a ui-sref="marksheet.ticket">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Student Admission Ticket</h4></div>
+
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides Hall Ticket.
+                            Student Hall ticket for attending assessments.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+            <div class="col-md-4">
+                <a ui-sref="transferCertificate.icard">
+                    <div class="panel panel-default" style="width: 270px;height: 180px;">
+                        <div class="panel-heading " style="color:#fff; background-color:#2a76a2"><h4>Student Id Cards</h4></div>
+
+                        <p style="padding: 10px 10px 10px 15px">
+                            This will provides students Id Cards.
+                            Here your can generate the Id Card for all students in the classroom at a time.
+                        </p>
+                    </div>
+                </a><!--/panel-->
+            </div>
+
+        </div>
+    </div>
+    <!-- /Main -->
+</div>s

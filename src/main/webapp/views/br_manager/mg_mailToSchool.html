@@ -1,0 +1,53 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="classroom.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Mail To Students</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Mail To School
+            </div>
+            <form name="mailSchool" autocomplete="off" class="form-horizontal" ng-submit="schoolMailNotification(x.year)">
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                       <!-- <select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5" placeholder="year">
+                            <option value="" selected="selected">Select Year</option>
+                        </select>-->
+                        <input type="text" ng-model="academicYear" tooltip="Academic Year"  class="form-control" name="year" readonly autofocus>
+                    </div>
+                </div>
+
+                 <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Subject</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="add.subject" tooltip="Alphabets And Numbers Are Allowed" ng-pattern="/^[a-zA-Z ]*[0-9]*$/" class="form-control" name="subject" required autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Description</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <textarea type="textarea" ng-model="add.description" tooltip="Enter the Proper Description" class="form-control" name="description" required autofocus ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="mailSchool.$invalid">Send</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel1()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

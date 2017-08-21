@@ -1,0 +1,118 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-lock"></i>Holidays Management</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <!-- Add Inventary -->
+            <div class="container-fluid" style="height: 30px;padding:0;">
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 0 0 20px 0px">
+                    <ul class="list-inline" style="margin:0;display:inline-flex">
+                        <li>
+                            <a ui-sref="^.add"><button style="margin-left: -5px;" type="button" tooltip="Add" ng-click="addHoliday()" class="btn btn-color btn-sm">Add Holiday</button></a>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="x" ng-change="fetchHolidayList(x.year,holidayDetails.startValue,holidayDetails.numPerPage)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Year</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+            <!-- Show Iventary -->
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if="holiday_lists == undefined || holiday_lists.length <= 10">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="10%">Holiday Type</th>
+                        <th width="10%">Reason</th>
+                        <th width="10%">To</th>
+                        <th width="10%">Standard</th>
+                        <th width="10%">Section</th>
+                        <th width="10%">Start Time</th>
+                        <th width="10%">End Time</th>
+                        <!--<th width="10%">Year</th>-->
+                        <th width="10%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="holiday in holiday_lists">
+                        <td width="10%">{{holiday.type}}</td>
+                        <td width="10%">{{holiday.reason}}</td>
+                        <td width="10%">{{holiday.to}}</td>
+                        <td width="10%">{{holiday.standard}}</td>
+                        <td width="10%">{{holiday.section}}</td>
+                        <td width="10%">{{holiday.startTime}}</td>
+                        <td width="10%">{{holiday.endTime}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editHoliday(holiday,$index)" title="Edit Holiday"><i class="fa fa-pencil " rel="popover">&nbsp;Edit</i></button></a>
+                            <a href="#" ng-click="deleteHoliday(holiday,$index,x.year)"><button class="btn-action" title="Delete Holiday"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="holiday_lists.length == 0 || holiday_lists == undefined" class="noData">No Holidays Found</div>
+                <!--<div ng-if="holiday_lists == undefined" class="noData">Processing...</div>-->
+            </div>
+           <!-- <div class="container-fluid" style="padding:0" ng-if="holiday_lists != undefined && holiday_lists.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="10%">Holiday Type</th>
+                        <th width="10%">Reason</th>
+                        <th width="10%">To</th>
+                        <th width="10%">Standard</th>
+                        <th width="10%">Class Room</th>
+                        <th width="10%">Start Time</th>
+                        <th width="10%">End Time</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="holiday_lists != undefined && holiday_lists.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="fuelbook in fuelbook_lists">
+                        <td width="10%">{{holiday.type}}</td>
+                        <td width="10%">{{holiday.reason}}</td>
+                        <td width="10%">{{holiday.to}}</td>
+                        <td width="10%">{{holiday.standard}}</td>
+                        <td width="10%">{{holiday.classRoomId}}</td>
+                        <td width="10%">{{holiday.startTime }}</td>
+                        <td width="10%">{{holiday.endTime }}</td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editHoliday(holiday,$index)" title="Edit {{holiday.type}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                             <a href="#" ng-click="deleteHoliday(holiday,$index,year)"><button class="btn-action" title="Delete {{holiday.startTime}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+
+            <!-- Pagination -->
+            <div class="container-fluid" style="padding: 0;" ng-show="holiday_lists != undefined && holiday_lists.length > 0">
+               <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="holidayDetails.numPerPage" ng-change="init()">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>-->
+                <pagination style="margin: 10px 0;float: right" ng-model="holidayDetails.currentPage" items-per-page="holidayDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged(x.year)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

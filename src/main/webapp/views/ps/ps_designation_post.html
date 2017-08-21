@@ -1,0 +1,77 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="addYearInfo();">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ><i class="fa fa-cubes"></i>Organization</a></li>
+            <li><i class="fa fa-plus"></i>Designation</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Post Designation
+            </div>
+            <form name="settings" autocomplete="off" class="form-horizontal" ng-submit="postDesignation()">
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Role</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="Teaching" ng-model="add.roleType">
+                                <span class="label-text">Teaching</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="nonTeaching" ng-model="add.roleType">
+                                <span class="label-text">Non-Teaching</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <fieldset  data-ng-repeat="role in desiglist">
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Designation</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type="text" ng-model="role.designation" tooltip="Enter the yer" name="designation" class="form-control" capitalize-first required ng-pattern="/^[A-Za-z ]*$/">
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="settings.designation.$error.pattern">
+                            Only alphabets and numbers are allowed including space</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="button" class="addfields" style="" ng-show="$last" ng-click="addRole()"><i class="fa fa-plus" rel="popover" ></i></button>
+                            <button type="button" class="remove" style="margin-left: 30px" ng-show="$last" ng-click="removeRole()"><i class="fa fa-times" rel="popover" ></i></button>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="settings.$invalid">Create</button>
+                        <a ui-sref="^.designation"><button type="button"  class="btn btn-color btn-sm">Cancel</button></a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;<strong class="blink_me">Press + symbol to add another Designation.</strong>
+        </div>
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;<strong class="blink_me">Press - symbol to remove currently entered Designation.</strong>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,140 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="init()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="classroom.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Student Spreadsheet</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Upload/Download File
+            </div>
+            <form name="uploadFiles" class="form-horizontal">
+
+               <!-- <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label"></label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <label>
+                            <input type="checkbox" ng-model="isUpload.value" name="check" >
+                            <span style="margin-left: 0px;color: #777575;font-weight: 500;display: inline-block;" class="label-text">&nbsp;&nbsp;&nbsp;Dowload</span>
+                        </label>
+                    </div>
+                </div>-->
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Choose</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <label class="radio-inline">
+                            <input type="radio" name="to"  ng-model="upload" value ="1"  ng-click="toUpload('U')" />
+                            <span class="label-text" style="margin-left: -20px;">Upload</span>
+                        </label>
+                        &nbsp;
+                        <label class="radio-inline">
+                            <input type="radio" name="to"  ng-model="download"  value="1" ng-click="toDownload('D')" />
+                            <span class="label-text">Download</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div ng-if="isUpload != false">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Academic Year</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type="text" ng-model="academicYear" tooltip="Academic Year"  name="" class="form-control " readonly autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select class="input-sm form-control" ng-model="currentStandard" required ng-change="fetchSectionList(currentStandard, academicYear)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Class</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select class="input-sm form-control" ng-model="currentClassroom" required ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Section</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-inline"  ng-controller="fileUploadCtrl">
+                        <div class="row" style="height: 30px;padding:0">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label"></label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type = "file" class="btn btn-sm" style="line-height: 1.5;color: #333;margin-left: 8px;" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" file-model = "xlsStudents"/>
+                            </div>
+                        </div>
+                        <div class="row text-center" style="height: 30px;padding:0;margin:10px;">
+                            <button tooltip="Upload" class="btn btn-color btn-sm"  ng-click = "uploadStudents(currentClassroom)">Upload</button>
+                            <button type="button" tooltip="Go Back" class="btn btn-color btn-sm" ng-click="cancel()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="isDownload">
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select  class="input-sm form-control" ng-model="x" required ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5" >
+                                <option value="" selected="selected">Select Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select class="input-sm form-control" ng-model="currentStandard" required ng-change="fetchSectionList(currentStandard, academicYear)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Class</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select class="input-sm form-control" ng-model="currentClassroom" required ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Section</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="container-fluid text-center">
+                            <button type="button" tooltip="Download" class="btn btn-color btn-sm" ng-click="downloadStudents(currentClassroom.classRoomId)">Download</button>
+                            <button type="button" tooltip="Go Back" class="btn btn-color btn-sm" ng-click="cancel()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;Select <strong>Year</strong>, <strong>Class</strong>, and <strong>Section</strong> before clicking dowload button.
+        </div>
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;Select <strong>Year</strong>, <strong>Class</strong>, and <strong>Section</strong> and <strong>File</strong> before clicking upload button.
+        </div>
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i> &nbsp;&nbsp;Make sure that all the dropdown values must have to match exactly with excel-sheet values.
+        </div>
+    </div>
+</div>
+

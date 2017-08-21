@@ -1,0 +1,105 @@
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="fetchYearList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-balance-scale"></i>Assessment Management</li>
+            <li><i class="fa fa-graduation-cap"></i>Assessment Result</li>
+            <li><i class="fa fa-pencil"></i>Edit</li>
+        </ol>
+    </section>
+    <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Update Marks
+            </div>
+            <form name="editMarks" autocomplete="off" class="form-horizontal" ng-submit="updateStudentMarks()">
+
+                <!--<div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="std" name="student" class="form-control" readonly autofocus>
+                    </div>
+                </div>-->
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student First Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="studentFirstName" name="studentFirstName" class="form-control" readonly autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Roll Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="currentRollNumber" name="currentRollNumber" class="form-control" readonly autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Assessment Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="marks_list.assessmentName" name="assessment" readonly class="form-control" autofocus>
+                    </div>
+                </div>
+
+                <fieldset  data-ng-repeat="mark in marks">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left:15px;">
+                                <input style="width:15%;" type="text" ng-model="mark.subject" readonly name="exam2" class="input-sm form-control"  autofocus>
+                            </span>
+                            <span width="20%" style="padding-left:15px;">
+                                <input style="width:15%;" type="number" ng-model="mark.maxScore" readonly name="exam2" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input style="width:15%;" type="text" ng-model="mark.obtainedScore" required name="marks" class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" ng-model="mark.passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </fieldset>
+
+                <div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Overall Result</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                            <select class="input-sm form-control" required ng-model="marks_list.passed"  style="line-height: 1.5">
+                                <option value="" selected>Select Result</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Remarks</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                            <input type="text" ng-model="marks_list.comments" tooltip="Alphabets Are Acceepted" capitalize-first name="remarks" class="form-control" ng-pattern="/^[a-zA-Z ]*$/" autofocus>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="editMarks.$invalid">Update Marks</button>
+                        <a ui-sref="marksheet.result1"><button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

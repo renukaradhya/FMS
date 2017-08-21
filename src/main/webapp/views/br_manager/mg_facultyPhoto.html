@@ -1,0 +1,70 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="fetchFacultyList(0, 1000)">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-user"></i>Staff Management</li>
+            <li><i class="fa fa-group"></i>Teaching Staff</li>
+            <li><i class="fa fa-plus"></i> Upload Photo</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Upload Photo
+            </div>
+            <div class="row" style="padding-bottom: 30px">
+                <form name="uploadPhoto" autocomplete="off" class="form-horizontal" ng-controller="photoCtrl">
+                    <div class="container-fluid">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Faculty Name</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <select  class="input-sm form-control" ng-model="faculty" required ng-options="faculty as faculty.fullName for faculty in faculty_list" style="line-height: 1.5" >
+                                <option value="" selected="selected">Select Faculty</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label"></label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type = "file" class="btn btn-search" style="line-height: 1.5;color: #333" accept="image/*" image-model = "facultyPhoto"/>
+                        </div>
+                    </div>
+
+                   <!-- <div class="container-fluid" >
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="height: 30px;padding-top: 30px;">
+
+                        </div>
+                    </div>-->
+
+                   <!-- <div class="form-group text-center">
+                        <div class="container-fluid" style="height: 30px;">
+                            <div class="container-fluid " style="margin: 10px 10px 10px 106px;">
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="form-group ">
+                        <div class="container-fluid text-center" style="    margin-top: 20px;margin-bottom: -20px;">
+                            <button tooltip="Upload" class="btn btn-color btn-sm"  ng-click = "uploadFacultyPhoto(faculty)">Upload</button>
+                            <a ui-sref="faculty.list"><button type="button"  class="btn btn-color btn-sm">Cancel</button></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+
+        <div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <i class="fa fa-space-shuttle faa-passing animated"></i>&nbsp;&nbsp;<span class="blink_me">Image size should be 100*100dp.</span>
+        </div>
+    </div>
+</div>
+

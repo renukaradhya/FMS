@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/ext_lib/bootstrap.min.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/ext_lib/angular-block-ui.min.css">
+<!--<link href="css/common.css" rel="stylesheet">
+<link href="css/header.css" rel="stylesheet">-->
+<link href="css/bootstrap-glyphicons.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/imp_fontawesome_animated.css">
+<link href="css/style123.css" rel="stylesheet">
+<link rel="stylesheet" href="css/styles456.css">
+<link rel="stylesheet" href="css/angular-csp.css">
+
+
+<script src="scripts/angular/jquery.js"></script>
+<script src="scripts/angular/bootstrap.min.js"></script>
+<script src="scripts/angular/angular.min.js"></script>
+<script src="scripts/angular/angular-route.js"></script>
+<script src="scripts/angular/angular-route.min.js"></script>
+<script src="scripts/angular/angular-resource.min.js"></script>
+<script src="scripts/angular/angular-block-ui.min.js"></script>
+<script src="scripts/angular/angular-local-storage.js"></script>
+<script src="scripts/angular/ngStorage.js"></script>
+<script src="scripts/angular/ngStorage.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+
+    <script src="scripts/check.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/admin/ad_login.js"></script>
+    <script src="scripts/br_manager/pc_login.js"></script>
+    <script src="scripts/ps/ps_login.js"></script>
+    <script src="scripts/br_operator/br_op_login.js"></script>
+    <script src="scripts/faculties/faculty_logins.js"></script>
+
+    <!--<script src="scripts/check.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/admin/admin.min.js"></script>
+    <script src="scripts/ps/orgadmin.min.js"></script>
+    <script src="scripts/br_manager/manager.min.js"></script>
+    <script src="scripts/br_operator/operator.min.js"></script>
+    <script src="scripts/faculties/faculty.min.js"></script>-->
+
+<script type="text/javascript">
+    angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+</script>
+
+<title>iCarat Technology</title>
+
+
+<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">iCarat Technology</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="appLogin.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="contactus.html">Contact Us</a></li>
+    </ul>
+
+  </div>
+</nav>-->
+
+</head>
+<body style="background-image: url('images/background-square.jpg');overflow: hidden;">
+<div class="container">
+                <div class="container-fluid" id="top">
+                    <nav class="navbar  navbar-inverse navbar-static-top" >
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#123">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a href="#" class="navbar-brand">iCarat Technology</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="123">
+                                <ul class="nav navbar-nav" >
+                                    <li ><a href="index.html" style="font-size: 14px;">Home</a></li>
+                                    <li><a href="products.html" style="font-size: 14px;">Products</a></li>
+                                    <li><a href="aboutus.html" style="font-size: 14px;">About Us</a></li>
+                                    <li ><a href="contactus.html" style="font-size: 14px;">Contact Us</a></li>
+                                    <li class="active"><a href="appLogin.html" style="font-size: 14px;">App Login</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="container-fluid" id="main" style="height: 100%;"  >
+                    <div class="col-sm-7 col-md-8 col-md-offset-4 col-sm-offset-2 col-xs-offset-1 col-lg-4 col-lg-offset-4 col-xs-9"  data-ng-app="check_app" style="height: 100%;margin-top: 13%" >
+                        <div class="col-md-8 col-sm-12 col-xs-12 bglogin"></div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 account-wall" style="background-color: rgba(251, 5, 141, 0);">
+                            <div class="text-center" style="height: 20px;margin-bottom:10px;color:#FF5733" ng-cloak>{{response_message}}</div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11" id="main-div" style="margin-left: 12px" ng-cloak>
+                                <select  class="input-sm form-control" ng-model="login_as" ng-cloak ng-init="login_as = 'admin'" style="line-height: 1.5">
+                                    <option value="admin">Admin</option>
+                                    <option value="orgadmin">Org Admin</option>
+                                    <option value="branchmanager">Branch Manager</option>
+                                    <option value="branchOperator">Branch Operator</option>
+                                    <option value="faculty">Faculty</option>
+                                </select>
+
+                                <form class="form-signin" ng-cloak ng-submit="adminLogin()" ng-if="login_as == 'admin'" data-ng-app="ad_login_app" data-ng-controller="adminloginController" >
+                                    <div class="input_container">
+                                        <input type="text" class="input-sm form-control" placeholder="Username" required ng-model="username">
+                                        <span class="input_img"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <div class="input_container">
+                                        <input type="password" class="input-sm form-control" placeholder="Password" required ng-model="password">
+                                        <span class="input_img"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <input class="btn-sm btn-sign btn-block" type="submit" value="Sign in">
+                                </form>
+
+                                 <form class="form-signin" ng-cloak ng-submit="login()" ng-if="login_as == 'orgadmin'" data-ng-app="login_app" data-ng-controller="loginController" >
+                                    <div class="input_container">
+                                        <input type="text" class="input-sm form-control" placeholder="Username" required ng-model="username">
+                                        <span class="input_img"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <div class="input_container">
+                                        <input type="password" class="input-sm form-control" placeholder="Password" required ng-model="password">
+                                        <span class="input_img"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <input class="btn-sm btn-sign btn-block" type="submit" value="Sign in">
+                                </form>
+
+                                <form class="form-signin" ng-cloak ng-submit="login()" ng-if="login_as == 'branchmanager'" data-ng-app="branchManager_login" data-ng-controller="loginCtrl">
+                                    <div class="input_container">
+                                        <input type="text" class="input-sm form-control" placeholder="Username" required ng-model="username">
+                                        <span class="input_img"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <div class="input_container">
+                                        <input type="password" class="input-sm form-control" placeholder="Password" required ng-model="password">
+                                        <span class="input_img"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <input class="btn-sm btn-sign btn-block" type="submit" value="Sign in">
+                                </form>
+
+                                <form class="form-signin" ng-cloak ng-submit="login()" ng-if="login_as == 'branchOperator'" data-ng-app="branchOperator_login" data-ng-controller="bo_loginCtrl">
+                                    <div class="input_container">
+                                        <input type="text" class="input-sm form-control" placeholder="Username" required ng-model="username">
+                                        <span class="input_img"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <div class="input_container">
+                                        <input type="password" class="input-sm form-control" placeholder="Password" required ng-model="password">
+                                        <span class="input_img"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <input class="btn-sm btn-sign btn-block" type="submit" value="Sign in">
+                                </form>
+
+                                <form class="form-signin" ng-cloak ng-submit="login()" ng-if="login_as == 'faculty'" data-ng-app="faculties_login" data-ng-controller="faculties_loginCtrl">
+                                    <div class="input_container">
+                                        <input type="text" class="input-sm form-control" placeholder="Username" required ng-model="username">
+                                        <span class="input_img"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <div class="input_container">
+                                        <input type="password" class="input-sm form-control" placeholder="Password" required ng-model="password">
+                                        <span class="input_img"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <input class="btn-sm btn-sign btn-block" type="submit" value="Sign in">
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="left:0;margin-top:350px;">
+                    <footer class="col-xs-12">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <h6 class="col-lg-10 col-sm-9 col-md-8 col-xs-12 foot" style="margin-top: 20px;" >Copyright &copy; 2016 iCarat Technology Services LLP.</h6>
+                                <ul  class="list-inline " class="col-sm-3 col-md-4 col-lg-2" style="margin-top: 2px;">
+                                    <li><a href="www.facebook.com"><img class="img1" src="images/Facebook.png" alt="No img"></a></li>
+                                    <li><a href="www.twitter.com"><img class="img1" src="images/twitter.png" alt="No img"></a></li>
+                                    <li><a href="www.linkedin.com"><img class="img1" src="images/linkedin.png" alt="No img"></a></li>
+                                    <li><a href="#top"><img class="img1" src="images/whiteArrowTop.png" width="50px"></a></li>
+                                </ul>
+                            </div><!-- end row -->
+                        </div><!-- end container -->
+                    </footer>
+                </div>
+</div>
+<script src="scripts/angular/jquery.js"></script>
+<script src="scripts/angular/bootstrap.min.js"></script>
+</body>
+</html>

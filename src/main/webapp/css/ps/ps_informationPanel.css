@@ -1,0 +1,151 @@
+.box {
+    position: relative;
+    background: #ffffff;
+    border-top: 2px solid #c1c1c1;
+    margin-bottom: 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: 100%;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+.box.box-primary {
+    border-top-color: #3c8dbc;
+}
+
+.box .box-header {
+    position: relative;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: 0px solid #f4f4f4;
+    color: #444;
+}
+.box .box-header:before,
+.box .box-header:after {
+    display: table;
+    content: " ";
+}
+.box .box-header:after {
+    clear: both;
+}
+
+.box .box-header .box-title {
+    display: inline-block;
+    padding: 0px;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+    float: none;
+    cursor: default;
+}
+
+.box .box-body {
+    padding: 10px;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.box .box-body > table,
+.box .box-body > .table {
+    margin-bottom: 0;
+}
+.box .box-body.chart-responsive {
+    width: 100%;
+    overflow: hidden;
+}
+.box .box-body > .chart {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.box .box-body > .chart svg,
+.box .box-body > .chart canvas {
+    width: 100%!important;
+}
+
+.box.box-solid {
+    border-top: 0px;
+}
+.box.box-solid > .box-header {
+    padding-bottom: 0px;
+}
+.box.box-solid > .box-header .btn.btn-default {
+    background: transparent;
+}
+.box.box-solid.box-primary > .box-header {
+    color: #fff;
+    background: #3c8dbc;
+    background-color: #3c8dbc;
+}
+.box.box-solid.box-primary > .box-header a {
+    color: #444;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 10px 0 20px;
+    border-bottom: 1px solid #D7D7D7;
+}
+
+/*
+    Compenent: Progress bars
+--------------------------------
+*/
+/* size variation */
+.progress.sm {
+    height: 10px;
+}
+.progress.xs {
+    height: 7px;
+}
+
+.progress.xs_margin {
+    height: 7px;
+    margin-bottom: 10px;
+
+}
+
+.progress-bar-green,
+.progress-bar-success {
+    background-color: #2fa118;
+}
+.progress-bar-red,
+.progress-bar-danger {
+    background-color: #a03418;
+}
+
+
+
+.spots .box-header {
+    padding-bottom: 10px!important;
+    text-align: center;
+}
+
+.spots .box-title {
+    display: inline-block;
+    padding: 0px;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+    float: none;
+    cursor: default;
+}

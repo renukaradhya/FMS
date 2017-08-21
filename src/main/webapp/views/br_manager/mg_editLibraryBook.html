@@ -1,0 +1,104 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-book"></i>Library Management</li>
+            <li><i class="fa fa-book"></i>Library Management</li>
+            <li><i class="fa fa-pencil"></i>Edit</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Edit Book
+            </div>
+            <form name="editLibrary" autocomplete="off" class="form-horizontal" ng-submit="editLibraryBook(edit.bookId)">
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Book Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.bookId" tooltip="Alphabets And Numbers Are Accepted" readonly class="form-control" name="bookId" ng-pattern="/^[a-zA-Z0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addBook.bookName.$error.pattern">
+                        Only alphabets and numbers are allowed</div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Book Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.bookName" capitalize-first tooltip="Alphabets And Numbers Are Accepted" name="bookName" class="form-control" >
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editLibrary.bookName.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Book Version</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.bookVersion" tooltip="Alphabets And Numbers Are Accepted" name="bookVersion" class="form-control" maxlength="32" ng-pattern="/^[a-zA-Z0-9\.\- ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editLibrary.bookVersion.$error.pattern">
+                        Only alphabets and numbers are allowed including space . and -</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Author</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.author" capitalize-first tooltip="Alphabets Are Accepted" name="author" class="form-control" ng-pattern="/^[a-zA-Z ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editLibrary.author.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Publication</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.publication" capitalize-first tooltip="Alphabets Are Accepted" name="publication" class="form-control"  ng-pattern="/^[a-zA-Z ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editLibrary.publication.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Cost</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.approximateCost" tooltip="Integer Or Real Value Are Accepted" name="approximateCost" class="form-control"  ng-pattern="/^[0-9]*[.]?[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editLibrary.approximateCost.$error.pattern">
+                        Cost should be a +ve Integer or real value</div>
+                </div>
+<!--
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Issued To</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.issuedTo" name="issuedTo" class="form-control"  maxlength="64">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Issued Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.issuedDate" name="issuedDate" class="form-control"  maxlength="64">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Return Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.returnDate" name="returnDate" class="form-control"  maxlength="64">
+                    </div>
+                </div>
+-->
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="editLibrary.$invalid">Update</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

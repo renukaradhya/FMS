@@ -1,0 +1,90 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-group"></i>Student Management</li>
+            <li><i class="fa fa-arrow-up"></i>Promotions</li>
+            <li><i class="fa fa-hand-o-right"></i>Promote</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid #dddddd;padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+               Student Promotion
+            </div>
+            <form name="promoteStudent" autocomplete="off" class="form-horizontal" ng-submit="studentPromotion(pms.studentId, pms.standard, pms.section, pms.year, promote)">
+
+               <!-- <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="pms.studentId" name="studentId" class="form-control"  maxlength="16" autofocus readonly>
+                    </div>
+                </div>-->
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student First Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="pms.Fname" name="Fname" class="form-control"  maxlength="16" autofocus readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Last Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="pms.Lname" name="Lname" class="form-control"  maxlength="16" autofocus readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="pms.year" name="year" class="form-control" autofocus maxlength="16" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Standard</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="pms.standard" class="form-control" name="standard" required readonly autofocus maxlength="16">
+                    </div>
+                    <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="promoteStudent.studentId.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>-->
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="pms.section" name="section" class="form-control" readonly autofocus maxlength="16">
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <div class="text-center">
+                        <button class="btn btn-color btn-sm"   ng-click="checkFeesPaid(pms.year, pms.studentId)">Check Fees Paid Or Not</button>
+                        <button type="button" tooltip="Ensure Fees Paid Or Not" class="btn btn-color btn-sm" ng-click="checkFeesPaid(pms.year, pms.studentId)">Check Fees Paid Or Not</button>
+                    </div>
+                    <div class="text-center">{{ response_msg }}</div>
+                </div> -->
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Promote</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<input type="text" ng-model="pms.promote" name="promote" class="form-control" autofocus maxlength="16">-->
+                        <select class="input-sm form-control" ng-model="promote"  ng-options="x as x for x in promotion" style="line-height: 1.5">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="promoteStudent.$invalid">Promote</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,65 @@
+
+<div class="container-fluid" style="height: 100%;padding-left: 0px">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="reports.main"> <i class="fa fa-file"></i>Reports</a></li>
+        </ol>
+    </section>
+    <div class="container-fluid base-content" style="margin-right:0;height: auto;width: 1070px">
+        <h3 class="text-type" style="margin-top: 10px;color: #777575;">Student Reports</h3>
+        <div class="container-fluid" style="padding: 0;">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 10px 10px 0">
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 20px">
+                    <select  class="input-sm form-control" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                        <option value="" selected="selected">Select Year</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 20px">
+                    <select  class="input-sm form-control" ng-model="currentStandard" ng-change="fetchClassRoomlist(currentStandard,x.year)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                        <option value="" selected="selected">Select Class</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 20px">
+                    <select  class="input-sm form-control" ng-model="classroom"  ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                        <option value="" selected="selected">Select Section</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-inline" style="padding: 10px 10px 10px 0">
+                    <div class="clearfix"></div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 10px 10px 20px">
+                        <button type="button" ng-click="generateStudentReport(classroom.classRoomId)" tooltip="Generate Report" class="btn btn-color btn-sm">Students for Classroom</button>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 10px 10px 60px">
+                        <button type="button" ng-click="back()" tooltip="Go Back" class="btn btn-color btn-sm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right" ng-show="success" style="padding:10px 0 10px 10px;text-align: right">
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-color " ng-click="downloadPdf()">
+                        Download
+                    </button>
+                    <!--<ul class="dropdown-menu" style="min-width: 89px">
+                        <li><a href="#" class="dropPdf" ng-click="downloadPdf()" >PDF</a></li>
+                        &lt;!&ndash;<li><a href="#" ng-click="downloadXls()">Xls</a></li>&ndash;&gt;
+                    </ul>-->
+                </div>
+                <!--<button type="button"  style="margin-right: 10px" tooltip="In progress" class="btn btn-color btn-sm">Archive</button>-->
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inner-base-content" style="height: auto;width: 1049px;padding: 10px;">
+            <div id="pdf-holder" ng-show="success" style="height: 100%;"></div>
+            <div class="noData" ng-hide="success">
+                No Data Found...
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="container-fluid ng-cloak" style="height: 100%;padding: 0px;" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building"></i>Classroom Management</li>
+            <li><i class="fa fa-clone"></i>Subjects</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <!-- Add Inventary -->
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <ul class="list-inline" style="margin:0;display:inline-flex">
+                        <li>
+                            <a ui-sref="^.add"><button type="button" style="margin-left: -5px;" tooltip="Add" ng-click="addSubject()" class="btn btn-color btn-sm">Add Subject</button></a>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchSyllabusList()" ng-options="x as x.name for x in standards" style="line-height: 1.5">
+                                <option value=""  selected="selected">Select Class</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="y" ng-change="fetchSubjectList(x.name, y.syllabus)" ng-options="y as y.syllabus for y in syllabus_list" style="line-height: 1.5">
+                                <option value=""  selected="selected">Select Syllabus</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+
+            <div>
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                       <!-- <th width="10%">Subject Id</th>-->
+                        <th width="10%">Subject Name</th>
+                        <th width="10%">Subject Code</th>
+                       <!-- <th width="10%">Syllabus Type</th>-->
+                        <th width="10%">Category</th>
+                       <!-- <th width="10%">Type</th>-->
+                        <th width="10%">Action</th>
+                        <th width="10%">Assign To Class</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="subjects_list != undefined">
+                    <tr ng-repeat="subject in subjects_list">
+                       <!-- <td width="10%">{{subject.subjectId}}</td>-->
+                        <td width="10%">{{subject.subjectName}}</td>
+                        <td width="10%">{{subject.subjectCode}}</td>
+                        <!--<td width="10%">{{subject.syllubusType}}</td>-->
+                        <td width="10%">{{subject.category}}</td>
+                        <!--<td width="10%">{{subject.type}}</td>-->
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editSubject(subject.subjectId)" title="Edit Subject"><i class="fa fa-pencil " rel="popover">&nbsp;Edit</i></button></a>
+                            <a href="#" ng-click="deleteSubject(subject,$index)"><button class="btn-action" title="Delete Subject"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                        <td width="10%">
+                            <a ui-sref="^.assign"><button class="btn-action" style="margin-right:5%" ng-click="assignSubject(subject, $index,x)" title="Assign Subject To Classroom"><i class="fa fa-pencil " rel="popover">&nbsp;Assign</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="subjects_list.length == 0 || subjects_list == undefined" class="noData">No subject Found</div>
+                <!--<div ng-if="subjects_list == undefined" class="noData">Processing...</div>-->
+            </div>
+
+            <!--<div class="container-fluid" style="padding:0" ng-if="subjects_list != undefined && subjects_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        &lt;!&ndash;<th width="10%">Subject Id</th>&ndash;&gt;
+                        <th width="10%">Subject Name</th>
+                        <th width="10%">Subject Code</th>
+                        <th width="10%">Syllabus Type</th>
+                        <th width="10%">Category</th>
+                        <th width="10%">Type</th>
+                        <th width="10%">Action</th>
+                        <th width="10%">Assign To Class</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="subjects_list != undefined && subjects_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="subject in subjects_list">
+                        &lt;!&ndash;<td width="10%">{{subject.subjectId}}</td>&ndash;&gt;
+                        <td width="10%">{{subject.subjectName}}</td>
+                        <td width="10%">{{subject.subjectCode}}</td>
+                        <td width="10%">{{subject.syllubusType}}</td>
+                        <td width="10%">{{subject.category}}</td>
+                        <td width="10%">{{subject.type}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editSubject(subject.subjectId)" title="Edit Subject"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteSubject(subject,$index)"><button class="btn-action" title="Delete Subject"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>
+                        <td width="10%">
+                            <a ui-sref="^.assign"><button class="btn-action" style="margin-right:5%" ng-click="assignSubject(subject, $index,x)" title="Assign Subject To Classroom">Assign</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+            </div>
+
+<!--
+            <div class="container-fluid" style="padding: 0;" ng-show="subjects_list != undefined && subjects_list.length > 0">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="subjectDetails.numPerPage" ng-change="init()">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>
+                <pagination style="margin: 10px 0;float: right" ng-model="subjectDetails.currentPage" items-per-page="subjectDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>-->
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

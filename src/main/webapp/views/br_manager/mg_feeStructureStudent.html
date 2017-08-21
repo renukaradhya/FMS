@@ -1,0 +1,70 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="init()" ng-cloak>
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-money"></i>Fees Transaction</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;width:95%">
+
+        <div class="container-fluid"  style="height: 90%;padding:0">
+            <!--<div class="container-fluid">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>-->
+            <div class="container-fluid">
+                <ul class="list-inline" style="margin:0;display:inline-block; margin-left: -18px; ">
+                    <li>
+                        <select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                            <option value="" selected>Select Year</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control search-text-box" ng-model="currentStandard" ng-change="fetchClassRoomlist(x.year,currentStandard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5" >
+                            <option value="">Select Class</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control search-text-box" ng-model="currentSection" ng-change="fetchStudentList(x.year,currentStandard,currentSection)" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5" >
+                            <option value="">Select Section</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control search-text-box" ng-model="currentStudent" ng-change="festchStudentFeesStructure(currentSection,currentStudent)" ng-options="student as student.studentFirstName for student in student_list" style="line-height: 1.5" >
+                            <option value="">Select Student</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;padding-top: 20px;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="10%">Fees Structure Name</th>
+                        <th width="10%">Total One Time Fee</th>
+                        <th width="10%">One Time Fee With Discount</th>
+                        <th width="10%">Total Recurring Fee</th>
+                        <th width="10%">Recurring Fee With Discount</th>
+                        <th width="10%">Full Details</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-hide="structure_list == undefined || structure_list == ''">
+                    <tr>
+                        <td width="10%">{{structure_list.name}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{structure_list.oneTimeFeeTotal}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{structure_list.oneTimeFeeTotalWithDiscount}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{structure_list.recurringFeeTotal}}</td>
+                        <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{structure_list.recurringFeeTotalWithDiscount}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.see"><button class="btn-action" style="margin-right:5%" ng-click="getDetails(structure_list)" title="View Details">View</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="structure_list == undefined || structure_list.length == 0" class="noData">
+                    No Fee Structure Found</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

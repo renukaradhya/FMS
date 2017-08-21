@@ -1,0 +1,76 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building"></i>Classroom Management</li>
+            <li><i class="fa fa-plus"></i>Assign</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content">
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div class="container-fluid text-success response_msg" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+        <div style="border:1px solid rgba(255,255,255,.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Assign Subject To Classroom
+            </div>
+            <form name="assignSubject" class="form-horizontal" autocomplete="off" ng-submit="assigntoClassroom(sub.subjectId,currentClassroom.classRoomId)">
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Subject Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="sub.subjectName" name="subjectName" class="form-control"  required readonly autofocus >
+                    </div>
+                    <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="assignSubject.subjectName.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>-->
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Subject Code</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="sub.subjectCode" class="form-control" maxlength="16" name="subjectCode" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<select  class="form-control" ng-model="x" required ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                            <option value="" selected>Select Year</option>
+                        </select>-->
+                        <input type="text" ng-model="year" class="form-control"  name="year" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<select  class="form-control" ng-model="standard" required ng-change="fetchSectionList(standard, x.year)" ng-options="standard as standard for standard in standard_list" style="line-height: 1.5">
+                            <option value="" selected>Select Class</option>
+                        </select>-->
+                        <input type="text" ng-model="standard.name" class="form-control"  name="standard" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="form-control" ng-model="currentClassroom" required  ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                            <option value="" selected>Select Section</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="assignSubject.$invalid">Assign</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

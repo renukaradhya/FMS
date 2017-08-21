@@ -1,0 +1,43 @@
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-archive"></i>Others</li>
+            <li><i class="fa fa-envelope"></i>Email Notification</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Send Notification
+            </div>
+            <div></div>
+            <form class="form-horizontal ">
+
+                <div class="container-fluid" style="padding-top: 20px">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 text-center" style="font-size: medium;" >
+                        <a ui-sref="^.mails"><button type="button" ng-click="mailNotify()" tooltip="Notification To Classroom" class="btn btn-color btn-sm" style="padding: 10px 10px 10px 10px">Classroom</button></a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 text-center" style="font-size: medium;" >
+                        <a ui-sref="^.mail"><button type="button" ng-click="mailNotify()" tooltip="Notification To Student" class="btn btn-color btn-sm" style="padding: 10px 10px 10px 10px">Student</button></a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 text-center" style="font-size: medium;" >
+                        <a ui-sref="^.mailsAll"><button type="button" ng-click="mailNotify()" tooltip="Notification To School" class="btn btn-color btn-sm" style="padding: 10px 10px 10px 10px">School</button></a>
+                    </div>
+                </div>
+
+                <div class="container-fluid" style="padding-top: 20px;padding-bottom: 20px;">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 text-center" style="font-size: medium;" >
+                        <a ui-sref="^.mailsAllfaculty"><button type="button" ng-click="mailNotify()" tooltip="Notification To Faculties" class="btn btn-color btn-sm" style="padding: 10px 10px 10px 10px">Faculties</button></a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 text-center" style="font-size: medium;" >
+                        <a ui-sref="^.mailtofaculty"><button type="button" ng-click="mailNotify()" tooltip="Notification To Faculty" class="btn btn-color btn-sm" style="padding: 10px 10px 10px 10px">Faculty</button></a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+

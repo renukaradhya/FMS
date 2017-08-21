@@ -1,0 +1,89 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="fetchBranchManagerList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-group"></i>User Management</a></li>
+            <li><i class="fa fa-user"></i>Branch Managers</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-8 base-content table-base" style="height:90%;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.add"><button type="button" tooltip="Add" ng-click="addManager()" class="btn btn-color btn-sm">Add Manager</button></a>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="20%">Branch Name</th>
+                        <th width="20%">FirstName</th>
+                        <th width="20%">LastName</th>
+                        <th width="20%">Gender</th>
+                        <th width="20%">Blood Group</th>
+                        <th width="20%">Contact Number</th>
+                        <!--<th width="20%">Action</th>-->
+                    </tr>
+                    </thead>
+                    <tbody ng-if="bm_list != undefined || bm_list.length != 0">
+                    <tr ng-repeat="branchManager in bm_list">
+                        <td width="20%">{{branchManager.branchName}}</td>
+                        <td width="20%">{{branchManager.firstName}}</td>
+                        <td width="20%">{{branchManager.lastName}}</td>
+                        <td width="20%">{{branchManager.gender}}</td>
+                        <td width="20%">{{branchManager.blood}}</td>
+                        <td width="20%">{{branchManager.phoneNumbers[0].phoneNumber
+                        }}</td>
+                        <!--<td width="20%">
+                            &lt;!&ndash; <a ui-sref="^.edit" ng-click="editBranch(branch,$index)"><button class="btn-action" style="margin-right:5%" title="Edit {{branch.branchId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>&ndash;&gt;
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editBranchManager(branchManager.branchId)" title="Edit {{branchManager.branchId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteBranchManager(branchManager,$index)"><button class="btn-action" title="Delete {{branchManager.branchId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="bm_list.length == 0" class="noData">No Branch Managers Found</div>
+                <!--<div ng-if="bm_list == undefined" class="noData">Processing...</div>-->
+            </div>
+           <!-- <div class="container-fluid" style="padding:0" ng-if="bm_list != undefined && bm_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="20%">Branch Name</th>
+                        <th width="20%">FirstName</th>
+                        <th width="20%">LastName</th>
+                        <th width="20%">Gender</th>
+                        <th width="20%">Blood Group</th>
+                        <th width="20%">Contact Number</th>
+                        &lt;!&ndash;<th width="20%">Action</th>&ndash;&gt;
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="bm_list != undefined && bm_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="branch in bm_list">
+                        <td width="20%">{{branchManager.branchName}}</td>
+                        <td width="20%">{{branchManager.firstName}}</td>
+                        <td width="20%">{{branchManager.lastName}}</td>
+                        <td width="20%">{{branchManager.gender}}</td>
+                        <td width="20%">{{branchManager.blood}}</td>
+                        <td width="20%">{{branchManager.phoneNumbers[0].phoneNumber}}</td>
+                       &lt;!&ndash; <td width="20%">
+                            &lt;!&ndash; <a ui-sref="^.edit" ng-click="editBranch(branch,$index)"><button class="btn-action" style="margin-right:5%" title="Edit {{branch.branchId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>&ndash;&gt;
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editBranchManager(branchManager.branchId)" title="Edit {{branchManager.branchId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteBranchManager(branchManager,$index)"><button class="btn-action" title="Delete {{branchManager.branchId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>&ndash;&gt;
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

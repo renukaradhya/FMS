@@ -1,0 +1,271 @@
+<div class="container-fluid" style="height: 100%;padding: 0" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building"></i>Classroom Management</li>
+            <li><i class="fa fa-clock-o"></i>Time Table</li>
+            <li><i class="fa fa-plus"></i>Add Time Table</li>
+        </ol>
+    </section>
+    <div class="col-lg-12 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" style="width:95%;">
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Create Time Table
+            </div>
+            <form name="addTimetable" autocomplete="off" class="form-horizontal" ng-submit="createTimeTable(currentClassroom)">
+
+                <div class="container-fluid" style="margin-top: 5px;height: 30px;padding:0;">
+                    <ul class="list-inline" style="margin:0;display:inline-block; margin-left: 18px;">
+                       <!-- <li>
+                            <select  class="input-sm form-control" ng-model="x"  ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                                <option value="" selected>Select Year</option>
+                            </select>
+                        </li>-->
+                        <li>
+                            <select  class="input-sm form-control" ng-model="standard"  ng-change="fetchSectionList(academicYear, standard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                                <option value="" selected>Select Class</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="currentClassroom"   ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5">
+                                <option value="" selected>Select Section</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-group required">
+                    <style type="text/css">
+                       /* th,td{margin: 0;text-align: center;border-collapse: collapse;
+                            outline: 1px solid #e3e3e3;}td{padding: 5px 10px;}*/
+                        th{background:#3c8dbc;color: white;padding: 5px 10px;}
+                        /*td:hover{cursor: pointer;background: #666;color: white;}*/
+                    </style>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <table class="table table-striped" style="margin-top: 15px;">
+                            <thead>
+                            <th>Periods</th>
+                            <th>1st Session</th>
+                            <th>2nd Session</th>
+                            <th>3rd Session</th>
+                            <th>4th Session</th>
+                           <!-- <th>Break</th>-->
+                            <th>5th Session</th>
+                            <th>6th Session</th>
+                            <th>7th Session</th>
+                            <th>8th Session</th>
+                            <th>9th Session</th>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <th>Start Time</th>
+
+                                <td><input type="text" ng-model="monday[0].periodStartTime" class="form-control" name="firstStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.firstStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[1].periodStartTime" class="form-control" name="secondStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.secondStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[2].periodStartTime" class="form-control" name="thirdStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.thirdStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[3].periodStartTime" class="form-control" name="fourthStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.fourthStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[4].periodStartTime" class="form-control" name="fifthStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.fifthStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[5].periodStartTime" class="form-control" name="sixthStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.sixthStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[6].periodStartTime" class="form-control" name="seventhStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.seventhStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[7].periodStartTime" class="form-control" name="eighthStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.eighthStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[8].periodStartTime" class="form-control" name="ninthStart" tooltip="Start Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.ninthStart.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                            </tr>
+
+                            <tr>
+                                <th>End Time</th>
+
+                                <td><input type="text" ng-model="monday[0].periodEndTime" class="form-control" name="firstEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.firstEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[1].periodEndTime" class="form-control" name="secondEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.secondEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[2].periodEndTime" class="form-control" name="thirdEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.thirdEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[3].periodEndTime" class="form-control" name="fourthEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.fourthEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[4].periodEndTime" class="form-control" name="fifthEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.fifthEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[5].periodEndTime" class="form-control" name="sixthEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.sixthEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[6].periodEndTime" class="form-control" name="seventhEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.seventhEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[7].periodEndTime" class="form-control" name="eighthEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.eighthEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="monday[8].periodEndTime" class="form-control" name="ninthEnd" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#ff0000;padding:0" ng-show="addTimetable.eighthEnd.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                            </tr>
+
+                            <tr>
+                                <th>Monday</th>
+
+                                <td><input capitalize-first type="text" ng-model="monday[0].subject" class="form-control" name="subjectName1" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[1].subject" class="form-control" name="subjectName2" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[2].subject" class="form-control" name="subjectName3" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[3].subject" class="form-control" name="subjectName4" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[4].subject" class="form-control" name="subjectName5" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[5].subject" class="form-control" name="subjectName6" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[6].subject" class="form-control" name="subjectName7" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[7].subject" class="form-control" name="subjectName8" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="monday[8].subject" class="form-control" name="subjectName9" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                            </tr>
+
+                            <tr>
+                                <th>Tuesday</td>
+
+                                <td><input capitalize-first type="text" ng-model="tuesday[0].subject" class="form-control" name="subjectName1" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[1].subject" class="form-control" name="subjectName2" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[2].subject" class="form-control" name="subjectName3" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[3].subject" class="form-control" name="subjectName4" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[4].subject" class="form-control" name="subjectName5" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[5].subject" class="form-control" name="subjectName6" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[6].subject" class="form-control" name="subjectName7" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[7].subject" class="form-control" name="subjectName8" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="tuesday[8].subject" class="form-control" name="subjectName9" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                            </tr>
+
+                            <tr>
+                                <th>Wednesday</td>
+
+                                <td><input capitalize-first type="text" ng-model="wednesday[0].subject" class="form-control" name="subjectName1" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[1].subject" class="form-control" name="subjectName2" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[2].subject" class="form-control" name="subjectName3" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[3].subject" class="form-control" name="subjectName4" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[4].subject" class="form-control" name="subjectName5" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[5].subject" class="form-control" name="subjectName6" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[6].subject" class="form-control" name="subjectName7" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[7].subject" class="form-control" name="subjectName8" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="wednesday[8].subject" class="form-control" name="subjectName9" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+
+                            </tr>
+
+                            <tr>
+                                <th>Thursday</td>
+
+                                <td><input capitalize-first type="text" ng-model="thursday[0].subject" class="form-control" name="subjectName1" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[1].subject" class="form-control" name="subjectName2" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[2].subject" class="form-control" name="subjectName3" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[3].subject" class="form-control" name="subjectName4" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[4].subject" class="form-control" name="subjectName5" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[5].subject" class="form-control" name="subjectName6" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[6].subject" class="form-control" name="subjectName7" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[7].subject" class="form-control" name="subjectName8" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="thursday[8].subject" class="form-control" name="subjectName9" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                            </tr>
+
+                            <tr>
+                                <th>Friday</td>
+
+                                <td><input capitalize-first type="text" ng-model="friday[0].subject" class="form-control" name="subjectName1" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[1].subject" class="form-control" name="subjectName2" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[2].subject" class="form-control" name="subjectName3" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[3].subject" class="form-control" name="subjectName4" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[4].subject" class="form-control" name="subjectName5" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[5].subject" class="form-control" name="subjectName6" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[6].subject" class="form-control" name="subjectName7" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[7].subject" class="form-control" name="subjectName8" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+                                <td><input capitalize-first type="text" ng-model="friday[8].subject" class="form-control" name="subjectName9" tooltip="Enter Subject Name"  autofocus  style="padding-right: 10px"></td>
+
+                            </tr>
+                            <tr>
+                                <th>Saturday Start Time</th>
+
+                                <td><input type="text" ng-model="saturday[0].periodStartTime" class="form-control" name="firstStart1" tooltip="Start Time"  autofocus  style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.firstStart1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[1].periodStartTime" class="form-control" name="secondStart1" tooltip="Start Time"  autofocus  style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.secondStart1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[2].periodStartTime" class="form-control" name="thirdStart1" tooltip="Start Time"  autofocus  style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.thirdStart1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[3].periodStartTime" class="form-control" name="fourthStart1" tooltip="Start Time"  autofocus  style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.fourthStart1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <!--<td><input type="text" ng-model="add.breakStart" class="form-control" name="breakStart" tooltip="Start Time" required autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS"></td>-->
+                                <td><input type="text" ng-model="saturday[4].periodStartTime" class="form-control" name="fifthStart1" tooltip="Start Time"  autofocus  style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.fifthStart1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[5].periodStartTime" class="form-control" name="sixthStart1" tooltip="Start Time"  autofocus  style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.sixthStart1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                            </tr>
+
+                            <tr>
+                                <th>Saturday End Time</th>
+
+                                <td><input type="text" ng-model="saturday[0].periodEndTime" class="form-control" name="firstEnd1" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.firstEnd1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[1].periodEndTime" class="form-control" name="secondEnd1" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.secondEnd1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[2].periodEndTime" class="form-control" name="thirdEnd1" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.thirdEnd1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[3].periodEndTime" class="form-control" name="fourthEnd1" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.fourthEnd1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <!--<td><input type="text" ng-model="add.breakEnd" class="form-control" name="breakEnd" tooltip="End Time" required autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS"></td>-->
+                                <td><input type="text" ng-model="saturday[4].periodEndTime" class="form-control" name="fifthEnd1" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.fifthEnd1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                                <td><input type="text" ng-model="saturday[5].periodEndTime" class="form-control" name="sixthEnd1" tooltip="End Time"  autofocus maxlength="16" style="padding-right: 10px" placeholder="HH:MM:SS" ng-pattern="/^(0[1-9]|1[0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/"></td>
+                                <div class="col-lg-4 col-md-5 col-sm-4" style="color:#f9ff00;padding:0" ng-show="addTimetable.sixthEnd1.$error.pattern">
+                                    Time should be HH:MM:SS format</div>
+                            </tr>
+
+                            <tr>
+                                <th>Saturday</td>
+
+                                <td><input capitalize-first type="text" ng-model="saturday[0].subject" class="form-control" name="subjectName1" tooltip="Enter Subject Name"  autofocus maxlength="16" ></td>
+                                <td><input capitalize-first type="text" ng-model="saturday[1].subject" class="form-control" name="subjectName2" tooltip="Enter Subject Name"  autofocus maxlength="16" ></td>
+                                <td><input capitalize-first type="text" ng-model="saturday[2].subject" class="form-control" name="subjectName3" tooltip="Enter Subject Name"  autofocus maxlength="16" ></td>
+                                <td><input capitalize-first type="text" ng-model="saturday[3].subject" class="form-control" name="subjectName4" tooltip="Enter Subject Name"  autofocus maxlength="16" ></td>
+                                <td><input capitalize-first type="text" ng-model="saturday[4].subject" class="form-control" name="subjectName5" tooltip="Enter Subject Name"  autofocus maxlength="16" ></td>
+                                <td><input capitalize-first type="text" ng-model="saturday[5].subject" class="form-control" name="subjectName6" tooltip="Enter Subject Name"  autofocus maxlength="16" ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="addTimetable.$invalid">Create</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,195 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building"></i>Classroom Management</li>
+            <li><i class="fa fa-home"></i>Classroom List</li>
+            <li><i class="fa fa-clone"></i>Full Details</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0;margin-left:-15px;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <a ui-sref="^.list"><button class="btn btn-color btn-sm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button></a>
+                </div>
+                <!--<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>-->
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 20px;" ng-if="sub_list== undefined || sub_list.length <= 10">
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #f4f4f4;" class="text-center">CLASSROOM SUBJECTS</caption>
+                    <thead>
+                    <tr>
+                        <th width="10%">Subject Name</th>
+                        <th width="10%">Syllabus Type</th>
+                        <th width="10%">Subject Code</th>
+                        <th width="10%">Category</th>
+                        <!--<th width="10%">Type</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="subject in sub_list">
+                        <td width="10%">{{subject.subjectName}}</td>
+                        <td width="10%">{{subject.syllubusType}}</td>
+                        <td width="10%">{{subject.subjectCode}}</td>
+                        <td width="10%">{{subject.category}}</td>
+                       <!-- <td width="10%">{{subject.type}}</td>-->
+                    </tr>
+                    </tbody>
+                </table>
+                <!--<div ng-if="sub_list.length == 0" class="noData">No subject Found</div>-->
+                <div ng-if="sub_list == undefined || sub_list.length == 0" class="noData">No subject assigned</div>
+            </div>
+            <!--<div class="container-fluid" style="padding:0" ng-if="sub_list != undefined && sub_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+
+                        <th width="10%">Syllabus Type</th>
+                        <th width="10%">Subject Code</th>
+                        <th width="10%">Category</th>
+                        <th width="10%">Type</th>
+
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="sub_list != undefined && sub_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="subject in sub_list">
+                        <td width="10%">{{subject.subjectName}}</td>
+                        <td width="10%">{{subject.syllubusType}}</td>
+                        <td width="10%">{{subject.subjectCode}}</td>
+                        <td width="10%">{{subject.category}}</td>
+                        <td width="10%">{{subject.type}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+        </div>
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height:auto;padding:0;margin-top: 10px;">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div>
+                        Fees Name: &nbsp;&nbsp;&nbsp;<strong> {{ fees.name}}</strong>
+                        <!--<label class="col-lg-4 col-md- col-sm-4 col-xs-4 control-label" style="font-size: 13px;font-weight: bold;color:#5e5e5e"></label>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="color: #5e5e5e;font-size: 13px;font-weight: bold">
+                            <strong>: {{ fees.name}}</strong>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div>
+                        Year: &nbsp;&nbsp;&nbsp;<strong>{{ fees.year}}</strong>
+                       <!-- <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label" style="font-size: 13px;font-weight: bold;color:#5e5e5e">Year</label>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="color: #5e5e5e;font-size: 13px;font-weight: bold">
+
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 20px;">
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #f4f4f4;" class="text-center">ONE TIME FEES</caption>
+                    <thead>
+                    <tr>
+                        <!-- <th width="10%">One Time Fees Id</th>-->
+                        <th width="10%">Type</th>
+                        <th width="10%">Pay By Date</th>
+                        <th width="10%">Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="one in fees.oneTimeFees">
+                        <!--<td width="10%">{{one.oneTimeFeeId}}</td>-->
+                        <td width="10%">{{one.type}}</td>
+                        <td width="10%">{{one.payByDate}}</td>
+                        <td width="10%">{{one.amount}}</td>
+                    </tr>
+                    <!--<tr>
+                        <td>Total:</td>
+                        <td>{{one.totalRecurringFee}}</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+                <div ng-if="fees.oneTimeFees.length == 0 || fees.oneTimeFees == undefined" class="noData">
+                    No Fee Structure Found</div>
+                <!--<div class="row">
+                    <div class="col-lg-4 col-md-4 pull-right">
+                        <table>
+                            <tr>
+                                <th class="control-label" style="font-size: 13px;font-weight: bold; color: #f4f4f4">Total One Time Fees:</th>
+                                <td><p style="margin-left: 15px;padding-top: 10px;color: #f4f4f4;font-size: 13px;font-weight:bold;"><strong>{{totalOneTimeFees}}</strong></p></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>-->
+            </div>
+
+            <div class="container-fluid" style="height:auto;padding:0;margin-top: 20px;">
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label" style="font-size: 13px;font-weight: bold;color: #777575;">Fees Mode</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <ul class="list-inline" style="margin:0;display:inline-block ">
+                            <li>
+                                <select  class="input-sm form-control search-text-box" ng-model="m" ng-options="m as m.mode for m in fees.modes" style="line-height: 1.5">
+                                    <option value="" selected="selected">Select Mode</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div  class="container-fluid" style="height:auto;padding:0;margin-top: 20px;">
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #f4f4f4;" class="text-center">RECURRING FEES</caption>
+                    <thead>
+                    <tr>
+                        <!-- <th width="10%">Recurring Fees Id</th>-->
+                        <th width="10%">Type</th>
+                        <th width="10%">Mode</th>
+                        <th width="10%">No of Instalments</th>
+                        <th width="10%">Amount</th>
+                        <th width="10%">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="rec in m.recurringFees">
+                        <!-- <td width="10%">{{rec.recurringId}}</td>-->
+                        <td width="10%">{{rec.type}}</td>
+                        <td width="10%">{{rec.mode}}</td>
+                        <td width="10%">{{rec.noOfInstalments}}</td>
+                        <td width="10%">{{rec.amount}}</td>
+                        <td width="10%">{{ rec.noOfInstalments * rec.amount}}</td>
+                    </tr>
+                    <!-- <tr>
+                         <td>Total Recurring Fee:</td>
+                         <td>{{rec.totalRecurring}}</td>
+                     </tr>-->
+                    </tbody>
+                </table>
+                <div ng-if="m.recurringFees.length == 0 || m.recurringFees== undefined" class="noData">
+                    No Fee Structure Found</div>
+                <!--<div class="row">
+                    <div class="col-lg-4 col-md-4 pull-right">
+                        <table>
+                            <tr>
+                                <th class="control-label" style="font-size: 13px;font-weight: bold; color: #f4f4f4">Total Recurring Fees: </th>
+                                <td><p style="margin-left: 15px;padding-top: 10px;color: #f4f4f4;font-size: 13px;font-weight:bold;"><strong>{{totalRecurringFees}}</strong></p></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

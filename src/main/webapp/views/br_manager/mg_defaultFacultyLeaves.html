@@ -1,0 +1,41 @@
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="fetchYearList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-user"></i>Staff Management</li>
+            <li><i class="fa fa-group"></i>Teaching Staff</li>
+            <li><i class="fa fa-plug"></i>Set Leaves</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content">
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Set Leave State
+            </div>
+            <form name="setLeaves" autocomplete="off" class="form-horizontal" ng-submit="setDeafultLeaves(add.x)">
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Role</label>
+                    <div  class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="input-sm form-control" ng-model="add.x"  ng-options="x as x.designation for x in designation_list" style="line-height: 1.5">
+                            <option value="">Select Designation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="setLeaves.$invalid">Save</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+
+    </div>
+</div>
+

@@ -1,0 +1,64 @@
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="addSections()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Settings</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Settings
+            </div>
+            <form name="delSecton" autocomplete="off" class="form-horizontal" ng-submit="deleteSections(standard)">
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Standard</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<select  class="input-sm form-control" ng-model="standard" required  ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                            <option value="">Select Standard</option>
+                        </select>-->
+                        <input type="text" ng-model="std" tooltip="Enter the Standard" name="" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <fieldset  data-ng-repeat="section in del_section">
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Sections</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5 form-inline">
+                            <input type="text" ng-model="section.name" tooltip="Enter the section" name="name" class="form-control" readonly>
+                            <button type="button" class="remove" style="margin-left: 30px" ng-click="removeSection(section, $index)">-</button>
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label"></label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <button type="button" class="remove" style="margin-left: 30px" ng-show="$last" ng-click="removeSection()">-</button>
+                        </div>
+                    </div>-->
+
+                </fieldset>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="delSecton.$invalid">Add</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11" style="margin-top: 10px;">
+
+        <!--<div class="alert alert-info" style="margin: 7px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="line-height: 0.2;margin-top: 3px;">&times;</a>
+            <strong>*</strong> Time Should be <strong>HH:MM;SS</strong> Format.
+        </div>-->
+
+    </div>
+</div>
+

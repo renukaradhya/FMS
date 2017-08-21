@@ -1,0 +1,90 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="fees.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Add Branch</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Add Fees
+            </div>
+            <form name="editFees" autocomplete="off" class="form-horizontal" ng-submit="updateFeesStructure(feesId)">
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Standard</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="add.standard" tooltip="Alphabets And Numbers Are Accepted" class="form-control" name="standard" required autofocus maxlength="16" ng-pattern="/^[a-zA-Z0-9 ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFees.standard.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Admission Fees</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.admissionFees" tooltip="Integer And Real Value Are Accepted" name="admissionFees" class="form-control" ng-pattern="/^[0-9]*[.]?[0-9]*$/" maxlength="64">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFees.admissionFees.$error.pattern">
+                        Fees should be a integer or real value</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.year" tooltip="Enter The Year In YYYY Formate" class="form-control" maxlength="7" name="year">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Monthly Fees</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.monthlyFees" tooltip="Integer And Real Value Are Accepted" name="monthlyFees" class="form-control"  maxlength="8" ng-pattern="/^[0-9]*[.]?[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFees.monthlyFees.$error.pattern">
+                        Fees should be a integer or real value</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Sports Fees</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.sportsFees" tooltip="Integer And Real Value Are Accepted" name="sportsFees" class="form-control"  maxlength="8" ng-pattern="/^[0-9]*[.]?[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFees.sportsFees.$error.pattern">
+                        Fees should be a integer or real value</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Books Fees</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.booksFees" tooltip="Integer And Real Value Are Accepted" name="booksFees" class="form-control"  maxlength="8" ng-pattern="/^[0-9]*[.]?[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFees.booksFees.$error.pattern">
+                        Fees should be a integer or real value</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Van Fees</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.vanFees" tooltip="Integer And Real Value Are Accepted" name="vanFees" class="form-control"  maxlength="8" ng-pattern="/^[0-9]*[.]?[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFees.vanFees.$error.pattern">
+                        Fees should be a integer or real value</div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" tooltip="Update Details" class="btn btn-color btn-sm" ng-disabled="editFees.$invalid">Create</button>
+                        <button type="button" tooltip="Cancel Updation" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

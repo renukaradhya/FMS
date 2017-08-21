@@ -1,0 +1,86 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-cog"></i>Settings</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%">
+        <div class="container-fluid content-header"  style="height: 90%;padding:0">
+            <div class="container-fluid" style="height: 30px;padding:0;">
+
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.std"><button type="button" tooltip="Add" ng-click="setValues()" class="btn btn-color btn-sm">Add Class</button></a>
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.sec"><button type="button" tooltip="Add" ng-click="addSections()" class="btn btn-color btn-sm">Add Sections</button></a>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+
+            </div>
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">Class Details</caption>
+                    <thead>
+                    <tr>
+                       <!-- <th width="20%">Class Id</th>-->
+                        <th style="width: 50%;">Class</th>
+                        <th style="width: 50%;">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="standard_list == undefined || standard_list.length != 0">
+                    <tr ng-repeat="obj in standard_list">
+                       <!-- <td width="20%">{{obj.id}}</td>-->
+                        <td style="width: 50%;">{{obj.name}}</td>
+                        <td style="width: 50%;">
+                            <a href="#" ng-click="deleteStandard(obj,$index)"><button class="btn-action" title="Delete Year"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="standard_list.length == 0 || standard_list == undefined" class="noData">
+                    No Records Found</div>
+            </div>
+
+            <div class="container-fluid" style="height:auto;padding:0;margin-top: 20px;">
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label" style="font-size: 13px;font-weight: bold;color: #777575;">Standard</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <ul class="list-inline" style="margin:0;display:inline-block ">
+                            <li>
+                                <select  class="input-sm form-control" ng-model="std" required ng-change="listSections(std);"  ng-options="std as std.standard for std in section_list" style="line-height: 1.5">
+                                    <option value="">Select Class</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div  class="container-fluid" style="margin-top: 20px;height:auto;padding:0;" ng-if="list_sections == undefined || list_sections.length <= 10">
+                <table class="table table-striped">
+                    <caption style="background-color: #3c8dbc;color: #ffffff;" class="text-center">Section Details</caption>
+                    <thead>
+                    <tr>
+                       <!-- <th width="20%">Section Id</th>-->
+                        <th style="width: 50%;">Sections</th>
+                        <th style="width: 50%;">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="obj in list_sections">
+                       <!-- <td width="20%">{{obj.sectionId}}</td>-->
+                        <td style="width: 50%;">{{obj.name}}</td>
+                        <td style="width: 50%;">
+                            <a href="#" ng-click="deleteSection(obj,$index)"><button class="btn-action" title="Delete Section"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="list_sections.length == 0 || list_sections == undefined" class="noData">
+                    No Records Found</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

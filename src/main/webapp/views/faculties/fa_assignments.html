@@ -1,0 +1,147 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-clone"></i>Assignments</li>
+        </ol>
+    </section>
+    <div class="col-lg-8 base-content table-base" style="height:auto;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <!-- Add Inventary -->
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 14px" >
+                    <a ui-sref="^.create"><button type="button" ng-click="addAssignment()" class="btn btn-color btn-sm">Create Assignment</button></a>
+                </div>
+            </div>
+            <div class="container-fluid text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            <div class="clearfix"></div>
+
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="row" style="margin-left: 10px;">
+                    <ul class="list-inline" style="margin:0;display:inline-flex;">
+                        <li>
+                            <select  class="input-sm form-control" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5" placeholder="year">
+                                <option value="">Select Year</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="currentStandard" ng-change="fetchSectionList(currentStandard,x.year)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5" placeholder="standard">
+                                <option value="">Select Class</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="currentClassroom"  ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                                <option value="">Select Section</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="text" width="20%" style="display: inline" class="input-sm form-control" name="input" ui-date="dateOptions" id="date" ng-model="startTime" tooltip="Select Date In Year-Month-Date Format" placeholder="Start Date" required />
+                        </li>
+                        <li>
+                            <input type="text" width="20%" style="display: inline" class="input-sm form-control " name="input1" ui-date="dateOptions" ng-model="endTime" tooltip="Select Date In Year-Month-Date Format" placeholder="End Date" required />
+                        </li>
+                        <li>
+                            <button class="btn btn-color btn-sm" ng-click="fetchAssignmentList(currentClassroom, startTime, endTime)">List</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--<div class="row" style="margin-top: 20px;margin-left: 0px;">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <ul class="list-inline" style="margin:0;display:inline-block">
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <ul class="list-inline" style="margin:0;display:inline-block">
+
+                        </ul>
+                    </div>
+                </div>-->
+            </div>
+
+            <!-- Show Iventary -->
+            <div  class="container-fluid" style="height:auto;margin-top: 30px;margin-left:0px;" >
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <!--<th width="15%">Assignment Id</th>-->
+                        <th width="15%">Assignment Name</th>
+                        <th width="15%">Subject</th>
+                        <th width="15%">Description</th>
+                        <th width="15%">Start Date</th>
+                        <th width="15%">End Date</th>
+                        <th width="15%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="assignment_list != undefined || assignment_list.length != 0">
+                    <tr ng-repeat="assignment in assignment_list">
+                       <!-- <td width="15%">{{assignment.assignmentId}}</td>-->
+                        <td width="15%">{{assignment.assignmentName}}</td>
+                        <td width="15%">{{assignment.subjectName}}</td>
+                        <td width="15%">{{assignment.description}}</td>
+                        <td width="15%">{{assignment.startDate}}</td>
+                        <td width="15%">{{assignment.endDate}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editAssignment(assignment,$index)" title="Edit {{assignment.subjectName}}"><i class="fa fa-pencil " rel="popover">&nbsp;Edit</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="assignment_list.length == 0" class="noData">No Data Found</div>
+                <div ng-if="assignment_list == undefined" class="noData">No Data Found</div>
+            </div>
+            <!--<div class="container-fluid" style="padding:0" ng-if="assignment_list != undefined && assignment_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        &lt;!&ndash;<th width="15%">Assignment Id</th>&ndash;&gt;
+                        <th width="15%">Assignment Name</th>
+                        <th width="15%">Subject</th>
+                        <th width="15%">Description</th>
+                        <th width="15%">Start Date</th>
+                        <th width="15%">End Date</th>
+                        <th width="15%">Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="assignment_list != undefined && assignment_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="assignment in assignment_list">
+                        &lt;!&ndash;<td width="15%">{{assignment.assignmentId}}</td>&ndash;&gt;
+                        <td width="15%">{{assignment.assignmentName}}</td>
+                        <td width="15%">{{assignment.subjectName}}</td>
+                        <td width="15%">{{assignment.description}}</td>
+                        <td width="15%">{{assignment.startDate}}</td>
+                        <td width="15%">{{assignment.endDate}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editAssignment(assignment,$index)" title="Edit {{assignment.subjectName}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+
+            <!-- Pagination -->
+          <!--  <div class="container-fluid" style="padding: 0;" ng-show="assignment_list != undefined && assignment_list.length > 0">
+                &lt;!&ndash;<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="assignmentDetails.numPerPage" ng-change="init()">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>&ndash;&gt;
+                <pagination style="margin: 10px 0;float: right" ng-model="assignmentDetails.currentPage" items-per-page="assignmentDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>-->
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

@@ -1,0 +1,95 @@
+<div class="container-fluid" style="height: 100%;padding: 0" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-check"></i>Attendance</li>
+            <li><i class="fa fa-check"></i>Post Attendance</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Post Attendance
+            </div>
+            <form name="addAttendance" class="form-horizontal" ng-submit="postAttendance()">
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.date" tooltip="Select Date In Year-Month-Year Format" name="attend" ui-date="dateOptions" id="date" class="form-control" required placeholder="YYYY-MM-DD"  autofocus >
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<select  class="form-control" ng-model="classroom" required ng-change="fetchStudentList(classroom)"  ng-options="classroom as classroom.section for classroom in completeList" style="line-height: 1.5">
+                            <option value="">Select Section</option>
+                        </select>-->
+                        <input type="text" ng-model="clr.section" tooltip="Alphabets Are Accepted" readonly class="form-control input-text" maxlength="128" name="section" capitalize-first>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="clr.year" name="year" class="form-control"  readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="clr.standard" name="year" class="form-control"  readonly />
+                    </div>
+                </div>
+
+                <div class="well-sm" slim-scroll="{height:'100%',allowPageScroll:true,width:'100%',distance: '5px',alwaysVisible:true}" style="min-height: 80px;max-height: 150px;">
+                <fieldset ng-if="attendance_list.length != 0" data-ng-repeat="student in attendance_list"  > <!--style="padding: 6px;width: auto;box-shadow: inset 0 0 10px #679789;background: rgba(0, 0, 0, 0.2);border-radius: 6px;"-->
+
+                    <!--<div class="form-group required" >-->
+                        <div class="row ">
+
+                            <div class="col-lg-12" style="color:white;">
+                                <div class="col-lg-6 col-md-6">
+                                    <label class="radio-inline radio form-inline">
+                                        <strong style="color: #777575;">{{student.rollNumber+"   "+student.fName +" "+ student.lName}}</strong>
+                                    </label>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <label class="radio-inline radio form-inline">
+                                        <input type="radio"  ng-model="student.status"  value ="Present"   name="">
+                                        <span class="label-text" style="color: #777575;">Present</span>
+                                    </label>
+
+                                    <label class="radio-inline radio form-inline">
+                                        <input type="radio"  ng-model="student.status"  value ="Absent"   name="">
+                                        <span class="label-text" style="color: #777575;">Absent</span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <!--</div>-->
+
+                </fieldset>
+                </div>
+
+
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="addAttendance.$invalid">Post</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+

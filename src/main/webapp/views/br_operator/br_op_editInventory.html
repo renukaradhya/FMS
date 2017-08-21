@@ -1,0 +1,93 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-cubes"></i>Inventory Management</li>
+            <li><i class="fa fa-pencil"></i>Edit </li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content">
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Edit Inventory
+            </div>
+            <form name="editInventory" autocomplete="off" class="form-horizontal" ng-submit="updateInventory(edit.inventoryId)">
+
+                <!--<div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Inventary Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.inventoryId" name="inventoryId" class="form-control" readonly maxlength="16" ng-pattern="/^[a-zA-Z0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editInventory.inventoryId.$error.pattern">
+                        Only alphabets and numbers are allowed</div>
+                </div>-->
+
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Inventory Type</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="edit.inventoryType" capitalize-first tooltip="Alphabets And Numbers Are Accepted" class="form-control" name="inventoryType" required autofocus maxlength="64" ng-pattern="/^[a-zA-Z0-9 ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editInventory.inventoryType.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Manufactured Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.yearOfManufacturer" tooltip="Manufacture Year (YYYY)" name="yearOfManufacturer" class="form-control" required maxlength="4" ng-pattern="/^[0-9]{4}$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editInventory.yearOfManufacturer.$error.pattern">
+                        Year should be in format such as <b>YYYY</b></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Purchase Date</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.dateOfPurchase" tooltip="Select Date In Year-Month-Date Formate" name="date" ui-date="dateOptions" id="date" class="form-control" required placeholder="YYYY-MM-DD" autofocus />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Approximate Cost</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.approximateCost" tooltip="Integer And Real Values Are Accepted" name="approximateCost" class="form-control" required maxlength="10" ng-pattern="/^[0-9]*[.]?[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editInventory.approximateCost.$error.pattern">
+                        Cost should be a integer or real value</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Serial Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.serialNumber" tooltip="Alphabets And Numbers Are Accepted" class="form-control" required maxlength="16" name="serialNumber" ng-pattern="/^[a-zA-Z0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editInventory.serialNumber.$error.pattern">
+                        Only alphabets and numbers are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Category</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select class="form-control" ng-model="edit.category" required ng-options="x for x in category">
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editInventory.category.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="editInventory.$invalid">Update</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

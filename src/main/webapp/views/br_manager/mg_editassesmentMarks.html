@@ -1,0 +1,450 @@
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="fetchYearList()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-balance-scale"></i>Assessment Management</li>
+            <li><i class="fa fa-graduation-cap"></i>Assessment Result</li>
+            <li><i class="fa fa-pencil"></i>Edit</li>
+        </ol>
+    </section>
+    <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Update Marks
+            </div>
+            <form name="editMarks" autocomplete="off" class="form-horizontal" ng-submit="updateStudentMarks()">
+
+                <!--<div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="std" name="student" class="form-control" readonly autofocus>
+                    </div>
+                </div>-->
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student First Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="studentFirstName" name="studentFirstName" class="form-control" readonly autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Roll Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="currentRollNumber" name="currentRollNumber" class="form-control" readonly autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Assessment Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="marks_list.assessmentName" name="assessment" readonly class="form-control" autofocus>
+                    </div>
+                </div>
+
+                <div ng-if="marks[0] != undefined">
+                    <!--<div class="col-lg-8 col-md-8 col-sm-8">-->
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left:15px;">
+                                <input style="width:15%;" type="text" ng-model="marks[0].subject" readonly name="exam1" class="input-sm form-control"  autofocus>
+                            </span>
+                            <span width="20%" style="padding-left:15px;">
+                                <input style="width:15%;" type="number" ng-model="maxMarks[0]" readonly name="marks" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input style="width:15%;" type="text" ng-model="obtainedMarks[0]" required name="marks1" class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[0].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" ng-model="marks[0].passed" required style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                        Marks should be in number.</div>
+                    <!--</div>-->
+                </div>
+                <div ng-if="marks[1] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left:15px;">
+                                <input style="width:15%;" type="text" ng-model="marks[1].subject" readonly name="exam2" class="input-sm form-control"  autofocus>
+                            </span>
+                            <span width="20%" style="padding-left:15px;">
+                                <input style="width:15%;" type="number" ng-model="maxMarks[1]" readonly name="exam2" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input style="width:15%;" type="text" ng-model="obtainedMarks[1]" required name="marks2" class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control"  ng-model="marks[1].grade" required style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" ng-model="marks[1].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[2] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left:15px;">
+                                <input type="text" style="width:15%;" ng-model="marks[2].subject" readonly name="exam3" class="input-sm form-control" autofocus>
+                            </span>
+                             <span width="20%" style="padding-left:15px;">
+                                <input type="number" style="width:15%;" ng-model="maxMarks[2]" readonly name="exam3" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input type="text" style="width:15%;" ng-model="obtainedMarks[2]" required name="marks3" class="input-sm form-control"  autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                           <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[2].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[2].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[3] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="text" ng-model="marks[3].subject" name="exam4" style="width:15%;" class="input-sm form-control"  readonly autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="number" ng-model="maxMarks[3]" name="exam4" style="width:15%;" class="input-sm form-control"  readonly autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input type="text" style="width:15%;" ng-model="obtainedMarks[3]" name="marks4" class="input-sm form-control" required  autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" ng-model="marks[3].grade" required style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[3].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[4] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="text" ng-model="marks[4].subject" style="width:15%;" name="exam5" readonly class="input-sm form-control"  autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="number" ng-model="maxMarks[4]" style="width:15%;" name="exam5" readonly class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input type="text" style="width:15%;" ng-model="obtainedMarks[4]" name="marks5" required class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                           <!-- <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[4].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[4].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[5] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="text" style="width:15%;" ng-model="marks[5].subject" readonly name="exam6" class="input-sm form-control" autofocus>
+                            </span>
+                             <span width="20%" style="padding-left: 15px">
+                                <input type="number" style="width:15%;" ng-model="maxMarks[5]" readonly name="exam6" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input type="text" style="width:15%;" ng-model="obtainedMarks[5]" required name="marks6" class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[5].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[5].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[6] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="text" style="width:15%;" ng-model="marks[6].subject" readonly name="exam7" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="number" style="width:15%;" ng-model="maxMarks[6]" readonly name="exam7" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input type="text" style="width:15%;" ng-model="obtainedMarks[6]" required name="marks7" class="input-sm form-control"  ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks" autofocus>
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[6].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[6].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[7] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left: 15px">
+                                <input style="width:15%;" type="text" ng-model="marks[7].subject" readonly name="exam8" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 15px">
+                                <input style="width:15%;" type="number" ng-model="maxMarks[7]" readonly name="exam8" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input style="width:15%;" type="text" ng-model="obtainedMarks[7]" required name="marks8" class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[7].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[7].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[8] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="text" style="width:15%;" ng-model="marks[8].subject" readonly name="exam9" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="number" style="width:15%;" ng-model="maxMarks[8]" readonly name="exam9" class="input-sm form-control"  autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input type="text" style="width:15%;" ng-model="obtainedMarks[8]" required name="marks9" class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[8].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[8].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+                <div ng-if="marks[9] != undefined">
+                    <div class="form-group form-inline">
+                        <div>
+                            <span width="20%" style="padding-left: 15px">
+                                <input type="text" style="width:15%;" ng-model="marks[9].subject" readonly name="exam10" class="input-sm form-control" autofocus>
+                            </span>
+                              <span width="20%" style="padding-left: 15px">
+                                <input type="number" style="width:15%;" ng-model="maxMarks[9]" readonly name="exam10" class="input-sm form-control" autofocus>
+                            </span>
+                            <span width="20%" style="padding-left: 20px">
+                                <input type="text" style="width:15%;" ng-model="obtainedMarks[9]" required name="marks10" class="input-sm form-control" autofocus ng-pattern="/^\d{0,3}(\.\d{0,2}){0,1}$/" placeholder="Marks">
+                            </span>
+                            <!--<span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[9].grade"  style="line-height: 1.5">
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="A+">A<sup>+</sup></option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B<sup>+</sup></option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </span>-->
+                            <span width="20%" style="padding-left: 20px">
+                                <select style="width:15%;" class="input-sm form-control" required ng-model="marks[9].passed"  style="line-height: 1.5">
+                                    <option value="" selected>Select Result</option>
+                                    <option value="Pass">Pass</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="color:red;padding:0px 50px 0px 0px" ng-show="editMarks.marks.$error.pattern">
+                            Marks should be in number.</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Overall Result</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                            <select class="input-sm form-control" required ng-model="marks_list.passed"  style="line-height: 1.5">
+                                <option value="" selected>Select Result</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Remarks</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                            <input type="text" ng-model="marks_list.comments" tooltip="Alphabets Are Acceepted" capitalize-first name="remarks" class="form-control" ng-pattern="/^[a-zA-Z ]*$/" autofocus>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="editMarks.$invalid">Update Marks</button>
+                        <a ui-sref="marksheet.result1"><button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,105 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-calendar-check-o"></i>Leave Management</li>
+            <li><i class="fa fa-clipboard"></i>Leave Status</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <!--<div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.add"><button type="button" ng-click="requestLeave()" class="btn btn-color btn-sm">Request Leave</button></a>
+                </div>-->
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 20px 0px">
+                    <ul class="list-inline" style="margin:0;display:inline-block">
+                        <li>
+                            <select  class="input-sm form-control" ng-model="x" ng-change="fetchApprovalList(x.year,0,approvalDetails.numPerPage)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Year</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>-->
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="10%"> From Date </th>
+                        <th width="10%"> To Date </th>
+                        <th width="10%"> Year</th>
+                        <th width="10%"> Reason</th>
+                        <th width="10%"> State</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="approval_list == undefined || approval_list.length != 0">
+                    <tr ng-repeat="approval in approval_list">
+                        <td width="10%">{{approval.fromDate}}</td>
+                        <td width="10%">{{approval.toDate}}</td>
+                        <td width="10%">{{approval.year}}</td>
+                        <td width="10%">{{approval.reason}}</td>
+                        <td width="10%">{{approval.state}}</td>
+                        <!--<td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editLeave(leave.leaveId)" title="Edit {{leave.leaveId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            &lt;!&ndash;<a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="cancelLeave(vehicle.vehicleId)" title="cancel {{leave.leaveId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>&ndash;&gt;
+                            <a href="#" ng-click="leaveCancel(leave,$index,year)"><button class="btn-action" title="Cancel {{leave.leaveId}}">Cancel</button></a>
+                        </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="approval_list.length == 0" class="noData">
+                    No Approvals Found
+                </div>
+            </div>
+            <!--<div class="container-fluid" style="padding:0" ng-if="approval_list != undefined && approval_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="10%"> From Date </th>
+                        <th width="10%"> To Date </th>
+                        <th width="10%"> Year</th>
+                        <th width="10%"> Reason</th>
+                        <th width="10%"> State</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="approval_list != undefined && approval_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody >
+                    <tr ng-repeat="approval in approval_list">
+                        <td width="10%">{{approval.fromDate}}</td>
+                        <td width="10%">{{approval.toDate}}</td>
+                        <td width="10%">{{approval.year}}</td>
+                        <td width="10%">{{approval.reason}}</td>
+                        <td width="10%">{{approval.state}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+
+            <!-- Pagination -->
+           <!-- <div class="container-fluid" style="padding: 0;" ng-show="approval_list != undefined && approval_list.length > 0">
+                &lt;!&ndash;<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="approvalDetails.numPerPage" ng-change="init(year)">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>&ndash;&gt;
+                <pagination style="margin: 10px 0;float: right" ng-model="approvalDetails.currentPage" items-per-page="approvalDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged(x.year)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>-->
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

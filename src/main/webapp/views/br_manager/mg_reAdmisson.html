@@ -1,0 +1,138 @@
+<div class="container-fluid" style="height: 100%;padding: 0" ng-cloak>
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-group"></i>Student Management</li>
+            <li><i class="fa fa-child"></i>Students</li>
+            <li><i class="fa fa-plus"></i>Re-Admission</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Re-Admission
+            </div>
+            <form name="readStudent" autocomplete="off" class="form-horizontal" ng-submit="studentReadmission(currentStudent, discountPercentage,read.y,read.z)">
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 10px 0 15px 15px">
+                    <select  class="input-sm form-control" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5;margin-left: -15px;" >
+                        <option value="" selected="selected">Select Year</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 10px 0 15px 15px">
+                    <select  class="input-sm form-control" ng-model="currentStandard" ng-change="fetchSectionList(x.year,currentStandard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5" >
+                        <option value="" selected="selected">Select Class</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 10px 0 15px 15px">
+                    <select  class="input-sm form-control" ng-model="currentSection" ng-change="fetchStudentList(x.year, currentStandard, currentSection)" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5" >
+                        <option value="" selected="selected">Select Section</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 10px 0 15px 15px ">
+                    <select  class="input-sm form-control" ng-model="currentStudent" ng-change="fetchStudentDetails(currentStudent,x.year,currentStandard,currentSection.section)" ng-options="student as student.studentFirstName for student in student_list" style="line-height: 1.5" >
+                        <option value="" selected="selected">Select Student</option>
+                    </select>
+                </div><br>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+                <div  class="container-fluid" style="height:auto;padding:0;">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width="20%">First Name</th>
+                            <th width="20%">Last Name</th>
+                            <th width="15%">Mobile Number</th>
+                            <th width="20%">Email Id</th>
+                            <th width="10%">Result</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-if="stud">
+                            <td width="20%">{{stud.studentFirstName}}</td>
+                            <td width="20%">{{stud.studentLastName}}</td>
+                            <td width="10%">{{stud.phoneNumbers[0].phoneNumber}}</td>
+                            <td width="10%">{{stud.emails[0].email}}</td>
+                            <td width="10%">{{stud.promote}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="student_list.length == 0" class="noData">No students Found</div>
+                    <div ng-if="student_list == undefined" class="noData">Processing...</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Corresponding Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<input type="text" ng-model="read.correspondingYear" tooltip="Corresponding Year 2010-11 Formate Is Accepted" name="correspondingYear" class="form-control" required autofocus maxlength="7" ng-pattern="/^[0-9]*-[0-9]*$/">-->
+                        <select  class="input-sm form-control" ng-model="read.x" ng-options="x as x.year for x in list_years" style="line-height: 1.5" >
+                            <option value="" selected="selected">Select Year</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="readStudent.correspondingYear.$error.pattern">
+                        Year should be in format such as 2010-11</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<input type="text" ng-model="read.standard" tooltip="Alphabets Are Accepted" style="text-transform: capitalize;" name="standard" class="form-control"  required autofocus maxlength="10" ng-pattern="/^[a-zA-Z ]*$/">-->
+                        <select  class="input-sm form-control" ng-model="read.y" ng-change="getSectionList(read.y);"  ng-options="y as y.standard for y in standards" style="line-height: 1.5" >
+                            <option value="" selected="selected">Select Class</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0"  ng-show="readStudent.standard.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<input type="text" ng-model="read.section" tooltip="Single Alphabet In Capitalized Form Accepted" name="section" capitalize-first class="form-control"  required autofocus maxlength="1" ng-pattern="/^[A-Z]{1}?$/">-->
+                        <select class="form-control" ng-model="read.z" required ng-options="z as z.name for z in sec_list">
+                            <option value="" selected>Select Section</option>
+                        </select>
+                    </div>
+                    <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0"  ng-show="readStudent.section.$error.pattern">
+                        Only Capital Letter Allowed</div>-->
+                </div>
+
+               <!-- <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Date Of Admission</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="date" ng-model="read.admissionDate" tooltip="Select DOA In Year-Month-Date Formate" name="date" class="form-control" required placeholder="YYYY-MM-DD" maxlength="16" autofocus />
+                    </div>
+                </div>-->
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Roll Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="read.rollnumber" tooltip="Only Two Digit Numbers Are Accepted" name="rollnumber" class="form-control"  required autofocus maxlength="2" ng-pattern="/^\d{1,2}$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="readStudent.rollnumber.$error.pattern">
+                        Only numbers are allowed</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Fees Discount Percentage</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="number" ng-model="discountPercentage" tooltip="Only numbers are allowed" name="caste" style="text-transform: capitalize;" class="form-control" autofocus maxlength="2">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="readStudent.discountAmount.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="readStudent.$invalid">Create</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

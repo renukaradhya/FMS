@@ -1,0 +1,89 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building"></i>Classroom Management</li>
+            <li><i class="fa fa-clones"></i>Subjects</li>
+            <li><i class="fa fa-plus"></i>Add Subject</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Add Subject
+            </div>
+            <form name="addSubject" autocomplete="off" class="form-horizontal" ng-submit="createSubject()">
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Subject Name</label>
+                        <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                            <input type="text" ng-model="add.subjectName" tooltip="Enter Valid Subject Name" capitalize-first name="subjectName" class="form-control"  required autofocus>
+                        </div>
+                        <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addSubject.subjectName.$error.pattern">
+                            Only alphabets and numbers are allowed including space</div>-->
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Subject Code</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.subjectCode" tooltip="Letters And Numbers Are Accepted" class="form-control"  name="subjectCode" required autofocus  ng-pattern="/^[a-zA-Z]+[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addSubject.subjectCode.$error.pattern">
+                        Only alphabets and numbers are allowed</div>
+                </div>
+
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Class</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <select class="input-sm form-control" ng-model="add.standard" ng-change="fetchSyllabusList()" required ng-options="x as x.name for x in standards">
+                            <option value="">Select Class</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Syllabus</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="input-sm form-control" ng-model="add.x" required  ng-options="x as x.syllabus for x in syllabus_list" style="line-height: 1.5">
+                            <option value="" selected>Select Syllabus</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0"  ng-show="addSubject.syllubusType.$error.pattern">
+                        Only alphabets are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Category</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!--<input type="text" ng-model="add.category" class="form-control"  name="category" required autofocus maxlength="16" ng-pattern="/^[a-zA-Z ]*$/">-->
+                        <select  class="input-sm form-control" ng-model="add.c" required ng-options="c as c.name for c in categories" style="line-height: 1.5" >
+                            <option value="" selected>Select Category</option>
+                        </select>
+                    </div>
+                </div>
+<!--
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Type</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="input-sm form-control" ng-model="add.type" required ng-options="type as type for type in types" style="line-height: 1.5" >
+                            <option value="" selected>Select Type</option>
+                        </select>
+                    </div>
+                </div>-->
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="addSubject.$invalid">Create</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+

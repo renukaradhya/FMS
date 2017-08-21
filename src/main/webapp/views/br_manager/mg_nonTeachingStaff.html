@@ -1,0 +1,121 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-user"></i>Staff Management</li>
+            <li><i class="fa fa-group"></i>Non-Teaching Faculty</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <ul class="list-inline" style="margin:0;display:inline-flex ">
+                        <li>
+                            <a ui-sref="^.add"><button type="button" style="margin-left: -5px;" tooltip="Add" ng-click="addNonTeachingFaculty()" class="btn btn-color btn-sm">Add Non-Teaching Staff</button></a>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchNonteachingFaculty(x)" ng-options="x as x.designation for x in roles_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Role</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <!--  <th width="10%">Faculty ID</th>-->
+                        <th width="10%">First Name</th>
+                        <th width="10%">Last Name</th>
+                        <th width="10%">Experience</th>
+                        <!--<th width="10%">Driving License Number</th>
+                        <th width="10%">License Expiry Date</th>-->
+                        <th width="10%">Date Of Joining</th>
+                        <th width="10%">Date Of Birth</th>
+                        <!--<th width="10%">View Details</th>-->
+                        <th width="10%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="staff_list != undefined || staff_list.length != 0">
+                    <tr ng-repeat="staff in staff_list">
+                        <!--<td width="10%">{{faculty.facultyId}}</td>-->
+                        <td width="10%">{{staff.firstName}}</td>
+                        <td width="10%">{{staff.lastName}} </td>
+                        <td width="10%">{{staff.noOfExperience}} </td>
+                        <!--<td width="10%">{{staff.drivingLicenseNumber}} </td>
+                        <td width="10%">{{staff.licenseExpiryDate}}</td>-->
+                        <td width="10%">{{staff.dateOfJoining}}</td>
+                        <td width="10%">{{staff.dateOfBirth}}</td>
+                        <!--<td width="10%">
+                            <a ui-sref="^.view"><button class="btn-action" style="margin-right:5%" ng-click="fetchStaffInfo(staff.facultyId)" title="View Faculty Details">Full Details</button></a>
+                        </td>-->
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editStaff(staff, $index)" title="Edit Faculty"><i class="fa fa-pencil " rel="popover">&nbsp;Edit</i></button></a>
+                            <a href="#" ng-click="deleteStaff(staff,$index)"><button class="btn-action" title="Delete Faculty"><i class="fa fa-times" rel="popover" >&nbsp;Delete</i></button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="staff_list.length == 0" class="noData"> No Non-Teaching Staff Found</div>
+                <!--<div ng-if="staff_list == undefined" class="noData"> Processing...</div>-->
+            </div>
+            <!-- <div class="container-fluid" style="padding:0" ng-if="staff_list != undefined && staff_list.length > 10">
+                 <table class="table" style="margin-bottom: 0px">
+                     <thead>
+                     <tr>
+                        &lt;!&ndash; <th width="10%">Faculty ID</th>&ndash;&gt;
+                         <th width="10%">First Name</th>
+                         <th width="10%">Last Name</th>
+                         <th width="10%">Designation</th>
+                         <th width="10%">Qualification</th>
+                         <th width="10%">DateOfJoining</th>
+                         <th width="10%">View Details</th>
+                         <th width="10%">Action</th>
+                     </tr>
+                     </thead>
+                 </table>
+             </div>
+             <div  class="container-fluid slim-content" style="padding:0;" ng-if="staff_list != undefined && staff_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                 <table class="table table-striped">
+                     <tbody>
+                     <tr ng-repeat="faculty in staff_list">
+                         &lt;!&ndash;<td width="10%">{{faculty.facultyId}}</td>&ndash;&gt;
+                         <td width="10%">{{faculty.firstName}}</td>
+                         <td width="10%">{{faculty.lastName}} </td>
+                         <td width="10%">{{faculty.designation}} </td>
+                         <td width="10%">{{faculty.qualification}}</td>
+                         <td width="10%">{{faculty.dateOfJoining}}</td>
+                         <td width="10%">
+                             <a ui-sref="^.view"><button class="btn-action" style="margin-right:5%" ng-click="fetchFacultyInfo(faculty.facultyId)" title="View {{faculty.facultyId}}">Full Details</button></a>
+                         </td>
+                         <td width="10%">
+                             <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editFaculty(faculty.facultyId)" title="Edit {{faculty.facultyId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                             <a href="#" ng-click="deleteFaculty(faculty,$index)"><button class="btn-action" title="Delete {{faculty.facultyId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                         </td>
+                     </tr>
+                     </tbody>
+                 </table>
+             </div>-->
+
+           <!-- <div class="container-fluid" style="padding: 0;margin-top: -20px" ng-show="staff_list != undefined && staff_list.length > 0">
+                &lt;!&ndash;<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="staffDetails.numPerPage" ng-change="init()">
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>&ndash;&gt;
+                <pagination style="margin: 10px 0;float: right" ng-model="staffDetails.currentPage" items-per-page="staffDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>-->
+
+        </div>
+    </div>
+</div>
+<div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" /></div>

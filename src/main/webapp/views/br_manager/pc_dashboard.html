@@ -1,0 +1,501 @@
+<div class="container-fluid" style="padding:0;overflow: hidden" ng-init="fetchAssetList()">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i>Home</li>
+            <li><i class="fa fa-tachometer"></i>Dashboard</li>
+        </ol>
+    </section>
+        <div class="row intial-row base-content" style="padding:10px 0 0 0;border-radius:3px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel panel-default asset-info" style="margin:0px;padding:0; border: transparent;background:transparent;overflow: hidden;">
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-blue" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.students}}</h3>
+                        <p>Students</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-users" style="color: white;"></i>
+                    </div>
+                    <!--<a href='#' ng-click="updateLink(true,'inventoryTree','nav-spot')" id="nav-spot" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>-->
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-green" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.faculty}}</h3>
+                        <p>Faculty</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-user" style="color: white;"></i>
+                    </div>
+                    <!--<a href='#' ng-click="updateLink(true,'inventoryTree','nav-gateway')" id="nav-gateway" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>-->
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-purple" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.vehicles}}</h3>
+                        <p>Vehicles</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-bus" style="color: white;"></i>
+                    </div>
+                    <!--<a href='#' ng-click="updateLink(true,'inventoryTree','nav-device')" id="nav-device" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>-->
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-yellow" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.feesTransactions}}</h3>
+                        <p>Fees Transactions</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-money" style="color: white;"></i>
+                    </div>
+                    <!-- <a href='#' id="nav-zone" ng-click="updateLink(true,'inventoryTree','nav-zone')" class="small-box-footer">
+                         More info <i class="fa fa-arrow-circle-right"></i>
+                     </a>-->
+                </div>
+            </div><!-- ./col -->
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel panel-default asset-info" style="margin:0px;padding:0; border: transparent;background:transparent;overflow: hidden;">
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-teal" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.assessments}}</h3>
+                        <p>Assessments</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-balance-scale" style="color: white;"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-maroon" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.events}}</h3>
+                        <p>Events</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-puzzle-piece" style="color: white;"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-orange-active" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.classroom}}</h3>
+                        <p>Classrooms</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-building" style="color: white;"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-fuchsia-active" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.books}}</h3>
+                        <p>Library Books</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-book" style="color: white;"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel panel-default asset-info" style="margin:0px;padding:0; border: transparent;background:transparent;overflow: hidden;">
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-red" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.listofTransactions}}</h3>
+                        <p>Last Week Fee Transactions</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-money" style="color: white;"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-green" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.noOfStudentBirthDay}}</h3>
+                        <!--<a href="#" ng-click="birthdayList()"><span><p>Today Birthdays &nbsp;&nbsp;<i class="fa fa-arrow-circle-right"  style="color: white;"></i></p></span></a>-->
+                        <p>Today Birthdays</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-gift" style="color: white;"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!-- small box -->
+                <div class="small-box bg-primary" style="height: 100px;">
+                    <div class="inner">
+                        <h3>{{asset_info.nooffacultyLeave}}</h3>
+                        <p>Last Week Absentees</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-clock-o" style="color: white;"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6" style="padding-right:10px;padding-left:10px">
+                <!--&lt;!&ndash; small box &ndash;&gt;
+                <div class="small-box bg-fuchsia-active" >
+                    <div class="inner">
+                        <h3>{{asset_info.books}}</h3>
+                        <p>Library Books</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-book" style="color: white;"></i>
+                    </div>
+                </div>-->
+            </div><!-- ./col -->
+        </div>
+    </div>
+
+    <div class="row" id="dashlink">
+
+        <a ui-sref="sm.list"><div class="col-lg-2 col-xs-12 col-sm-6" style="padding-right:10px;padding-left:10px">
+            <!-- small box -->
+            <div class="small-box bg-fuchsia-active vision" >
+                <div class="inner1">
+                    <div class="icon1" style="color: white;">
+                        <i class="fa fa-group"></i>
+                        <p>Students</p>
+                    </div>
+                </div>
+
+            </div>
+        </div></a><!-- ./col -->
+        <a ui-sref="library.list"><div class="col-lg-2 col-xs-12 col-sm-6" style="padding-right:10px;padding-left:10px">
+            <!-- small box -->
+            <div class="small-box bg-primary vision" >
+                <div class="inner1">
+                    <div class="icon1" style="color: white;">
+                        <i class="fa fa-book"></i>
+                        <p>Library</p>
+                    </div>
+                </div>
+            </div>
+        </div></a><!-- ./col -->
+        <a ui-sref="inventory.list"><div class="col-lg-2 col-xs-12 col-sm-6" style="padding-right:10px;padding-left:10px">
+            <!-- small box -->
+            <div class="small-box bg-orange-active vision" >
+                <div class="inner1">
+                    <div class="icon1" style="color: white;">
+                        <i class="fa fa-cubes"></i>
+                        <p>Inventory</p>
+                    </div>
+                </div>
+            </div>
+        </div></a><!-- ./col -->
+        <a ui-sref="vehicle.list"><div class="col-lg-2 col-xs-12 col-sm-6" style="padding-right:10px;padding-left:10px">
+            <!-- small box -->
+            <div class="small-box bg-green vision" >
+                <div class="inner1">
+                    <div class="icon1" style="color: white;">
+                        <i class="fa fa-bus"></i>
+                        <p>Vehicles</p>
+                    </div>
+                </div>
+            </div>
+        </div></a><!-- ./col -->
+        <a ui-sref="assess.list"><div class="col-lg-2 col-xs-12 col-sm-6" style="padding-right:10px;padding-left:10px">
+            <!-- small box -->
+            <div class="small-box bg-red vision" >
+                <div class="inner1">
+                    <div class="icon1" style="color: white;">
+                        <i class="fa fa-check"></i>
+                        <p>Assessments</p>
+                    </div>
+                </div>
+            </div>
+        </div></a><!-- ./col -->
+        <a ui-sref="settings.list"><div class="col-lg-2 col-xs-12 col-sm-6" style="padding-right:10px;padding-left:10px">
+            <!-- small box -->
+            <div class="small-box bg-blue-active vision" >
+                <div class="inner1">
+                    <div class="icon1" style="color: white;">
+                        <i class="fa fa-gears"></i>
+                        <p>Settings</p>
+                    </div>
+                </div>
+            </div>
+        </div></a><!-- ./col -->
+
+    </div>
+
+    <div class="row intial-row base-content" style="padding:10px 0 0 0;border-radius:3px;">
+        <div class="row">
+            <style type="text/css">
+
+                .widget {
+                    /* margin: 0 auto;*/
+                    width:500px;
+                    height: 450px;
+                    /*margin-top:50px;*/
+                    background-color: #ffffff;
+                    border-radius: 5px;
+                    box-shadow: 0px 0px 1px 0px #06060d;
+
+                }
+                .header{
+                    background-color: #2a76a2;
+                    height:40px;
+                    color:#f4f4f4;
+                    text-align: center;
+                    line-height: 40px;
+                    border-top-left-radius: 7px;
+                    border-top-right-radius: 7px;
+                    font-weight: 400;
+                    font-size: 1.5em;
+                    text-shadow: 1px 1px #06060d;
+                }
+                .chart-container{
+                    padding-left: 85px;
+                    padding-top: 40px;
+                }
+                .shadow {
+                    -webkit-filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+                    filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+                }
+                .chart-column{
+                    morgin:0;
+                    padding:0;
+                }
+                /*donut  ********************************************/
+                .chart-container1{
+                    /*padding-top: 20px;*/
+                }
+                .label-text {
+                    alignment-baseline: middle;
+                    font-size: 12px;
+                    font-family: arial,helvetica,"sans-serif";
+                    fill: #393939;
+                }
+                .label-line {
+                    stroke-width: 1;
+                    stroke: #393939;
+                }
+                .label-circle {
+                    fill: #393939;
+                }
+                .rc {
+                    margin-left: -25px;
+                }
+                .pies {
+                    margin-left: 40px;
+                    margin-top: -40px;
+                }
+                .widget1 {
+                    /* margin: 0 auto;*/
+                    width:500px;
+                    height: 450px;
+                    /*margin-top:50px;*/
+                    background-color: #ffffff;
+                    border-radius: 5px;
+                    box-shadow: 0px 0px 1px 0px #06060d;
+
+                }
+                .header1{
+                    background-color: #2a76a2;
+                    height:40px;
+                    color:#f4f4f4;
+                    text-align: center;
+                    line-height: 40px;
+                    border-top-left-radius: 7px;
+                    border-top-right-radius: 7px;
+                    font-weight: 400;
+                    font-size: 1.5em;
+                    text-shadow: 1px 1px #06060d;
+                }
+                .chart-container1{
+                    /*padding-left: 40px;*/
+                    padding-top: 40px;
+                }
+                .shadow {
+                    -webkit-filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+                    filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+                }
+                .chart-column1{
+                    morgin:0;
+                    padding:0;
+                }
+                /*donut  ********************************************/
+                .chart-container1{
+                    /*padding-top: 20px;*/
+                }
+                .label-text {
+                    alignment-baseline: middle;
+                    font-size: 12px;
+                    font-family: arial,helvetica,"sans-serif";
+                    fill: #393939;
+                }
+                .label-line {
+                    stroke-width: 1;
+                    stroke: #393939;
+                }
+                .label-circle {
+                    fill: #393939;
+                }
+                .rc {
+                    margin-left: -25px;
+                }
+
+                #resultchart {
+                    border: 1px dotted;
+                    margin: 10px;
+                    height: 50px;
+                    background-color: rgb(241, 241, 241);
+                }
+                #res {
+                    margin: 10px;
+                    display: inline-block;
+                }
+
+                .slice text {
+                    font-size: 16pt;
+                    font-family: Arial;
+                }
+                .res {
+                    margin-left: 90px;
+                }
+
+                rect:hover {
+                    fill: #ff6666;
+                }
+
+                .d3-tip {
+                    line-height: 1;
+                    font-weight: bold;
+                    padding: 12px;
+                    background: rgba(0, 0, 0, 0.8);
+                    color: #fff;
+                    border-radius: 2px;
+                }
+
+                /* Creates a small triangle extender for the tooltip */
+                .d3-tip:after {
+                    box-sizing: border-box;
+                    display: inline;
+                    font-size: 10px;
+                    width: 100%;
+                    line-height: 1;
+                    color: rgba(0, 0, 0, 0.8);
+                    content: "\25BC";
+                    position: absolute;
+                    text-align: center;
+                }
+
+                /* Style northward tooltips differently */
+                .d3-tip.n:after {
+                    margin: -1px 0 0 0;
+                    top: 100%;
+                    left: 0;
+                }
+                .para {
+                    font-family: Verdana;
+                    margin-top: 100px;
+                    font-size: 14px;
+                    margin-left: 150px;
+                    color: #666;
+                    font-weight: bold;
+                    text-anchor: middle;
+                }
+            </style>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel panel-default asset-info" style="margin:0px;padding:0; border: transparent;background:transparent;overflow: hidden;">
+                <div class="container" style="margin: 10px 10px;">
+
+                    <div class="col-md-6 chart-column1">
+                        <div class="widget1" ng-if="values != undefined || values.length != 0">
+                            <div class="header1">Students Growth Each Year</div>
+                            <p class="para" ng-if="values == undefined || values.length == 0">Students Data Not Found</p>
+                            <div id="bar" class="chart-container1">
+                                <bar-chart id = "barchart" values="values" ng-if="values != undefined ||  values.length != 0"></bar-chart>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 rc">
+                        <div class="widget" >
+                            <div class="header">Faculty Growth Each Year</div>
+                            <p class="para" ng-if="data == undefined || data.length == 0">Faculties Data Not Found</p>
+                            <div id="chart" class="chart-container1">
+                                <donut-chart id = "donutchart" data="data" ng-if="data != undefined ||  data.length != 0"></donut-chart>
+                                <!--<svg>
+                                    <g id="canvas">
+                                        <g id="art" />
+                                        <g id="labels" /></g>
+                                </svg>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" style="margin: 10px 10px;">
+
+                    <div class="col-md-6 chart-column">
+                        <div class="widget">
+                            <div class="header">Vehicle Growth Each Year</div>
+                            <p class="para" ng-if="data1 == undefined || data1.length == 0">Vehicles Data Not Found</p>
+                            <div id="chart1" class="chart-container">
+                                <pie-chart id = "piechart" data1="data1" ng-if="data1 != undefined || data1.length != 0"></pie-chart>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 rc">
+                        <div class="widget" >
+                            <div class="header">Section Based Assessment Result</div>
+                            <!--<p class="para" ng-if="data == undefined || data.length == 0">Faculties Data Not Found</p>-->
+                            <div id="resultchart">
+                                <ul class="list-inline" id="res">
+                                    <li>
+                                        <select  class="input-sm form-control search-text-box" ng-model="currentStandard" ng-change="fetchSectionList(year,currentStandard)" ng-options="standard as standard for standard in standards" style="line-height: 1.5">
+                                            <option value="" selected="selected">Select Class </option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select  class="input-sm form-control search-text-box" ng-model="currentSection"  ng-change="assessmentList(currentSection)" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5">
+                                            <option value="" selected="selected">Select Section </option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select  class="input-sm form-control search-text-box" ng-model="assessment" ng-change="fetchResultData(currentSection, assessment)" ng-options="assessment as assessment.assessmentName for assessment in assessments" style="line-height: 1.5">
+                                            <option value="" selected="selected">Select Assessment</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr style="border-top: 1px solid #333;">
+                            <div id="charts" class="res">
+                                <result-chart id = "reschart" result="result"></result-chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

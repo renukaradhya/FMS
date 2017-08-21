@@ -1,0 +1,360 @@
+@media all {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        padding:0;
+        margin:0;
+        overflow: hidden;
+        font: 12px normal ;
+        font-family: "Lato", Helvetica, Arial, sans-serif;
+    } }
+
+@media screen and (min-width: 1162px){
+
+    .logo{
+        /* width:17.7%;*/
+        height: 100%;
+    }
+
+    #wrapper{
+        height:100%;
+        padding:0;
+    }
+
+
+
+
+    .logo_img{
+        width: 100%;
+        height: 100%;
+        padding: 0 0 0 15px;
+        object-fit:fill;
+    }
+
+    #userInfo{
+        color: #5a5a5a;font-weight: 700;font-size: 14px;padding-left: 15px
+    }
+
+    .navigation{
+        height: 100%;
+        width:100%;
+    }
+
+    .navigation > li > .dropdown-menu{
+        margin-left: 15px;
+    }
+
+    .navigation >li >.dropdown-menu >li{
+        background-color: #E1EAF2;border: 0;
+    }
+    .userProfile{
+        height: 100%;float: right;width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1161px){
+
+    .logo{
+       /* width:17.7%;*/
+        height: 100%;
+    }
+
+    #wrapper{
+        height:100%;
+        padding:0;
+    }
+
+
+
+    .logo_img{
+        height: 100%;
+        padding: 0 0 0 15px;
+        object-fit:fill;
+        width:100%;
+    }
+
+    .navigation{
+        width:100%;
+        height: 100%;
+    }
+
+    .navigation > li > .dropdown-menu{
+        margin-left: 15px;
+    }
+
+    .navigation >li >.dropdown-menu >li{
+        background-color: #E1EAF2;border: 0;
+    }
+
+    #userInfo{
+        color: #5a5a5a;font-weight: 700;font-size: 14px;padding-left: 15px
+    }
+
+    .userProfile{
+        height: 100%;float: right;width: 100%;
+    }
+}
+
+@media screen and (min-width: 369px) and (max-width: 767px) {
+
+    .logo{
+        height: 100%;
+    }
+
+    #wrapper{
+        height:100%;
+        padding:0;
+    }
+
+
+
+
+
+    .logo_img{
+        width: 95%;
+        height: 100%;
+        padding: 0 0 0 15px;
+        object-fit:fill;
+    }
+
+    .navigation{
+        margin-top:0;
+        margin-bottom: 0;
+        height: 100%;
+    }
+
+    .navigation > li > .dropdown-menu{
+        height: 100%;
+        margin-left: -55%;
+    }
+
+
+
+    #userInfo{
+        color: #5a5a5a;font-weight: 700;font-size: 12px;padding-left: 10px
+    }
+    .navigation{
+        margin-top:0;
+        margin-bottom: 0;
+        height: 100%;
+        margin-right:0px;
+    }
+
+
+    .navigation > li > .dropdown-toggle{
+        height: 100%;
+        padding-top: 5px;
+    }
+
+    .userProfile{
+        float: right;width: 100%;
+    }
+
+    .navigation > li{
+        margin-left: 50%
+    }
+
+    .userImg{
+        width: 40px;
+        height:40px;
+    }
+
+    .navigation > li > .dropdown-menu  > li{
+        float: right;background-color: #E1EAF2;border: 0;
+    }
+
+    .navbar-nav .open .dropdown-menu>li>a {
+        padding:0 15px 5px 15px;
+    }
+}
+
+@media screen and (max-width: 368px) {
+
+
+
+    .logo{
+        height: 100%;
+    }
+
+    #wrapper{
+        height:100%;
+        padding:0;
+    }
+
+
+    .logo_img {
+        width: 100%;
+        height: 100%;
+        padding: 0 0 0 15px;
+        object-fit: fill;
+    }
+
+    .navigation{
+        margin-top:0;
+        margin-bottom: 0;
+        height: 100%;
+        margin-right:0px;
+    }
+
+    .navigation > li > .dropdown-menu{
+        height: 100%;
+    }
+
+    .navigation > li > .dropdown-toggle{
+        height: 100%;
+        padding-top:5px;
+    }
+
+    .navigation > li > .dropdown-menu  > li{
+        float: right;
+        background-color: #E1EAF2;border: 0;
+        width:75%;
+    }
+
+    .navbar-nav .open .dropdown-menu>li>a {
+        padding:0 15px 5px 15px;
+    }
+
+    #userInfo{
+        color: #5a5a5a;font-size: 10px;padding-left: 2px
+    }
+
+    .userProfile{
+        float: right;
+    }
+
+    .userImg{
+        width: 40px;
+        height:40px;
+    }
+
+}
+
+#companyInfo{
+    height: 100%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    background-color:#121517;
+    min-height: 50px;
+}
+
+.space-info{
+    color:#b8c7ce;
+    height:100%;
+    padding-top: 2px;
+    width: 100%;
+    font-weight: 700;
+    font-size: 12px;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+.space-info li{
+    width: 100%;
+}
+
+.header_gradient {
+    /*background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.5)), to(rgba(0,0,0,0.0)));*/
+    background: -webkit-linear-gradient(right,#33b5e6,#e7eaf1); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,#33b5e6,#e7eaf1); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,#33b5e6,#e7eaf1); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(right,#33b5e6,#e7eaf1); /* Standard syntax (must be last) */
+
+}
+
+/*#footer{
+    padding: 0.5% 15px 0 15px;
+    height: 5%;
+    background: -webkit-linear-gradient(right,#33b5e6,#e7eaf1); *//* For Safari 5.1 to 6.0 *//*
+    background: -o-linear-gradient(left,#33b5e6,#e7eaf1); *//* For Opera 11.1 to 12.0 *//*
+    background: -moz-linear-gradient(left,#33b5e6,#e7eaf1); *//* For Firefox 3.6 to 15 *//*
+    background: linear-gradient(right,#33b5e6,#e7eaf1); *//* Standard syntax (must be last) *//*
+}*/
+
+/*#header{
+    height:13%;
+    padding:0;
+    background-color: #E1EAF2;
+}*/
+
+#mainContainer{
+    height:82%;
+    margin-right:2px;
+    margin-left: 0px;
+}
+
+@media screen and (min-width: 601px){
+
+    #leftContainer{
+        height: 100%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 600px){
+
+    #leftContainer{
+        height: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        width: 10%;
+    }
+}
+
+#rightContainer{
+    height: 100%;
+    padding:0;
+    overflow: auto;
+    background-color: #f5f5f5;
+}
+
+.navigation > li{
+    height: 100%;
+}
+
+.navigation > li:first-child{
+    width: 100%;
+    font: 12px normal Calibri;
+}
+
+.navigation > li:last-child{
+    /*width: 20%;*/
+}
+
+.navigation > li > ul .dropdown-menu {
+    background-color: #000000;
+}
+
+/*.navigation > li:last-child > a{
+    float: right;
+    padding-right: 10%;
+}*/
+
+@media screen and (min-height: 480px) {
+    .userImg{
+        width: 40px;
+        height:40px;
+    }
+}
+
+@media screen and (max-height: 480px) {
+    .userImg{
+        width: 30px;
+        height:30px;
+    }
+}
+
+.userImg .hidden-xs{
+    padding-right: 10px;
+}
+
+
+.navigation > li > .dropdown-menu  > li:hover{
+    background-color: #FFF;
+}

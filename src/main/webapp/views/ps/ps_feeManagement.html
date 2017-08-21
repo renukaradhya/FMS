@@ -1,0 +1,127 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="init();">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-money"></i>Fees Management</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;width:95%">
+
+        <div class="container-fluid"  style="height: 90%;padding:0">
+
+            <div class="container-fluid" style="height: 30px;padding:0">
+               <!-- <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.add"><button type="button" ng-click="addBranchFees()" class="btn btn-color btn-sm">Add Fee</button></a>
+                </div>-->
+                <!--<div>
+                    <ul class="list-inline" style="margin:0;display:inline-block ">
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="selectedYear" ng-change="fetchFeeList(selectedYear)" ng-options="year as year for year in year_list" style="line-height: 1.5">
+                                <option value="" selected="selected">Select Year</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>-->
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <ul class="list-inline" style="margin:0;display:inline-block">
+                        <li>
+                            <select  class="input-sm form-control" ng-model="branch"  ng-options="branch as branch.branchName for branch in branch_list" style="line-height: 1.5;margin-left: -5px;width: 120px;">
+                                <option value="">Select Branch</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control" ng-model="x" ng-change="fetchFeeList(branch,x.year, feesDetails.startValue, feesDetails.numPerPage)" ng-options="x as x.year for x in year_list" style="line-height: 1.5;width: 120px;">
+                                <option value="">Select Year</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <!-- <th width="10%">Fee Id</th>-->
+                        <th width="10%">Name</th>
+                        <th width="10%">Year</th>
+                        <th width="10%">Full Details</th>
+                        <!--<th width="10%">Update Fee</th>
+                        <th width="10%">Action</th>
+                        <th width="10%">Assign To Classroom</th>-->
+                    </tr>
+                    </thead>
+                    <tbody ng-if="fee_list != undefined">
+                    <tr ng-repeat="fee in fee_list">
+                        <!--<td width="10%">{{fee.feeId}}</td>-->
+                        <td width="10%">{{fee.name}}</td>
+                        <td width="10%">{{fee.year}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.details"><button class="btn-action" style="margin-right:5%" ng-click="viewDetails(fee,$index)" title="View {{fee.feeId}}">View</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="fee_list.length == 0 || fee_list.length == undefined" class="noData">
+                    No Fees Found</div>
+                <!-- <div ng-if="fee_list == undefined" class="noData">
+                     Processing...</div>-->
+            </div>
+
+            <!--<div class="container-fluid" style="padding:0" ng-if="fee_list != undefined && fee_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        &lt;!&ndash;<th width="10%">Fee Id</th>&ndash;&gt;
+                        <th width="10%">Name</th>
+                        <th width="10%">Year</th>
+                        <th width="10%">Full Details</th>
+                        &lt;!&ndash;<th width="10%">Update</th>
+                        <th width="10%">Action</th>
+                        <th width="10%">Assign To Classroom</th>&ndash;&gt;
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="fee_list != undefined && fee_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="fee in fee_list">
+                        &lt;!&ndash;<td width="10%">{{fee.feeId}}</td>&ndash;&gt;
+                        <td width="10%">{{fee.name}}</td>
+                        <td width="10%">{{fee.year}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.details"><button class="btn-action" style="margin-right:5%" ng-click="viewDetails(fee,$index)" title="View {{fee.feeId}}">View</button></a>
+                        </td>
+                        &lt;!&ndash;<td width="10%">
+                            <a ui-sref="^.oneTimeFee"><button class="btn-action" style="margin-right:5%" ng-click="readValues(fee.feeId)" title="Edit {{fee.feeId}}">One Time</button></a>
+                            <a ui-sref="^.recurringFee"><button class="btn-action" style="margin-right:5%" ng-click="readRecurringValues(fee.feeId)" title="Edit {{fee.feeId}}">Recurring Time</button></a>
+                        </td>
+                        <td width="10%">
+                            <a ui-sref="^.edit"><button class="btn-action" style="margin-right:5%" ng-click="editFees(fee,$index)" title="Edit {{fee.feeId}}"><i class="fa fa-pencil " rel="popover"></i></button></a>
+                            <a href="#" ng-click="deleteFee(fee,$index)"><button class="btn-action" title="Delete {{fee.feeId}}"><i class="fa fa-times" rel="popover" ></i></button></a>
+                        </td>
+                        <td width="10%">
+                            <a ui-sref="^.assign"><button class="btn-action" style="margin-right:5%" ng-click="assignFees(fee,$index)" title="Assign {{fee.feeId}}">Assign</button></a>
+                        </td>&ndash;&gt;
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+            <div class="container-fluid" style="padding: 0;" ng-show="fee_list != undefined && fee_list.length > 0">
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                     <label class="pagination-label" style="padding-right: 5px">Show </label>
+                     <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="feesDetails.numPerPage" ng-change="init()">
+                         <option value=25>25</option>
+                         <option value=50>50</option>
+                         <option value=100>100</option>
+                     </select>
+                     <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                 </div>-->
+                <pagination style="margin: 10px 0;float: right" ng-model="feesDetails.currentPage" items-per-page="feesDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged(branch, x.year)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>
+        </div>
+        <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" /></div>
+</div>

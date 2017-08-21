@@ -1,0 +1,93 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" ng-init="listAdmins()">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-user"></i>Admin List</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:90%;width:95%">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+            <div class="container-fluid" style="height: 30px;padding:0;">
+                <div class="col-md-2 col-sm-3 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.admin"><button type="button" tooltip="Add" ng-click="addAdmin()" class="btn btn-color btn-sm">Add Admin</button></a>
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+
+            <div  class="container-fluid" style="height:auto;padding:0;" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                       <!-- <th width="10%">Org Name</th>-->
+                        <!--<th width="10%">Admin Id</th>-->
+                        <th width="10%">Organization Name</th>
+                        <th width="10%">First Name</th>
+                        <th width="10%">Last Name</th>
+                        <th width="10%">Gender</th>
+                        <th width="10%">Blood Group</th>
+                        <th width="10%">Phone Number</th>
+                        <th width="10%">Email Id</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="admin_list != undefined || admin_list.length != 0">
+                    <tr ng-repeat="admin in admin_list">
+                       <!-- <td width="10%">{{org.orgId}}</td>-->
+                        <!--<td width="10%">{{admin.adminId}}</td>-->
+                        <td width="10%">{{admin.orgName}} </td>
+                        <td width="10%">{{admin.firstName}} </td>
+                        <td width="10%">{{admin.lastName}}</td>
+                        <td width="10%">{{admin.gender}}</td>
+                        <td width="10%">{{admin.blood}}</td>
+                        <td width="10%">{{admin.phoneNumber}}</td>
+                        <td width="10%">{{admin.email}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="admin_list.length == 0" class="noData"> No Admin Found</div>
+                <div ng-if="admin_list == undefined" class="noData"> Processing...</div>
+            </div>
+
+           <!-- <div class="container-fluid" style="padding:0" ng-if="admin_list != undefined && admin_list.length > 10">
+                <table class="table" style="margin-bottom: 0px">
+                    <thead>
+                    <tr>
+                        &lt;!&ndash;<th width="10%">Org Name</th>&ndash;&gt;
+                        <th width="10%">Admin Id</th>
+                        <th width="10%">First Name</th>
+                        <th width="10%">Last Name</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="admin_list != undefined && admin_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="admin in admin_list">
+                        &lt;!&ndash;<td width="10%">{{org.adminId}}</td>&ndash;&gt;
+                        <td width="10%">{{admin.adminId}}</td>
+                        <td width="10%">{{admin.firstName}} </td>
+                        <td width="10%">{{admin.lastName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+
+            <!-- <div class="container-fluid" style="padding: 0;" ng-show="admin_list != undefined && admin_list.length > 0">
+                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                     <label class="pagination-label" style="padding-right: 5px">Show </label>
+                     <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="orgDetails.numPerPage" ng-change="init()">
+                         <option value=25>25</option>
+                         <option value=50>50</option>
+                         <option value=100>100</option>
+                     </select>
+                     <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                 </div>
+                 <pagination style="margin: 10px 0;float: right" ng-model="orgDetails.currentPage" items-per-page="orgDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                 </pagination>
+             </div>-->
+
+        </div>
+    </div>
+</div>
+<div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" /></div>

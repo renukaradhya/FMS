@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iCarat | FMS</title>
+<link rel="stylesheet" href="css/ext_lib/bootstrap.min.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/ext_lib/angular-block-ui.min.css">
+
+<script src="scripts/angular/jquery.js"></script>
+<script src="scripts/angular/bootstrap.min.js"></script>
+<script src="scripts/angular/angular.min.js"></script>
+<script src="scripts/angular/angular-route.min.js"></script>
+<script src="scripts/angular/angular-resource.min.js"></script>
+<script src="scripts/angular/angular-block-ui.min.js"></script>
+<script src="scripts/ps/ps_login.js"></script>
+<script src="scripts/config.js"></script>
+<script type="text/javascript">
+    angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+</script>
+
+</head>
+<body>
+<div class="container-fluid" id="main" style="height: 100%;" data-ng-app="login_app" data-ng-controller="loginController">
+    <div class="col-sm-7 col-md-8 col-md-offset-4 col-sm-offset-2 col-xs-offset-1 col-lg-4 col-lg-offset-4 col-xs-8" data-ng-app="check_app" style="height: 100%;" >
+        <div class="col-md-8 col-sm-12 col-xs-12 bglogin"></div>
+        <div class="col-md-4 col-sm-12 col-xs-12 account-wall">
+            <div class="text-center" style="height: 20px;margin-bottom:10px;color:#ffffff">{{response_message}}</div>
+            <img src="images/profile.png" class="profile-img" />
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" style="max-width: 330px;margin:15px">
+                <form class="form-signin" ng-submit="login()" >
+                    <div class="input_container">
+                        <input type="text" class="input-sm form-control" placeholder="Id" required ng-model="id">
+                        <span class="input_img"><i class="fa fa-info"></i></span>
+                    </div>
+                    <div class="input_container">
+                        <input type="text" class="input-sm form-control" placeholder="Username" required ng-model="username">
+                        <span class="input_img"><i class="fa fa-envelope"></i></span>
+                    </div>
+                    <div class="input_container">
+                        <input type="password" class="input-sm form-control" placeholder="Password" required ng-model="password">
+                        <span class="input_img"><i class="fa fa-lock"></i></span>
+                    </div>
+                    <input class="btn-sm btn-sign" type="submit" value="Sign in">
+                </form>
+            </div>
+        </div>
+        <!-- <a href="#" class="text-center new-account">Create an account </a>-->
+    </div>
+</div>
+</body>
+</html>

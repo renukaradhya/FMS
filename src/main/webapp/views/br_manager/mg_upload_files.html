@@ -1,0 +1,30 @@
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="/dash"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>File Upload</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div style="border:1px solid rgba(255,255,255,.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                File Upload
+            </div>
+            <form class="form-horizontal ">
+                <div class="container-fluid" style="padding-top: 30px">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center" style="font-size: medium;" >
+                        <a ui-sref="xlsfiles.upload"><button type="button" ng-click="uploadResultSheets()" class="btn btn-color btn-sm" style="padding: 10px 10px 10px 10px">Uplaod Excelsheet</button></a>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center" style="font-size: medium;" >
+                        <a ui-sref="xlsdown.download"><button type="button" class="btn btn-color btn-sm" style="padding: 10px 10px 10px 10px">Download Excelsheet</button></a>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px; height: 1.5em;"></div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,89 @@
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="fees.list"><i class="fa fa-cubes"></i>Fee Management</a></li>
+            <li><i class="fa fa-plus"></i>Edit Fee Transaction</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Edit Fee Transaction
+            </div>
+            <form name="editfeeTransaction" autocomplete="off" class="form-horizontal" ng-submit="updateTransaction(edit.transactionId, edit.studentId)">
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Transaction Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="edit.transactionId" class="form-control" name="transactionId" readonly required autofocus maxlength="16" ng-pattern="/^[a-zA-Z0-9 ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFeesTransaction.periodicity.$error.pattern">
+                        Only alphabets and numbers are allowed</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="edit.studentId" class="form-control" name="studentId" required autofocus maxlength="16" ng-pattern="/^[a-zA-Z0-9 ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFeesTransaction.periodicity.$error.pattern">
+                        Only alphabets and numbers are allowed</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Academic Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="input-sm form-control" ng-model="edit.year"  ng-options="year as year for year in year_list" style="line-height: 1.5" >
+                            <option value="">-Year-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Amount</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.amount" name="amount" class="form-control"  maxlength="10" ng-pattern="/^[0-9]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addFeesTransaction.amount.$error.pattern">
+                        Cost should be a +ve Integer</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Type</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <!-- <input type="text" ng-model="add.type" class="form-control" maxlength="16" name="type"  ng-pattern="/^[a-zA-Z ]*$/">-->
+                        <select  class="input-sm form-control" ng-model="add.type"  ng-options="type as type for type in trasanction_type" style="line-height: 1.5" >
+                            <option value="">-Type-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Periodicity</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select  class="input-sm form-control" ng-model="periodicity" ng-change="fetchPeriod(periodicity)" ng-options="periodicity as periodicity for periodicity in periodicity_list" style="line-height: 1.5" >
+                            <option value="">-Periodicity-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Period</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <select class = "input-sm form-control" ng-model="period" ng-change="" ng-options="period as period for period in period_list" style="line-height: 1.5">
+                            <option value="">-Period-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-color btn-sm" ng-disabled="editfeeTransaction.$invalid">Update</button>
+                        <button type="button" class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+
+<div class="container-fluid" style="height: 100%;padding: 0" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="classroom.list"><i class="fa fa-cubes"></i>Branch</a></li>
+            <li><i class="fa fa-plus"></i>Emails</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255, 255, 255, 0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+               Mail To Student
+            </div>
+            <form name="mailStudent" autocomplete="off" class="form-horizontal" ng-submit="sendMail(currentStudent)">
+
+
+                <!--<div class="form-group">-->
+                    <!--<label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Student Id</label>-->
+                    <!--<div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">-->
+                        <!--<input type="text" ng-model="add.studentId" class="form-control"  name="studentId" required autofocus>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Year</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <!--<select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5" placeholder="year">
+                            <option value="" selected="selected">Select Year</option>
+                        </select>-->
+                        <input type="text" ng-model="academicYear" tooltip="Academic Year"  class="form-control" name="year" readonly autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Standard</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <select  class="input-sm form-control search-text-box" ng-model="currentStandard" ng-change="fetchSectionList(currentStandard,academicYear)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5" placeholder="standard">
+                            <option value="" selected="selected">Select Class</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <select  class="input-sm form-control search-text-box" ng-model="currentClassroom" ng-change="fetchStudentList(academicYear,currentStandard, currentClassroom)" ng-options="classroom as classroom.section for classroom in classroom_list" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Section</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Section</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <select  class="input-sm form-control search-text-box" ng-model="currentStudent"  ng-options="Student as Student.studentFirstName for Student in student_list" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Section</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Subject</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="add.subject" tooltip="Alphabets And Numbers Are Allowed" ng-pattern="/^[a-zA-Z ]*[0-9]*$/" class="form-control" name="sucject" required autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Description</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <textarea  ng-model="add.description" tooltip="Enter the Proper Description" class="form-control" name="description" required autofocus ></textarea>
+                    </div>
+                </div>
+
+             <!-- <div class="form-group">
+                    <div ng-controller = "myCtrl" class="col-lg-5 col-md-4 col-sm-5 col-xs-5 form-inline">
+                        <input type = "file" class="btn btn-sm" file-model = "myFile"/>
+                        <button ng-click = "uploadFile()">upload me</button>
+                    </div>
+                </div> -->
+<!--
+                <div class="form-inline text-center">
+                    <div class="container-fluid" style="height: 30px;padding:0">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 15px 15px">
+                            <input type = "file" class="btn btn-sm" file-model = "myFile"/>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0 0 15px 15px">
+                            <button class="btn btn-color btn-sm" ng-click = "uploadFile()">upload File</button>
+                        </div>
+                    </div>
+                </div>-->
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="mailStudent.$invalid">Send</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel1()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

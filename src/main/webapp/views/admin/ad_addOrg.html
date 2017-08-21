@@ -1,0 +1,77 @@
+<div class="container-fluid" style="height: 100%;padding: 0" ng-init="">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-building-o"></i>Organization</li>
+            <li><i class="fa fa-plus"></i>Add Organization</li>
+        </ol>
+    </section>
+    <div class="col-lg-6 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-11 col-xs-11 base-content">
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Add Organization
+            </div>
+            <form name="addOrg" autocomplete="off" class="form-horizontal" ng-submit="createOrgnization()">
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Organization Name</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                        <input type="text" ng-model="add.orgName" tooltip="Alphabets Are Accepted" capitalize-first class="form-control input-text" name="orgName" required autofocus maxlength="128" >
+                    </div>
+                    <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addOrg.orgName.$error.pattern">
+                        Only alphabets are allowed including space</div>-->
+                </div>
+
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Address</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.address" tooltip="Alphabets Are Accepted" capitalize-first class="form-control input-text" required name="address"  autofocus >
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Pincode</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.pincode" tooltip="Six Digit Numbers Are Accepted" style="text-transform: capitalize;" class="form-control input-text" maxlength="6" name="pincode" required  autofocus ng-pattern="/^[0-9 ]*$/">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="addOrg.pincode.$error.pattern">
+                        Only numbers are allowed including space</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Board Of Education</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.boardOfEducation" tooltip="Alphabets Are Accepted" capitalize-first class="form-control input-text"  name="boardOfEducation"  autofocus >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Recognized By</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.recognizedBy" tooltip="Alphabets Are Accepted" capitalize-first class="form-control input-text"  name="recognizedBy"  autofocus >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Affiliation Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.affiliationNumber" tooltip="Enter the Affiliation Number" capitalize-first class="form-control input-text"  name="affiliationNumber"  autofocus >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Fax Number</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="add.faxNumber" tooltip="Enter the Fax Number" capitalize-first class="form-control input-text"  name="faxNumber"  autofocus >
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="addOrg.$invalid">Create</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

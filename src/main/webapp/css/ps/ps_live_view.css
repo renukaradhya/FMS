@@ -1,0 +1,260 @@
+.content {
+    padding: 20px 15px 0;
+    background: #f9f9f9;
+    overflow: auto;
+    margin-bottom: 20px;
+}
+
+.page-header {
+    padding-bottom: 5px;
+    margin: 10px 0 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 22px;
+}
+
+.page-header > small {
+    color: #666;
+    display: block;
+    margin-top: 5px;
+}
+
+.small-box {
+    position: relative;
+    display: block;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+.small-box > .inner {
+    padding: 10px;
+}
+.small-box > .small-box-footer {
+    position: relative;
+    text-align: center;
+    padding: 0;
+    color: #fff;
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.small-box > .small-box-footer:hover {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.15);
+}
+.small-box h3 {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    padding: 0;
+}
+.small-box p {
+    font-size: 13px;
+}
+.small-box p > small {
+    display: block;
+    color: #f9f9f9;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.small-box h3,
+.small-box p {
+    z-index: 5px;
+}
+.small-box .icon {
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    right: 15px;
+    z-index: 0;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.15);
+}
+.small-box:hover {
+    text-decoration: none;
+    color: #f9f9f9;
+}
+.small-box:hover .icon {
+    animation-name: tansformAnimation;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: tansformAnimation;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-name: tansformAnimation;
+    -moz-animation-duration: .5s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: forwards;
+}
+
+@keyframes tansformAnimation {
+    from {
+        font-size: 50px;
+    }
+    to {
+        font-size: 60px;
+    }
+}
+@-webkit-keyframes tansformAnimation {
+    from {
+        font-size: 50px;
+    }
+    to {
+        font-size: 60px;
+    }
+}
+
+.slot-body {
+    min-height: 42px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.box-available {
+    color: #fff;
+    background: #2fa118;
+    background-color: #2fa118;
+}
+
+.box-occupied {
+    color: #fff;
+    background: #a03418;
+    background-color: #a03418;
+}
+
+.box-unknown {
+    color: #fff;
+    background: #5a5a5a;
+    background-color: #5a5a5a;
+}
+
+.bg-unknown,
+.bg-unMapped,
+.bg-available,
+.bg-occupied,
+.bg-yellow,
+.bg-red,
+.bg-aqua,
+.bg-blue,
+.bg-light-blue,
+.bg-green,
+.bg-navy,
+.bg-teal,
+.bg-olive,
+.bg-lime,
+.bg-orange,
+.bg-fuchsia,
+.bg-purple,
+.bg-maroon,
+.bg-black,
+.bg-vacant{
+    color: #f9f9f9 !important;
+}
+
+.bg-unknown {
+    background-color: #5a5a5a !important;
+}
+.bg-unMapped {
+    background-color: #1D618B !important;
+}
+.bg-yellow {
+    background-color: #f39c12 !important;
+}
+.bg-available {
+    background-color: #2fa118 !important;
+}
+.bg-occupied {
+    background-color: #a03418 !important;
+}
+
+.bg-gray {
+    background-color: #eaeaec !important;
+}
+.bg-black {
+    background-color: #222222 !important;
+}
+.bg-blue {
+    background-color: #0073b7 !important;
+}
+.bg-light-blue {
+    background-color: #3c8dbc !important;
+}
+.bg-navy {
+    background-color: #001f3f !important;
+}
+.bg-teal {
+    background-color: #39cccc !important;
+}
+.bg-olive {
+    background-color: #3d9970 !important;
+}
+.bg-lime {
+    background-color: #01ff70 !important;
+}
+.bg-orange {
+    background-color: #ff851b !important;
+}
+.bg-fuchsia {
+    background-color: #f012be !important;
+}
+.bg-purple {
+    background-color: #932ab6 !important;
+}
+.bg-maroon {
+    background-color: #85144b !important;
+}
+/* Text colors */
+.text-red {
+    color: #f56954 !important;
+}
+.text-yellow {
+    color: #f39c12 !important;
+}
+.text-aqua {
+    color: #00c0ef !important;
+}
+.text-blue {
+    color: #0073b7 !important;
+}
+.text-black {
+    color: #222222 !important;
+}
+.text-light-blue {
+    color: #3c8dbc !important;
+}
+.text-green {
+    color: #00a65a !important;
+}
+.text-navy {
+    color: #001f3f !important;
+}
+.text-teal {
+    color: #39cccc !important;
+}
+.text-olive {
+    color: #3d9970 !important;
+}
+.text-lime {
+    color: #01ff70 !important;
+}
+.text-orange {
+    color: #ff851b !important;
+}
+.text-fuchsia {
+    color: #f012be !important;
+}
+.text-purple {
+    color: #932ab6 !important;
+}
+.text-maroon {
+    color: #85144b !important;
+}

@@ -1,0 +1,142 @@
+<div class="container-fluid" style="height: 100%;padding: 0px;" >
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-money"></i>Students</a></li>
+        </ol>
+    </section>
+    <div class="col-lg-10 base-content table-base" style="height:auto;width:95%;">
+        <div class="container-fluid"  style="height: 90%;padding:0">
+            <div class="container-fluid" style="height: 30px;padding:0">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.add"><button type="button" ng-click="addStudent()" tooltip="Add New Student" class="btn btn-color btn-sm">New Admission</button></a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4" style="font-size: medium;padding: 0 0 10px 0px" >
+                    <a ui-sref="^.read"><button type="button" tooltip="Re-Admission Of Student" ng-click="readStudent()" class="btn btn-color btn-sm">Re-Admission</button></a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-success response_msg" style="padding-top: 10px;" ng-hide="response_msg == undefined || response_msg == ''"  >{{response_msg}}</div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="container-fluid" style="margin-left: -20px;margin-bottom: 15px;">
+                <ul class="list-inline" style="margin:0;display:inline-block ">
+                    <li>
+                        <select  class="input-sm form-control search-text-box" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Year</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control search-text-box" ng-model="currentStandard" ng-change="fetchSectionList(x.year,currentStandard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Class</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select  class="input-sm form-control search-text-box" ng-model="currentSection" ng-change="fetchStudents(x.year,currentStandard, currentSection,studentDetails.startValue,studentDetails.numPerPage)" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5">
+                            <option value="" selected="selected">Select Section</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div  class="container-fluid" style="height:auto;padding:0;" ng-if="student_list== undefined || student_list.length <= 10">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                       <!-- <th width="10%">Student ID</th>-->
+                        <th width="10%">Roll No.</th>
+                        <th width="10%">First Name</th>
+                        <th width="10%">Last Name</th>
+                        <th width="10%">Contact Number</th>
+                        <th width="10%">Blood Group</th>
+                        <th width="10%">Gender</th>
+                        <th width="10%">Set Boarding Point</th>
+                       <!-- <th width="10%">Email Id</th>-->
+                        <!--<th width="10%">Assign To Vehicle</th>-->
+                        <th width="10%">Select Fees Mode</th>
+                        <th width="10%">Full Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="student in student_list">
+                        <!--<td width="10%">{{student.studentId}}</td>-->
+                        <td width="10%">{{student.currentRollNumber}}</td>
+                        <td width="10%">{{student.studentFirstName}}</td>
+                        <td width="10%">{{student.studentLastName}}</td>
+                        <td width="10%">{{student.phoneNumbers[0].phoneNumber}}</td>
+                        <td width="10%">{{student.blood}}</td>
+                        <td width="10%">{{student.gender}}</td>
+                       <!-- <td width="10%">{{student.emails[0].email}}</td>-->
+                        <td width="10%">
+                            <a ui-sref="^.board"><button class="btn-action" style="margin-right:5%" ng-click="postPlace(student,$index)" title="Post Boarding Point">Select</button></a>
+                        </td>
+                        <!--<td width="10%">
+                            <a ui-sref="^.assign"><button class="btn-action" style="margin-right:5%" ng-click="assignVehicle(student.studentId)" title="Assign Student To Vehicle">Assign</button></a>
+                        </td>-->
+                        <td width="10%">
+                            <a ui-sref="^.choose"><button class="btn-action" style="margin-right:5%" ng-click="chooseMode(student,$index,currentSection)" title="Choose Fee Mode">Choose</button></a>
+                        </td>
+                        <td width="10%">
+                            <a ui-sref="^.view"><button class="btn-action" style="margin-right:5%" ng-click="fetchStudentDetails(student,x.year,currentStandard,currentSection.section,$index);fetchPhoto(student.studentId)" title="View Details">View</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="student_list.length == 0 || student_list == undefined" class="noData">No students Found</div>
+                <!--<div ng-if="student_list == undefined" class="noData">Processing...</div>-->
+            </div>
+            <!--<div class="container-fluid" style="margin: 15px; padding:0" ng-if="student_list != undefined && student_list.length > 10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                      &lt;!&ndash;  <th width="10%">Student ID</th>&ndash;&gt;
+                        <th width="10%">First Name</th>
+                        <th width="10%">Last Name</th>
+                        <th width="10%">Contact Number</th>
+                        <th width="10%">Email Id</th>
+                        <th width="10%">Assign To Vehicle</th>
+                        <th width="10%">Select Fees Mode</th>
+                        <th width="10%">More details</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div  class="container-fluid slim-content" style="padding:0;" ng-if="student_list != undefined && student_list.length > 10" slim-scroll="{height:'88%',size:'3px',allowPageScroll :true,width:'100%'}">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr ng-repeat="student in student_list">
+                        &lt;!&ndash;<td width="10%">{{student.studentId}}</td>&ndash;&gt;
+                        <td width="10%">{{student.studentFirstName}}</td>
+                        <td width="10%">{{student.studentLastName}}</td>
+                        <td width="10%">{{student.phoneNumbers[0].phoneNumber}}</td>
+                        <td width="10%">{{student.emails[0].email}}</td>
+                        <td width="10%">
+                            <a ui-sref="^.assign"><button class="btn-action" style="margin-right:5%" ng-click="assignVehicle(student.studentId)" title="Assign {{student.studentId}}">Assign</button></a>
+                        </td>
+                        <td width="10%">
+                            <a ui-sref="^.choose"><button class="btn-action" style="margin-right:5%" ng-click="chooseMode(student,$index,currentSection)" title="Choose {{student.studentId}}">Choose</button></a>
+                        </td>
+                        <td width="10%">
+                            <a ui-sref="^.view"><button class="btn-action" style="margin-right:5%" ng-click="fetchStudentDetails(student,$index)" title="View {{student.studentId}}">Full Deatils</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+
+            <div class="container-fluid" style="padding: 0;margin-top: -20px" ng-show="student_list != undefined && student_list.length > 0">
+                <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 0 0 0">
+                    <label class="pagination-label" style="padding-right: 5px">Show </label>
+                    <select class="input-sm form-control" style="width: 65px;display:inline" ng-model="studentDetails.numPerPage" ng-change="init1(searchby,inputValue,0,studentDetails.numPerPage)">
+                        <option value=10>10</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                    <label class="pagination-label" style="padding-left: 5px">entries per page </label>
+                </div>-->
+                <pagination style="margin: 10px 0;float: right" ng-model="studentDetails.currentPage" items-per-page="studentDetails.numPerPage" total-items="count"  max-size="maxSize"  boundary-links="true" num-pages="numPages" ng-change="pageChanged(x.year,currentStandard, currentSection)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </pagination>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-xs-offset-1 col-sm-offset-1" data-ng-include="'views/dialoge.html'" />
+</div>

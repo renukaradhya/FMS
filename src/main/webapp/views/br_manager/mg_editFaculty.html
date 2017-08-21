@@ -1,0 +1,209 @@
+<div class="container-fluid" style="height: 100%;padding: 0">
+    <section class="container-fluid content-header" style="padding:0">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><i class="fa fa-user"></i>Staff Management</li>
+            <li><i class="fa fa-group"></i>Teaching Staff</li>
+            <li><i class="fa fa-pencil"></i>Edit</li>
+        </ol>
+    </section>
+    <div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2 col-sm-11 col-xs-11 base-content" >
+        <div class="container-fluid text-success response_msg1" ng-hide="response_msg1 == undefined || response_msg1 == ''"  >{{response_msg1}}</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);padding: 0" class="bg-base">
+            <div class="container-fluid details-header">
+                Edit Teaching Staff
+            </div>
+            <form name="editFaculty" autocomplete="off" class="form-horizontal" ng-submit="updateFacultyEntry()">
+
+                <!--<div class="form-group">
+                    <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Faculty Id</label>
+                    <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                        <input type="text" ng-model="edit.facultyId" name="facultyId" class="form-control" readonly maxlength="64">
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.facultyId.$error.pattern">
+                        Only alphabets and numbers are allowed</div>
+                </div>-->
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">First Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                                <input type="text" ng-model="obj.firstName" tooltip="Alphabets Are Accepted" capitalize-first class="form-control" name="firstName" required autofocus maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.firstName.$error.pattern">
+                                Only alphabetsare allowed including space</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Last Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.lastName" tooltip="Alphabets Are Accepted" capitalize-first name="lastName" class="form-control"  maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.lastName.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Staff Id</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7">
+                                <input type="text" ng-model="obj.staffId" tooltip="" class="form-control" name="staffId" required capitalize-first autofocus maxlength="64" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Qualification</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.qualification" tooltip="Alphabets And Special Character Are Accepted" name="qualification" class="form-control" required autofocus >
+                            </div>
+                           <!-- <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.qualification.$error.pattern">
+                                Only alphabets are allowed including space, dot(.) and comma(,)</div>-->
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Date Of Joining</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <!--<input type="text" ng-model="edit.dateOfJoining" name="dateOfJoining" class="form-control" required autofocus ng-maxlength="10" ng-pattern="/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/">-->
+                                <input type="text" ng-model="obj.dateOfJoining" tooltip="Select Date of Joining" ui-date="dateOptions"  class="form-control" required   autofocus />
+                            </div>
+                            <!-- <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.dateOfJoining.$error.pattern">
+                                 Date should be in <b>YYYY-MM-DD</b> format.</div>-->
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Date Of Birth</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <!--<input type="text" ng-model="edit.dateOfBirth" name="dateOfBirth" class="form-control"  required autofocus ng-maxlength="10" ng-pattern="/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/">-->
+                                <input type="text" ng-model="obj.dateOfBirth" tooltip="Select Date of Birth" ui-date="dateOptions" class="form-control" required   autofocus />
+                            </div>
+                            <!--<div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.dateOfBirth.$error.pattern">
+                                Date should be in <b>YYYY-MM-DD</b> format.</div>-->
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Designation</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.designation" tooltip="Alphabets Are Accepted" capitalize-first name="designation" class="form-control"  required autofocus readonly ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.designation.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Is Permanent</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <label>
+                                    <input type="checkbox" ng-model="obj.permanent" name="check" >
+                                    <span style="margin-left: 0px;color: #777575;font-weight: 500;display: inline-block;" class="label-text">&nbsp;&nbsp;&nbsp;Permanent</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Experience</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="number" ng-model="obj.noOfExperience" tooltip="Experience at date of joining"  name="noOfExperience" min="0" max="50" class="form-control"  autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Comments</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.comments" tooltip="Alphabets Are Accepted" capitalize-first name="comments" class="form-control"  maxlength="128" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.comments.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Gender</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-7 form-inline">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sex" value="Male" ng-model="obj.gender">
+                                        <span class="label-text">Male</span>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sex" value="Female" ng-model="obj.gender">
+                                        <span class="label-text">Female</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Blood Group</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <select class="input-sm form-control" ng-model="obj.blood" required  ng-options="x as x for x in bg_list" style="line-height: 1.5">
+                                    <option value="" selected="selected">Select Blood Group</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Father First Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.fatherFirstName" tooltip="Alphabets Are Accepted" capitalize-first name="fatherFirstName" class="form-control"  maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.fatherFirstName.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Father Last Name</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.fatherLastName" tooltip="Alphabets Are Accepted" capitalize-first name="fatherLastName" class="form-control"  maxlength="64" ng-pattern="/^[a-zA-Z ]*$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.fatherlastName.$error.pattern">
+                                Only alphabets are allowed including space</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Local Address</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <textarea type="text" ng-model="obj.localAddress" tooltip="Enter Proper Local Address" capitalize-first name="localAddress" class="form-control"  required autofocus ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Permanent Address</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <textarea type="text" ng-model="obj.permanentAddress" tooltip="Enter Proper Permanent Address" capitalize-first name="permanentAddress" class="form-control"  required autofocus ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Email Id</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.emails[0].email" tooltip="Valid Email Id Is Accepted" name="email" class="form-control"  maxlength="32"
+                                       ng-pattern="/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/">
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.email.$error.pattern">
+                                Email Id should be like <b>email@example.com</b></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-2 col-sm-3 col-xs-3 control-label">Phone Number</label>
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5">
+                                <input type="text" ng-model="obj.phoneNumbers[0].phoneNumber" tooltip="Ten Digit Numbers Are Accepted" name="phoneNumber" class="form-control"  autofocus>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-4" style="color:red;padding:0" ng-show="editFaculty.phoneNumber.$error.pattern">
+                                Phone Number should be 10 digit number or pincode-ph_number</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="container-fluid text-center">
+                        <button type="submit"  class="btn btn-color btn-sm" ng-disabled="editFaculty.$invalid">Update</button>
+                        <button type="button"  class="btn btn-color btn-sm" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

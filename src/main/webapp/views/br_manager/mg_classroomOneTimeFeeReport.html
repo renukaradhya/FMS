@@ -1,0 +1,165 @@
+
+<div class="container-fluid" style="height: 100%;padding-left: 0px" ng-init="">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a onclick="goToHome()"><i class="fa fa-home"></i>Home</a></li>
+            <li><a ui-sref="reports.main"> <i class="fa fa-file"></i>Reports</a></li>
+        </ol>
+    </section>
+    <div class="container-fluid base-content" style="margin-right:0;height: auto;width: 1070px">
+        <div class="col-lg-5">
+            <h3 class="text-type " style="margin-top: 10px;color: #777575;">Fees Due/Paid Report</h3>
+        </div>
+
+        <div class="col-lg-7">
+            <span style="float: right;color: #3c8dbc;font-size: 12px;list-style-type: none;padding-left: 490px;">
+                <ul style="list-style-type: none;padding: 2px;clear: both;">
+                    <li>
+                        <i class="fa fa-check-square" aria-hidden="true"></i>&nbsp;&nbsp;<span style="color: #777575; display: inline; " class="blink_me">Paid</span>
+                    </li>
+                    <li>
+                        <i class="fa fa-square-o" aria-hidden="true"></i>&nbsp;&nbsp;<span style="color: #777575; display: inline; " class="blink_me">Unpaid</span>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <div class="container-fluid" style="padding: 0;">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 10px 10px 28px;/* margin-left: 17px; */clear: both;">
+
+                    <div style="    margin-left: 20px;">
+                        <ul class="list-inline" style="display:inline-flex;">
+                            <li>
+                                <select class="input-sm form-control search-text-box ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="x" ng-change="fetchStandardList(x.year)" ng-options="x as x.year for x in years" style="line-height: 1.5"><option value="" selected="" class="">Select Year</option><option value="0" label="2016-17">2016-17</option></select>
+                            </li>
+                            <li>
+                                <select class="input-sm form-control search-text-box ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="currentStandard" ng-change="fetchClassRoomlist(x.year,currentStandard)" ng-options="standard as standard.name for standard in standard_list" style="line-height: 1.5"><option value="" class="">Select Class</option><option value="0" label="Second">Second</option><option value="1" label="L.K.G">L.K.G</option><option value="2" label="First">First</option></select>
+                            </li>
+                            <li>
+                                <select class="input-sm form-control search-text-box ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="currentSection" ng-change="classroomFeeStructure(currentSection);" ng-options="classroom as classroom.section for classroom in section_list" style="line-height: 1.5"><option value="" class="">Select Section</option><option value="0" label="A">A</option></select>
+                            </li>
+                            <li>
+                                <a><button type="button" ng-click="back()" class="btn btn-color btn-sm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Back</button></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--<div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-inline" style="padding: 10px 10px 10px 0">
+                            <div class="clearfix"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 10px 10px 20px">
+                                <button type="button" ng-click="fetchClassroomTransactionReport(classroom)" tooltip="Generate Report" class="btn btn-color btn-sm">Show Report</button>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding: 10px 10px 10px 60px">
+                                <button type="button" ng-click="back()" tooltip="Go Back" class="btn btn-color btn-sm">Back</button>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-show="success" style="text-align: right;margin-left: -15px;">
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-color " ng-click="downloadPdf()">
+                            Download
+                        </button>
+                        <!--<ul class="dropdown-menu" style="min-width: 89px">
+                            <li><a href="#" ng-click="downloadPdf()" >PDF</a></li>
+                            &lt;!&ndash;<li><a href="#" ng-click="downloadXls()">Xls</a></li>&ndash;&gt;
+                        </ul>-->
+                    </div>
+                    <!--<button type="button"  style="margin-right: 10px" tooltip="In progress" class="btn btn-color btn-sm">Archive</button>-->
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" style="padding-left: 0px;">
+            <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3 radio radio-info" style="padding-left: 0px;margin-top: 10px;">
+                <!--<label class="radio" style="padding-left: 0px;">
+                    <input type="radio"  ng-model="radioone"  value ="1"  ng-click="toOnetime('O')" name="optradio">
+                    <span class="label-text">One Time Fee</span>
+                </label>
+                <label class="radio" style="padding-left: 0px;margin-top: 10px;">
+                    <input type="radio"  ng-model="radiorec"  value ="1"  ng-click="toRecurring('R')" name="optradio">
+                    <span class="label-text">Recurring Fee</span>
+                </label>-->
+                <div class="radio radio-info radio-inline" >
+                    <form style="margin-top: 13px;  ">
+                        <label >
+                            <input type="radio"  ng-model="radioone"  value ="1"  ng-click="toOnetime('O')" name="optradio">
+                            <span class="label-text">One Time Fee</span>
+                        </label>
+                        <label >
+                            <input type="radio"  ng-model="radiorec"  value ="1"  ng-click="toRecurring('R')" name="optradio">
+                            <span class="label-text">Recurring Fee</span>
+                        </label>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-9 col-sm-9 col-xs-9" style="margin-top: 27px;">
+                <form ng-if="isVisibleS">
+                    <ul class="list-inline" style="display:inline-flex;">
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="otf"  ng-options="otf as otf.type for otf in one_time_fee" style="line-height: 1.5">
+                                <option value="" selected>Fees Type</option>
+                            </select>
+                        </li>
+
+                        <li style="margin-right: 0px;">
+                            <label>
+                                <input type="checkbox" ng-click="checkboxClick()" value=""/>
+                                <span class="label-text">   </span>
+                            </label>
+                        </li>
+                        <li>
+                            <button type="button" ng-click="checkDuesReport(currentSection,fee_id,otf)" class="btn btn-color btn-sm" style="margin-left: 14px;">Show Report</button>
+                        </li>
+                    </ul>
+                </form>
+                <form ng-if="isVisibleF">
+                    <ul class="list-inline" style="display:inline-flex;">
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="rcf"  ng-options="rcf as rcf.mode for rcf in modes" style="line-height: 1.5">
+                                <option value=""  selected>Fees Mode</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="obj"  ng-options="obj as obj.type for obj in rcf.recurringFees" style="line-height: 1.5">
+                                <option value=""  selected>Fees Type</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select  class="input-sm form-control search-text-box" ng-model="instalment"  ng-options="instalment as instalment for instalment in obj.installmentDetails" style="line-height: 1.5">
+                                <option value="" selected>Select Instalment</option>
+                            </select>
+                        </li>
+                        <li style="margin-right: 0px;">
+                            <!-- <input type="checkbox" ng-click="checkboxClick()" value="">Not In-->
+                            <!--<section style="display: inline-block;">
+                                <div class="checkboxFour">
+                                    <input type="checkbox" ng-click="checkboxClick()" value="" id="checkboxFourInput" name="" />
+                                    <label for="checkboxFourInput"></label>
+                                </div>
+
+                            </section>-->
+                            <label>
+                                <input type="checkbox" ng-click="checkboxClick()" value=""/>
+                                <span class="label-text">   </span>
+                            </label>
+                        </li>
+                        <!--<li><h5>Not In</h5></li>-->
+                        <li>
+                            <button type="button" ng-click="checkRecurringDuesReport(currentSection,fee_id,rcf,obj,instalment)" class="btn btn-color btn-sm" style="margin-left: 14px;">Show Report</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inner-base-content" style="height: auto;width: 1049px;padding: 10px;">
+            <div id="pdf-holder" ng-show="success" style="height: 100%;"></div>
+            <div class="noData" ng-hide="success">
+                No Data Found...
+            </div>
+        </div>
+    </div>
+</div>
